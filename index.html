@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mojca Estudio — Diseño, Audiovisual & Desarrollo Web</title>
+    <meta name="description" content="Estudio creativo especializado en diseño audiovisual, fotografía, branding, redes sociales y desarrollo web.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- GLightbox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">MOJCA</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre">Nosotros</a></li>
+                <li><a href="#audiovisual">Audiovisual</a></li>
+                <li><a href="#fotografia">Fotografía</a></li>
+                <li><a href="#branding">Branding</a></li>
+                <li><a href="#redes">Redes</a></li>
+                <li><a href="#webdev">Web & Código</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <div class="hero-bg">
+            <video autoplay muted loop playsinline poster="assets/images/hero-poster.jpg">
+                <source src="assets/videos/hero-reel.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+            <p class="hero-label">Estudio Creativo</p>
+            <h1 class="hero-title">Damos vida a tus ideas<br>con <span class="accent">diseño</span>, creatividad<br>y estrategia visual</h1>
+            <p class="hero-sub">Creamos contenido que se ve, se siente y se comparte.</p>
+            <div class="hero-cta">
+                <a href="#audiovisual" class="btn btn-primary">Ver trabajo</a>
+                <a href="#contacto" class="btn btn-outline">Hablemos</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- SOBRE NOSOTROS -->
+    <section class="section sobre" id="sobre">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Sobre Nosotros</span>
+                <h2 class="section-title">Damos vida a ideas<br>a través de la <span class="accent">imagen</span></h2>
+            </div>
+            <div class="sobre-grid">
+                <div class="sobre-text" data-aos="fade-right" data-aos-delay="100">
+                    <p>Nos especializamos en diseño audiovisual, fotografía, producción de video y estrategias para redes sociales. En Mojca Estudio combinamos formación técnica y sensibilidad creativa para dar vida a contenidos con identidad.</p>
+                    <p>Creemos en las ideas que emocionan y perduran, en relatos capaces de conectar de verdad con las personas. Por eso cada proyecto lo abordamos con compromiso, cercanía y criterio.</p>
+                    <div class="sobre-stats">
+                        <div class="stat">
+                            <span class="stat-num">50+</span>
+                            <span class="stat-label">Proyectos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-num">30+</span>
+                            <span class="stat-label">Clientes</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-num">5</span>
+                            <span class="stat-label">Años</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sobre-visual" data-aos="fade-left" data-aos-delay="200">
+                    <div class="sobre-img-wrapper">
+                        <img src="assets/images/sobre-estudio.jpg" alt="Equipo Mojca Estudio" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUDIOVISUAL -->
+    <section class="section audiovisual" id="audiovisual">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Creación Audiovisual</span>
+                <h2 class="section-title">Producimos videos y<br>fotografías con <span class="accent">sello único</span></h2>
+            </div>
+            <div class="video-grid">
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="video-card glightbox" data-aos="fade-up" data-aos-delay="0">
+                    <div class="video-thumb">
+                        <img src="assets/images/video-1.jpg" alt="Proyecto Audiovisual 1" loading="lazy">
+                        <div class="video-play">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Spot Comercial — Marca X</h3>
+                        <p>Dirección, filmación y postproducción para campaña de lanzamiento.</p>
+                        <span class="video-tag">Comercial</span>
+                    </div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="video-card glightbox" data-aos="fade-up" data-aos-delay="100">
+                    <div class="video-thumb">
+                        <img src="assets/images/video-2.jpg" alt="Proyecto Audiovisual 2" loading="lazy">
+                        <div class="video-play">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Video Musical — Artista Y</h3>
+                        <p>Concepto visual, dirección de arte y edición para single debut.</p>
+                        <span class="video-tag">Musical</span>
+                    </div>
+                </a>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="video-card glightbox" data-aos="fade-up" data-aos-delay="200">
+                    <div class="video-thumb">
+                        <img src="assets/images/video-3.jpg" alt="Proyecto Audiovisual 3" loading="lazy">
+                        <div class="video-play">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Corporativo — Empresa Z</h3>
+                        <p>Video institucional con drone y motion graphics.</p>
+                        <span class="video-tag">Corporativo</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOTOGRAFÍA -->
+    <section class="section fotografia" id="fotografia">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Fotografía</span>
+                <h2 class="section-title">Capturamos momentos<br>que <span class="accent">transmiten</span></h2>
+            </div>
+            <div class="gallery-filter" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all">Todo</button>
+                <button class="filter-btn" data-filter="producto">Producto</button>
+                <button class="filter-btn" data-filter="retrato">Retrato</button>
+                <button class="filter-btn" data-filter="evento">Eventos</button>
+                <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+            </div>
+            <div class="photo-grid" id="photoGrid">
+                <div class="photo-item" data-category="producto" data-aos="fade-up" data-aos-delay="0">
+                    <a href="assets/images/foto-1.jpg" class="glightbox" data-description="Campaña de producto para marca de skincare. Estudio con iluminación controlada.">
+                        <img src="assets/images/foto-1.jpg" alt="Fotografía de producto" loading="lazy">
+                        <div class="photo-overlay">
+                            <h4>Skincare Campaign</h4>
+                            <p>Producto · Estudio</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="photo-item tall" data-category="retrato" data-aos="fade-up" data-aos-delay="50">
+                    <a href="assets/images/foto-2.jpg" class="glightbox" data-description="Retrato editorial para revista local. Luz natural + reflector.">
+                        <img src="assets/images/foto-2.jpg" alt="Retrato editorial" loading="lazy">
+                        <div class="photo-overlay">
+                            <h4>Retrato Editorial</h4>
+                            <p>Retrato · Natural</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="photo-item" data-category="evento" data-aos="fade-up" data-aos-delay="100">
+                    <a href="assets/images/foto-3.jpg" class="glightbox" data-description="Cobertura de evento corporativo anual. 200+ asistentes.">
+                        <img src="assets/images/foto-3.jpg" alt="Evento corporativo" loading="lazy">
+                        <div class="photo-overlay">
+                            <h4>Evento Corporativo</h4>
+                            <p>Evento · Cobertura</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="photo-item" data-category="lifestyle" data-aos="fade-up" data-aos-delay="150">
+                    <a href="assets/images/foto-4.jpg" class="glightbox" data-description="Sesión lifestyle para marca de ropa urbana. Locación exterior.">
+                        <img src="assets/images/foto-4.jpg" alt="Lifestyle urbano" loading="lazy">
+                        <div class="photo-overlay">
+                            <h4>Urban Lifestyle</h4>
+                            <p>Lifestyle · Exterior</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="photo-item wide" data-category="producto" data-aos="fade-up" data-aos-delay="200">
+                    <a href="assets/images/foto-5.jpg" class="glightbox" data-description="Flat lay para e-commerce. Composición minimalista.">
+                        <img src="assets/images/foto-5.jpg" alt="Flat lay e-commerce" loading="lazy">
+                        <div class="photo-overlay">
+                            <h4>Flat Lay E-commerce</h4>
+                            <p>Producto · Minimal</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="photo-item" data-category="retrato" data-aos="fade-up" data-aos-delay="250">
+                    <a href="assets/images/foto-6.jpg" class="glightbox" data-description="Retrato artístico con iluminación creativa. Estudio.">
+                        <img src="assets/images/foto-6.jpg" alt="Retrato artístico" loading="lazy">
+                        <div class="photo-overlay">
+                            <h4>Retrato Artístico</h4>
+                            <p>Retrato · Creativo</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRANDING -->
+    <section class="section branding" id="branding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Branding & Identidad</span>
+                <h2 class="section-title">Imaginamos y construimos<br><span class="accent">universos visuales</span></h2>
+            </div>
+            <div class="branding-grid">
+                <div class="branding-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="branding-visual">
+                        <img src="assets/images/branding-1.jpg" alt="Proyecto de branding" loading="lazy">
+                    </div>
+                    <div class="branding-info">
+                        <h3>Marca A — Identidad Completa</h3>
+                        <p>Diseño de logo, paleta cromática, tipografía y aplicaciones en packaging y redes.</p>
+                        <div class="branding-tags">
+                            <span>Logo</span>
+                            <span>Packaging</span>
+                            <span>Social</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="branding-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="branding-visual">
+                        <img src="assets/images/branding-2.jpg" alt="Proyecto de branding" loading="lazy">
+                    </div>
+                    <div class="branding-info">
+                        <h3>Restaurante B — Rebranding</h3>
+                        <p>Renovación completa de imagen: desde el menú físico hasta la presencia digital.</p>
+                        <div class="branding-tags">
+                            <span>Rebranding</span>
+                            <span>Menú</span>
+                            <span>Web</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="branding-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="branding-visual">
+                        <img src="assets/images/branding-3.jpg" alt="Proyecto de branding" loading="lazy">
+                    </div>
+                    <div class="branding-info">
+                        <h3>Startup C — Brand Book</h3>
+                        <p>Manual de marca completo con guidelines de uso para equipos internacionales.</p>
+                        <div class="branding-tags">
+                            <span>Brand Book</span>
+                            <span>Guidelines</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REDES SOCIALES — FEED INTERACTIVO -->
+    <section class="section redes" id="redes">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Redes Sociales</span>
+                <h2 class="section-title">Transformamos contenidos<br>en <span class="accent">conexiones</span></h2>
+            </div>
+            <p class="section-intro" data-aos="fade-up">Diseñamos estrategias para redes, campañas creativas y piezas adaptadas a cada formato. Explorá nuestro feed y dejanos tu comentario.</p>
+
+            <div class="ig-feed" id="igFeed">
+                <!-- Post 1 -->
+                <article class="ig-post" data-aos="fade-up" data-aos-delay="0">
+                    <div class="ig-header">
+                        <div class="ig-avatar">
+                            <img src="assets/images/logo-mojca.jpg" alt="Mojca">
+                        </div>
+                        <div class="ig-user">
+                            <strong>mojcaestudio</strong>
+                            <span>Buenos Aires</span>
+                        </div>
+                    </div>
+                    <div class="ig-media">
+                        <img src="assets/images/redes-1.jpg" alt="Post de redes" loading="lazy">
+                    </div>
+                    <div class="ig-actions">
+                        <button class="ig-like" onclick="toggleLike(this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </button>
+                        <button class="ig-comment-btn" onclick="focusComment('disqus-post-1')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </button>
+                        <button class="ig-share">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </div>
+                    <div class="ig-likes"><span class="like-count">124</span> Me gusta</div>
+                    <div class="ig-caption">
+                        <strong>mojcaestudio</strong> Nueva campaña de verano para @marcacliente 🌞🎬 Filmamos, editamos y diseñamos todo el contenido para sus redes. ¿Qué te parece el resultado? <span class="hashtag">#audiovisual</span> <span class="hashtag">#redessociales</span>
+                    </div>
+                    <div class="ig-comments" id="disqus-post-1">
+                        <div id="disqus_thread_post1"></div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="ig-post" data-aos="fade-up" data-aos-delay="100">
+                    <div class="ig-header">
+                        <div class="ig-avatar">
+                            <img src="assets/images/logo-mojca.jpg" alt="Mojca">
+                        </div>
+                        <div class="ig-user">
+                            <strong>mojcaestudio</strong>
+                            <span>Córdoba</span>
+                        </div>
+                    </div>
+                    <div class="ig-media">
+                        <img src="assets/images/redes-2.jpg" alt="Post de redes" loading="lazy">
+                    </div>
+                    <div class="ig-actions">
+                        <button class="ig-like" onclick="toggleLike(this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </button>
+                        <button class="ig-comment-btn" onclick="focusComment('disqus-post-2')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </button>
+                        <button class="ig-share">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </div>
+                    <div class="ig-likes"><span class="like-count">89</span> Me gusta</div>
+                    <div class="ig-caption">
+                        <strong>mojcaestudio</strong> Behind the scenes de nuestra última producción 🎥💡 Siempre buscando la luz perfecta. <span class="hashtag">#behindthescenes</span> <span class="hashtag">#produccion</span>
+                    </div>
+                    <div class="ig-comments" id="disqus-post-2">
+                        <div id="disqus_thread_post2"></div>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="ig-post" data-aos="fade-up" data-aos-delay="200">
+                    <div class="ig-header">
+                        <div class="ig-avatar">
+                            <img src="assets/images/logo-mojca.jpg" alt="Mojca">
+                        </div>
+                        <div class="ig-user">
+                            <strong>mojcaestudio</strong>
+                            <span>Rosario</span>
+                        </div>
+                    </div>
+                    <div class="ig-media">
+                        <img src="assets/images/redes-3.jpg" alt="Post de redes" loading="lazy">
+                    </div>
+                    <div class="ig-actions">
+                        <button class="ig-like" onclick="toggleLike(this)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </button>
+                        <button class="ig-comment-btn" onclick="focusComment('disqus-post-3')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </button>
+                        <button class="ig-share">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </div>
+                    <div class="ig-likes"><span class="like-count">215</span> Me gusta</div>
+                    <div class="ig-caption">
+                        <strong>mojcaestudio</strong> Branding completo para un nuevo emprendimiento local 🎨 Desde el logo hasta las redes. <span class="hashtag">#branding</span> <span class="hashtag">#diseño</span> <span class="hashtag">#emprendedores</span>
+                    </div>
+                    <div class="ig-comments" id="disqus-post-3">
+                        <div id="disqus_thread_post3"></div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- WEB & CÓDIGO — NUEVA SECCIÓN -->
+    <section class="section webdev" id="webdev">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Desarrollo Web & Programación</span>
+                <h2 class="section-title">Creamos experiencias<br><span class="accent">digitales</span> que funcionan</h2>
+            </div>
+            <p class="section-intro" data-aos="fade-up">Diseñamos y desarrollamos sitios web modernos, rápidos y optimizados. Desde landing pages hasta aplicaciones web completas.</p>
+
+            <div class="webdev-grid">
+                <div class="webdev-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="webdev-preview">
+                        <div class="browser-mockup">
+                            <div class="browser-bar">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <img src="assets/images/web-1.jpg" alt="Proyecto web" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="webdev-info">
+                        <h3>E-commerce — Tienda de Moda</h3>
+                        <p>Tienda online completa con carrito, pasarela de pagos y panel de administración. Diseño responsive y optimizado para conversión.</p>
+                        <div class="webdev-stack">
+                            <span>React</span>
+                            <span>Next.js</span>
+                            <span>Stripe</span>
+                            <span>Tailwind</span>
+                        </div>
+                        <div class="webdev-links">
+                            <a href="#" class="link-live">Ver sitio →</a>
+                            <a href="#" class="link-repo">Código</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="webdev-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="webdev-preview">
+                        <div class="browser-mockup">
+                            <div class="browser-bar">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <img src="assets/images/web-2.jpg" alt="Proyecto web" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="webdev-info">
+                        <h3>Landing Page — SaaS</h3>
+                        <p>Landing page de alta conversión para startup de software. Animaciones fluidas, formularios inteligentes y SEO técnico.</p>
+                        <div class="webdev-stack">
+                            <span>Vue 3</span>
+                            <span>Vite</span>
+                            <span>GSAP</span>
+                            <span>Netlify</span>
+                        </div>
+                        <div class="webdev-links">
+                            <a href="#" class="link-live">Ver sitio →</a>
+                            <a href="#" class="link-repo">Código</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="webdev-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="webdev-preview">
+                        <div class="browser-mockup">
+                            <div class="browser-bar">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <img src="assets/images/web-3.jpg" alt="Proyecto web" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="webdev-info">
+                        <h3>Portfolio Interactivo — Artista</h3>
+                        <p>Portfolio inmersivo con scroll horizontal, WebGL effects y transiciones cinematográficas. Experiencia de usuario única.</p>
+                        <div class="webdev-stack">
+                            <span>Three.js</span>
+                            <span>React</span>
+                            <span>Framer Motion</span>
+                            <span>Vercel</span>
+                        </div>
+                        <div class="webdev-links">
+                            <a href="#" class="link-live">Ver sitio →</a>
+                            <a href="#" class="link-repo">Código</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="section contacto" id="contacto">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Contacto</span>
+                <h2 class="section-title">Hablemos de tu<br><span class="accent">próximo proyecto</span></h2>
+            </div>
+            <div class="contacto-grid">
+                <div class="contacto-info" data-aos="fade-right">
+                    <p>¿Tenés una idea? Nosotros la hacemos realidad. Escribinos y empecemos a crear juntos.</p>
+                    <div class="contacto-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <span>hola@mojcaestudio.com</span>
+                    </div>
+                    <div class="contacto-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        <span>Buenos Aires, Argentina</span>
+                    </div>
+                    <div class="contacto-social">
+                        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+                        <a href="#" aria-label="Behance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h6a4 4 0 0 1 4 4 4 4 0 0 1-4 4H3V3z"></path><path d="M3 11h7a4 4 0 0 1 4 4 4 4 0 0 1-4 4H3v-8z"></path><path d="M15 4h6"></path><path d="M15 20h6"></path><path d="M15 12h6a3 3 0 0 0 0-6h-6v6z"></path><path d="M15 12h6a3 3 0 0 1 0 6h-6v-6z"></path></svg></a>
+                        <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                    </div>
+                </div>
+                <form class="contacto-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" data-aos="fade-left">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="servicio">¿Qué necesitás?</label>
+                        <select id="servicio" name="servicio">
+                            <option value="">Seleccioná un servicio</option>
+                            <option value="audiovisual">Producción Audiovisual</option>
+                            <option value="fotografia">Fotografía</option>
+                            <option value="branding">Branding & Identidad</option>
+                            <option value="redes">Redes Sociales</option>
+                            <option value="web">Desarrollo Web</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Contanos sobre tu proyecto..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Enviar mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">MOJCA</span>
+                    <p>Diseño, creatividad y estrategia visual.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#sobre">Nosotros</a>
+                    <a href="#audiovisual">Audiovisual</a>
+                    <a href="#fotografia">Fotografía</a>
+                    <a href="#branding">Branding</a>
+                    <a href="#redes">Redes</a>
+                    <a href="#webdev">Web & Código</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Mojca Estudio. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- DISQUS -->
+    <script>
+        var disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = 'mojca-redes-feed';
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://mojcaestudio.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+</body>
+</html>
