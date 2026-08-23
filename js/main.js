@@ -1,36 +1,20 @@
 /* ========================================
-   MOJCA ESTUDIO — Main JavaScript
+   MOJCA ESTUDIO - Main JavaScript v2
    ======================================== */
 
 document.addEventListener('DOMContentLoaded', function() {
 
     // ========================================
-    // AOS — Animate On Scroll
-    // ========================================
-    AOS.init({
-        duration: 800,
-        easing: 'ease-out-cubic',
-        once: true,
-        offset: 50
-    });
-
-    // ========================================
-    // NAV — Scroll effect + Mobile toggle
+    // NAV - Scroll effect + Mobile toggle
     // ========================================
     const nav = document.getElementById('nav');
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
 
-    // Scroll: add/remove .scrolled
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
+        nav.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Mobile menu toggle
     if (navToggle && navLinks) {
         navToggle.addEventListener('click', () => {
             navToggle.classList.toggle('active');
@@ -38,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
         });
 
-        // Close menu on link click
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navToggle.classList.remove('active');
@@ -49,75 +32,82 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ========================================
-    // GLIGHTBOX — Galerías interactivas
+    // CARRUSELES - Horizontal y Vertical
     // ========================================
-    const lightbox = GLightbox({
-        selector: '.glightbox',
-        touchNavigation: true,
-        loop: true,
-        autoplayVideos: true,
-        plyr: {
-            css: 'https://cdn.plyr.io/3.6.12/plyr.css',
-            js: 'https://cdn.plyr.io/3.6.12/plyr.js',
-            config: {
-                ratio: '16:9',
-                muted: false,
-                hideControls: true,
-                youtube: {
-                    noCookie: true,
-                    rel: 0,
-                    showinfo: 0
-                }
-            }
-        }
-    });
+    const carousels = {
+        horizontal: { el: document.getElementById('carousel-horizontal'), index: 0 },
+        vertical: { el: document.getElementById('carousel-vertical'), index: 0 }
+    };
 
-    // ========================================
-    // GALERÍA DE FOTOS — Filtro por categoría
-    // ========================================
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const photoItems = document.querySelectorAll('.photo-item');
+    function getVisibleCount(track) {
+        if (window.innerWidth <= 768) return 1;
+        if (track.id === 'carousel-vertical') return Math.floor(window.innerWidth / 304);
+        return 2;
+    }
 
-    filterBtns.forEach(btn => {
+    function updateCarousel(key) {
+        const c = carousels[key];
+        if (!c.el) return;
+        const items = c.el.children;
+        const visible = getVisibleCount(c.el);
+        const maxIndex = Math.max(0, items.length - visible);
+        c.index = Math.min(c.index, maxIndex);
+        const itemWidth = items[0]?.offsetWidth + 24 || 0;
+        c.el.style.transform = `translateX(-${c.index * itemWidth}px)`;
+    }
+
+    document.querySelectorAll('.carousel-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            // Active state
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const filter = btn.dataset.filter;
-
-            photoItems.forEach(item => {
-                const category = item.dataset.category;
-                if (filter === 'all' || category === filter) {
-                    item.style.display = 'block';
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, 50);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 400);
-                }
-            });
+            const key = btn.dataset.carousel;
+            const dir = btn.classList.contains('prev') ? -1 : 1;
+            carousels[key].index += dir;
+            updateCarousel(key);
         });
     });
 
+    window.addEventListener('resize', () => {
+        Object.keys(carousels).forEach(updateCarousel);
+    });
+
     // ========================================
-    // INSTAGRAM FEED — Likes interactivos
+    // CARRUSELES INTERNOS - Instagram posts
+    // ========================================
+    window.moveCarousel = function(postId, direction) {
+        const track = document.getElementById('carousel-' + postId);
+        const dots = document.getElementById('dots-' + postId);
+        if (!track || !dots) return;
+
+        const slides = track.children;
+        const total = slides.length;
+        let current = 0;
+
+        for (let i = 0; i < total; i++) {
+            if (dots.children[i].classList.contains('active')) {
+                current = i;
+                break;
+            }
+        }
+
+        let next = current + direction;
+        if (next < 0) next = total - 1;
+        if (next >= total) next = 0;
+
+        track.style.transform = `translateX(-${next * 100}%)`;
+
+        for (let i = 0; i < total; i++) {
+            dots.children[i].classList.toggle('active', i === next);
+        }
+    };
+
+    // ========================================
+    // LIKES - Instagram feed
     // ========================================
     window.toggleLike = function(btn) {
         btn.classList.toggle('liked');
-        const countEl = btn.closest('.ig-post').querySelector('.like-count');
-        let count = parseInt(countEl.textContent);
+        const countEl = btn.closest('.ig-post-full').querySelector('.like-count');
+        let count = parseInt(countEl.textContent.replace(/,/g, ''));
         if (btn.classList.contains('liked')) {
             count++;
-            // Pequeña animación
             countEl.style.transform = 'scale(1.3)';
             countEl.style.color = 'var(--accent)';
             setTimeout(() => {
@@ -127,20 +117,40 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             count--;
         }
-        countEl.textContent = count;
+        countEl.textContent = count.toLocaleString();
     };
 
-    // Scroll a comentarios Disqus
-    window.focusComment = function(postId) {
-        const el = document.getElementById(postId);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            el.style.boxShadow = '0 0 0 2px var(--accent)';
-            setTimeout(() => {
-                el.style.boxShadow = '';
-            }, 1500);
-        }
-    };
+    // ========================================
+    // GALERIA DE FOTOS - Filtro por categoria
+    // ========================================
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const photoItems = document.querySelectorAll('.photo-item');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+
+            photoItems.forEach(item => {
+                const category = item.dataset.category;
+                if (filter === 'all' || category === filter) {
+                    item.style.display = 'block';
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.95)';
+                    requestAnimationFrame(() => {
+                        item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    });
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.95)';
+                    setTimeout(() => { item.style.display = 'none'; }, 400);
+                }
+            });
+        });
+    });
 
     // ========================================
     // SMOOTH SCROLL para anclas
@@ -158,63 +168,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ========================================
-    // FORMULARIO — Feedback visual
+    // FORMULARIO - Feedback visual
     // ========================================
     const form = document.querySelector('.contacto-form');
     if (form) {
         form.addEventListener('submit', function(e) {
-            // Si no tenés Formspree configurado, mostramos un mensaje
             const action = form.getAttribute('action');
             if (action.includes('YOUR_FORM_ID')) {
                 e.preventDefault();
-                alert('⚠️ Recordá reemplazar YOUR_FORM_ID en el formulario con tu ID de Formspree. Andá a formspree.io para crear uno gratis.');
-                return;
+                alert('Recorda reemplazar YOUR_FORM_ID en el formulario con tu ID de Formspree. Anda a formspree.io para crear uno gratis.');
             }
         });
     }
 
-    // ========================================
-    // PARALLAX suave en hero (opcional)
-    // ========================================
-    const heroVideo = document.querySelector('.hero-bg video');
-    if (heroVideo) {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.scrollY;
-            if (scrolled < window.innerHeight) {
-                heroVideo.style.transform = `translateY(${scrolled * 0.3}px)`;
-            }
-        });
-    }
-
-    // ========================================
-    // LAZY LOADING para imágenes
-    // ========================================
-    if ('IntersectionObserver' in window) {
-        const imgObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                    }
-                    observer.unobserve(img);
-                }
-            });
-        }, { rootMargin: '100px' });
-
-        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-            imgObserver.observe(img);
-        });
-    }
-
-    // ========================================
-    // DISQUS — Cargar múltiples threads
-    // ========================================
-    // Nota: Disqus en un sitio estático solo puede tener un thread por página.
-    // Para simular múltiples feeds, usamos un solo thread general.
-    // Si querés comentarios por post, necesitás usar Giscus o una solución diferente.
-    // El código actual carga un único thread de Disqus.
-
-    console.log('✅ Mojca Estudio — Scripts cargados correctamente');
+    console.log('Mojca Estudio - Scripts cargados correctamente');
 });
