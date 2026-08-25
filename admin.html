@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administracion — Mojca Estudio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-panel: #111111;
+            --bg-card: #161616;
+            --bg-input: #1a1a1a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --accent: #ff6b35;
+            --accent-light: #ff8c42;
+            --accent-terracotta: #c0392b;
+            --border: #2a2a2a;
+            --border-light: #333333;
+            --radius: 10px;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* LOGIN */
+        .login-screen {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-dark);
+            z-index: 10000;
+        }
+        .login-box {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 48px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+        .login-box h1 {
+            font-family: var(--font-display);
+            font-size: 26px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .login-box .logo-text {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .login-box p {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 14px;
+            margin-bottom: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .login-box input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+        }
+        .login-box button {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .login-box button:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+        .login-error {
+            color: var(--accent-terracotta);
+            font-size: 13px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        /* ADMIN LAYOUT */
+        .admin-layout {
+            display: none;
+            min-height: 100vh;
+        }
+        .admin-layout.active { display: flex; }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border);
+            padding: 24px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .sidebar-header {
+            padding: 0 24px 24px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 16px;
+        }
+        .sidebar-header h2 {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--text-primary);
+        }
+        .sidebar-header h2 .logo-text {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .sidebar-header p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .sidebar-nav {
+            list-style: none;
+        }
+        .sidebar-nav li {
+            padding: 0;
+        }
+        .sidebar-nav button {
+            width: 100%;
+            text-align: left;
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 3px solid transparent;
+        }
+        .sidebar-nav button:hover,
+        .sidebar-nav button.active {
+            background: var(--bg-card);
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+        }
+        .sidebar-footer button {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .sidebar-footer button:hover {
+            border-color: var(--accent-terracotta);
+            color: var(--accent-terracotta);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 32px 40px;
+            max-width: calc(100% - 280px);
+        }
+
+        .section-panel {
+            display: none;
+        }
+        .section-panel.active {
+            display: block;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .panel-header h2 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            color: var(--text-primary);
+        }
+        .panel-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-admin {
+            padding: 10px 20px;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: var(--radius);
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-admin-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+        .btn-admin-primary:hover {
+            background: var(--accent-light);
+        }
+        .btn-admin-outline {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        .btn-admin-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .btn-admin-danger {
+            background: var(--accent-terracotta);
+            color: #fff;
+        }
+        .btn-admin-danger:hover {
+            background: #e74c3c;
+        }
+
+        /* ITEM CARDS */
+        .items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .item-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .item-card:hover {
+            border-color: var(--border-light);
+        }
+        .item-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .item-card-title {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+        .item-card-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .item-card-actions button {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .item-card-actions button:hover {
+            border-color: var(--accent-terracotta);
+            color: var(--accent-terracotta);
+        }
+
+        /* FORM FIELDS */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .form-group-admin {
+            margin-bottom: 12px;
+        }
+        .form-group-admin label {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .form-group-admin input,
+        .form-group-admin textarea,
+        .form-group-admin select {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .form-group-admin input:focus,
+        .form-group-admin textarea:focus,
+        .form-group-admin select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+        .form-group-admin textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .form-group-admin input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* ADD BUTTON */
+        .add-item-btn {
+            width: 100%;
+            padding: 24px;
+            background: transparent;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            color: var(--text-muted);
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .add-item-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        /* TEXT EDITOR */
+        .text-editor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .text-editor-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+        }
+        .text-editor-card h4 {
+            font-family: var(--font-display);
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* PHOTO GRID EDITOR */
+        .photo-grid-editor {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .photo-grid-cell {
+            aspect-ratio: 1;
+            background: var(--bg-panel);
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .photo-grid-cell:hover {
+            border-color: var(--accent);
+        }
+        .photo-grid-cell.occupied {
+            border-style: solid;
+            border-color: var(--accent);
+        }
+        .photo-grid-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .photo-grid-cell .cell-label {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            right: 4px;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--text-primary);
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-align: center;
+            font-family: var(--font-body);
+        }
+        .photo-grid-cell .cell-size {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+        .photo-grid-cell .cell-actions {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            display: flex;
+            gap: 4px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .photo-grid-cell:hover .cell-actions {
+            opacity: 1;
+        }
+        .photo-grid-cell .cell-actions button {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: none;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .photo-grid-cell .cell-actions button:hover {
+            background: var(--accent-terracotta);
+        }
+
+        .size-selector {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .size-option {
+            padding: 6px 12px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .size-option:hover,
+        .size-option.active {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 20000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h3 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--text-primary);
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .modal-close:hover {
+            color: var(--accent-terracotta);
+        }
+        .modal-body {
+            padding: 24px;
+        }
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        /* PREVIEW PANEL */
+        .preview-info {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px;
+            text-align: center;
+        }
+        .preview-info h3 {
+            font-family: var(--font-display);
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        .preview-info p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .preview-info .btn-admin {
+            padding: 14px 32px;
+            font-size: 14px;
+        }
+        .preview-note {
+            margin-top: 20px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .sidebar { width: 220px; }
+            .main-content { margin-left: 220px; max-width: calc(100% - 220px); padding: 20px; }
+            .text-editor-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main-content { margin-left: 0; max-width: 100%; padding: 16px; }
+            .login-box { padding: 32px 24px; margin: 16px; }
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--accent);
+            color: var(--text-primary);
+            padding: 14px 24px;
+            border-radius: var(--radius);
+            font-family: var(--font-body);
+            font-size: 13px;
+            z-index: 30000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 0.4s;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+    <div class="login-box">
+        <h1><span class="logo-text">MOJCA</span></h1>
+        <p>Panel de Administracion</p>
+        <input type="password" id="passwordInput" placeholder="Contrasena" onkeypress="if(event.key==='Enter')doLogin()">
+        <button onclick="doLogin()">Entrar</button>
+        <p class="login-error" id="loginError">Contrasena incorrecta</p>
+        <p style="margin-top:16px;font-size:11px;color:var(--text-muted);">
+            Contrasena por defecto: <strong style="color:var(--accent);">mojca2024</strong>
+        </p>
+    </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-layout" id="adminLayout">
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2><span class="logo-text">MOJCA</span></h2>
+            <p>Panel de Administracion</p>
+        </div>
+        <ul class="sidebar-nav">
+            <li><button class="active" onclick="showSection('textos')" data-section="textos">Textos del Sitio</button></li>
+            <li><button onclick="showSection('videos-h')" data-section="videos-h">Videos Horizontales</button></li>
+            <li><button onclick="showSection('videos-v')" data-section="videos-v">Reels Verticales</button></li>
+            <li><button onclick="showSection('fotos')" data-section="fotos">Fotografia</button></li>
+            <li><button onclick="showSection('branding')" data-section="branding">Branding</button></li>
+            <li><button onclick="showSection('redes')" data-section="redes">Redes Sociales</button></li>
+            <li><button onclick="showSection('webdev')" data-section="webdev">Web y Codigo</button></li>
+            <li><button onclick="showSection('preview')" data-section="preview">Vista Previa</button></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button onclick="logout()">Cerrar Sesion</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <!-- TEXTOS -->
+        <div class="section-panel active" id="panel-textos">
+            <div class="panel-header">
+                <h2>Textos del Sitio</h2>
+                <div class="panel-actions">
+                    <button class="btn-admin btn-admin-primary" onclick="saveTexts()">Guardar Cambios</button>
+                    <button class="btn-admin btn-admin-outline" onclick="resetTexts()">Restaurar</button>
+                </div>
+            </div>
+            <div class="text-editor-grid" id="textEditorGrid"></div>
+        </div>
+
+        <!-- VIDEOS HORIZONTALES -->
+        <div class="section-panel" id="panel-videos-h">
+            <div class="panel-header">
+                <h2>Videos Horizontales</h2>
+                <div class="panel-actions">
+                    <button class="btn-admin btn-admin-primary" onclick="saveAll()">Guardar Todo</button>
+                </div>
+            </div>
+            <div class="items-list" id="videosHList"></div>
+            <button class="add-item-btn" onclick="openModal('video-h')" style="margin-top:16px;">
+                <span style="font-size:20px;">+</span> Agregar Video Horizontal
+            </button>
+        </div>
+
+        <!-- VIDEOS VERTICALES -->
+        <div class="section-panel" id="panel-videos-v">
+            <div class="panel-header">
+                <h2>Reels y Shorts Verticales</h2>
+                <div class="panel-actions">
+                    <button class="btn-admin btn-admin-primary" onclick="saveAll()">Guardar Todo</button>
+                </div>
+            </div>
+            <div class="items-list" id="videosVList"></div>
+            <button class="add-item-btn" onclick="openModal('video-v')" style="margin-top:16px;">
+                <span style="font-size:20px;">+</span> Agregar Reel/Short
+            </button>
+        </div>
+
+        <!-- FOTOS -->
+        <div class="section-panel" id="panel-fotos">
+            <div class="panel-header">
+                <h2>Fotografia — Grilla Visual</h2>
+                <div class="panel-actions">
+                    <button class="btn-admin btn-admin-primary" onclick="saveAll()">Guardar Todo</button>
+                    <button class="btn-admin btn-admin-outline" onclick="openModal('foto')">+ Agregar Foto</button>
+                </div>
+            </div>
+            <p style="color:var(--text-muted);margin-bottom:16px;font-style:italic;">
+                Haz clic en una celda para editarla. Puedes cambiar el tamano, la imagen, el titulo y la categoria.
+            </p>
+            <div class="photo-grid-editor" id="photoGridEditor"></div>
+        </div>
+
+        <!-- BRANDING -->
+        <div class="section-panel" id="panel-branding">
+            <div class="panel-header">
+                <h2>Branding</h2>
+                <div class="panel-actions">
+                    <button class="btn-admin btn-admin-primary" onclick="saveAll()">Guardar Todo</button>
+                </div>
+            </div>
+            <div class="items-list" id="brandingList"></div>
+            <button class="add-item-btn" onclick="openModal('branding')" style="margin-top:16px;">
+                <span style="font-size:20px;">+</span> Agregar Proyecto de Branding
+            </button>
+        </div>
+
+        <!-- REDES -->
+        <div class="section-panel" id="panel-redes">
+            <div class="panel-header">
+                <h2>Redes Sociales</h2>
+                <div class="panel-actions">
+                    <button class="btn-admin btn-admin-primary" onclick="saveAll()">Guardar Todo</button>
+                </div>
+            </div>
+            <div class="items-list" id="redesList"></div>
+            <button class="add-item-btn" onclick="openModal('redes-carousel')" style="margin-top:16px;">
+                <span style="font-size:20px;">+</span> Agregar Post con Carrusel
+            </button>
+            <button class="add-item-btn" onclick="openModal('redes-reel')" style="margin-top:8px;">
+                <span style="font-size:20px;">+</span> Agregar Reel
+            </button>
+        </div>
+
+        <!-- WEBDEV -->
+        <div class="section-panel" id="panel-webdev">
+            <div class="panel-header">
+                <h2>Web y Codigo</h2>
+                <div class="panel-actions">
+                    <button class="btn-admin btn-admin-primary" onclick="saveAll()">Guardar Todo</button>
+                </div>
+            </div>
+            <div class="items-list" id="webdevList"></div>
+            <button class="add-item-btn" onclick="openModal('webdev')" style="margin-top:16px;">
+                <span style="font-size:20px;">+</span> Agregar Proyecto Web
+            </button>
+        </div>
+
+        <!-- PREVIEW -->
+        <div class="section-panel" id="panel-preview">
+            <div class="panel-header">
+                <h2>Vista Previa</h2>
+            </div>
+            <div class="preview-info">
+                <h3>Ver los cambios en el sitio</h3>
+                <p>Los cambios que hagas en este panel se guardan en el navegador. Para verlos reflejados, abri el sitio en una nueva pestana.</p>
+                <button class="btn-admin btn-admin-primary" onclick="window.open('index.html','_blank')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Abrir sitio en nueva ventana
+                </button>
+                <p class="preview-note">Sugerencia: abri index.html y admin.html lado a lado para ver los cambios en tiempo real.</p>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3 id="modalTitle">Agregar Elemento</h3>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+        <div class="modal-footer">
+            <button class="btn-admin btn-admin-outline" onclick="closeModal()">Cancelar</button>
+            <button class="btn-admin btn-admin-primary" id="modalSaveBtn" onclick="saveModal()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>
