@@ -3,6 +3,28 @@
 // ========================================
 
 const DEFAULT_DATA = {
+    sections: {
+        hero: true,
+        marquee: true,
+        sobre: true,
+        quienesSomos: true,
+        testimonios: true,
+        videos: true,
+        reels: true,
+        fotos: true,
+        branding: true,
+        redes: true,
+        webdev: true,
+        proceso: true,
+        contacto: true
+    },
+    gradients: {
+        warm: "linear-gradient(180deg, #0a0a0a 0%, #1a0f0a 40%, #0f0a05 70%, #0a0a0a 100%)",
+        cream: "linear-gradient(180deg, #0a0a0a 0%, #111111 40%, #0d0d0d 70%, #0a0a0a 100%)",
+        terracotta: "linear-gradient(180deg, #0a0a0a 0%, #1a0a05 40%, #150804 70%, #0a0a0a 100%)",
+        olive: "linear-gradient(180deg, #0a0a0a 0%, #0f1a0a 40%, #0a1208 70%, #0a0a0a 100%)",
+        wine: "linear-gradient(180deg, #0a0a0a 0%, #1a0505 40%, #120303 70%, #0a0a0a 100%)"
+    },
     texts: {
         logoText: "MOJCA",
         heroLabel: "Estudio Creativo",
@@ -155,24 +177,6 @@ function deepMerge(defaults, saved) {
     return result;
 }
 
-function saveData(data) {
-    localStorage.setItem('mojcaData', JSON.stringify(data));
-}
-
-function resetData() {
-    localStorage.setItem('mojcaData', JSON.stringify(DEFAULT_DATA));
-    return JSON.parse(JSON.stringify(DEFAULT_DATA));
-}
-
-function placeholderHTML(label, iconType) {
-    const icons = {
-        image: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`,
-        video: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
-        web: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`
-    };
-    return `<div class="ph-inner">${icons[iconType] || icons.image}<span>${label}</span></div>`;
-}
-
 function createMediaElement(src, label, type) {
     if (src && src.trim() !== '') {
         if (type === 'video' || src.match(/\.(mp4|webm|ogg)$/i) || src.includes('youtube') || src.includes('vimeo')) {
@@ -184,15 +188,25 @@ function createMediaElement(src, label, type) {
                 const id = src.match(/vimeo\.com\/(\d+)/);
                 if (id) return `<iframe src="https://player.vimeo.com/video/${id[1]}?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></iframe>`;
             }
-            return `<video src="${src}" muted loop playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;display:block;"></video>`;
+            return `<video src="${src}" muted loop playsinline preload="metadata" controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false;" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:auto;"></video>`;
         }
-        return `<img src="${src}" alt="${label}" style="width:100%;height:100%;object-fit:cover;display:block;">`;
+        return `<img src="${src}" alt="${label}" oncontextmenu="return false;" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block;">`;
     }
     return placeholderHTML(label, type === 'video' ? 'video' : 'image');
 }
 
+function placeholderHTML(label, iconType) {
+    const icons = {
+        image: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`,
+        video: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
+        web: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`
+    };
+    return `<div class="ph-inner">${icons[iconType] || icons.image}<span>${label}</span></div>`;
+}
+
 function applyDynamicStyles(data) {
     const s = data.style;
+    const g = data.gradients || DEFAULT_DATA.gradients;
     const styleEl = document.getElementById('dynamic-styles') || document.createElement('style');
     styleEl.id = 'dynamic-styles';
     styleEl.textContent = `
@@ -214,8 +228,44 @@ function applyDynamicStyles(data) {
             --text-muted: ${s.textMuted} !important;
             --border: ${s.borderColor} !important;
         }
+        .bg-gradient-layer[data-active="warm"] { background: ${g.warm} !important; }
+        .bg-gradient-layer[data-active="cream"] { background: ${g.cream} !important; }
+        .bg-gradient-layer[data-active="terracotta"] { background: ${g.terracotta} !important; }
+        .bg-gradient-layer[data-active="olive"] { background: ${g.olive} !important; }
+        .bg-gradient-layer[data-active="wine"] { background: ${g.wine} !important; }
     `;
     document.head.appendChild(styleEl);
+}
+
+function applySectionVisibility(data) {
+    const sec = data.sections || DEFAULT_DATA.sections;
+    const mapping = {
+        hero: { el: document.getElementById('inicio'), link: 'a[href="#inicio"]' },
+        marquee: { el: document.querySelector('.marquee-section'), link: null },
+        sobre: { el: document.getElementById('sobre'), link: 'a[href="#sobre"]' },
+        quienesSomos: { el: document.getElementById('quienes-somos'), link: 'a[href="#quienes-somos"]' },
+        testimonios: { el: document.getElementById('testimonios'), link: null },
+        videos: { el: document.getElementById('videos'), link: 'a[href="#videos"]' },
+        reels: { el: document.getElementById('reels'), link: null },
+        fotos: { el: document.getElementById('fotos'), link: 'a[href="#fotos"]' },
+        branding: { el: document.getElementById('branding'), link: 'a[href="#branding"]' },
+        redes: { el: document.getElementById('redes'), link: 'a[href="#redes"]' },
+        webdev: { el: document.getElementById('webdev'), link: 'a[href="#webdev"]' },
+        proceso: { el: document.getElementById('proceso'), link: null },
+        contacto: { el: document.getElementById('contacto'), link: 'a[href="#contacto"]' }
+    };
+
+    for (const [key, conf] of Object.entries(mapping)) {
+        const isVisible = sec[key] !== false;
+        if (conf.el) conf.el.style.display = isVisible ? '' : 'none';
+        if (conf.link) {
+            document.querySelectorAll(conf.link).forEach(a => {
+                const parentLi = a.closest('li');
+                if (parentLi) parentLi.style.display = isVisible ? '' : 'none';
+                else a.style.display = isVisible ? '' : 'none';
+            });
+        }
+    }
 }
 
 function initHero(data) {
@@ -243,6 +293,9 @@ function initHero(data) {
             heroVideo.loop = true;
             heroVideo.playsInline = true;
             heroVideo.autoplay = true;
+            heroVideo.setAttribute('controlsList', 'nodownload noplaybackrate');
+            heroVideo.setAttribute('disablePictureInPicture', 'true');
+            heroVideo.oncontextmenu = () => false;
             heroVideo.style.display = 'block';
         }
         heroVideoBg.style.display = 'block';
@@ -283,6 +336,7 @@ function renderQuienesSomos(data) {
     const grid = document.getElementById('quienesSomosGrid');
     if (!section || !grid) return;
     const qs = data.quienesSomos;
+    if (data.sections && data.sections.quienesSomos === false) return;
     if (!qs.enabled) { section.style.display = 'none'; return; }
     section.style.display = 'block';
     if (!qs.members || qs.members.length === 0) {
@@ -292,7 +346,7 @@ function renderQuienesSomos(data) {
     grid.innerHTML = qs.members.map(m => `
         <div class="member-card scroll-reveal">
             <div class="member-photo">
-                ${m.photo ? `<img src="${m.photo}" alt="${m.name}">` : `<div class="img-placeholder avatar" data-label="${m.name.charAt(0)}"><div class="ph-inner"><span>${m.name.charAt(0)}</span></div></div>`}
+                ${m.photo ? `<img src="${m.photo}" alt="${m.name}" oncontextmenu="return false;" draggable="false">` : `<div class="img-placeholder avatar" data-label="${m.name.charAt(0)}"><div class="ph-inner"><span>${m.name.charAt(0)}</span></div></div>`}
             </div>
             <h3 class="member-name">${m.name}</h3>
             <p class="member-role">${m.role}</p>
@@ -337,7 +391,7 @@ function renderVideosVertical(data) {
                 <h4>${v.title}</h4>
                 <p>${v.description}</p>
                 <div class="video-metrics">
-                    <span class="metric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> ${v.views}</span>
+                    <span class="metric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> ${v.views}</span>
                     <span class="metric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> ${v.likes}</span>
                 </div>
             </div>
@@ -417,7 +471,7 @@ function renderRedes(data) {
                 </div>
                 <div class="ig-actions">
                     <button class="ig-like" onclick="toggleLike(this)" aria-label="Me gusta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                    <button class="ig-comment-btn" aria-label="Comentar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+                    <button class="ig-comment-btn" aria-label="Comentar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
                     <button class="ig-share" aria-label="Compartir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
                     <button class="ig-save" aria-label="Guardar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
                 </div>
@@ -455,6 +509,7 @@ function renderTestimonios(data) {
     const track = document.getElementById('testimoniosTrack');
     if (!section || !track) return;
     const t = data.testimonios;
+    if (data.sections && data.sections.testimonios === false) return;
     if (!t.enabled) { section.style.display = 'none'; return; }
     section.style.display = 'block';
     const bg = document.getElementById('testimoniosBg');
@@ -469,7 +524,7 @@ function renderTestimonios(data) {
         <div class="testimonio-card">
             <div class="testimonio-quote">"${item.texto}"</div>
             <div class="testimonio-author">
-                <div class="testimonio-avatar">${item.avatar ? `<img src="${item.avatar}" alt="${item.nombre}">` : `<span>${item.nombre.charAt(0)}</span>`}</div>
+                <div class="testimonio-avatar">${item.avatar ? `<img src="${item.avatar}" alt="${item.nombre}" oncontextmenu="return false;">` : `<span>${item.nombre.charAt(0)}</span>`}</div>
                 <div class="testimonio-info"><strong>${item.nombre}</strong><span>${item.empresa}</span></div>
             </div>
         </div>`;
@@ -535,8 +590,8 @@ class InfiniteCarousel {
         const offset = -this.currentIndex * this.itemWidth;
         this.track.style.transform = `translateX(${offset}px)`;
     }
-    next() { this.currentIndex++; this.updatePosition(); this.checkInfinite(); }
-    prev() { this.currentIndex--; this.updatePosition(); this.checkInfinite(); }
+    next() { this.currentIndex++; this.updatePosition(true); this.checkInfinite(); }
+    prev() { this.currentIndex--; this.updatePosition(true); this.checkInfinite(); }
     checkInfinite() {
         const originalCount = this.items.length / 3;
         setTimeout(() => {
@@ -676,6 +731,14 @@ function initContactForm() {
     });
 }
 
+function initSecurity() {
+    document.addEventListener('contextmenu', (e) => {
+        if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG' || e.target.closest('.video-thumb-large, .video-thumb-vertical')) {
+            e.preventDefault();
+        }
+    });
+}
+
 function initCursorGlow() {
     const glow = document.getElementById('cursorGlow');
     if (!glow) return;
@@ -726,6 +789,7 @@ function initServicioBars() {
 function init() {
     const data = getData();
     applyDynamicStyles(data);
+    applySectionVisibility(data);
     renderTexts(data);
     initHero(data);
     renderQuienesSomos(data);
@@ -742,6 +806,7 @@ function init() {
     initNav();
     initGalleryFilter(data);
     initContactForm();
+    initSecurity();
     initCursorGlow();
     initCountUp();
     initServicioBars();
