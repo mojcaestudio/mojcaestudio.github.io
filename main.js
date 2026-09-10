@@ -1,5 +1,5 @@
 // ========================================
-// MOJCA ESTUDIO — Main JavaScript
+// MOJCA ESTUDIO — Main JavaScript Optimizado
 // ========================================
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkjnkdvl";
@@ -20,13 +20,6 @@ const DEFAULT_DATA = {
         proceso: true,
         contacto: true
     },
-    gradients: {
-        warm: "radial-gradient(circle at 50% 30%, #2a1208 0%, #0a0a0a 75%)",
-        cream: "radial-gradient(circle at 50% 30%, #171717 0%, #0a0a0a 75%)",
-        terracotta: "radial-gradient(circle at 50% 30%, #2e0d04 0%, #0a0a0a 75%)",
-        olive: "radial-gradient(circle at 50% 30%, #0d210b 0%, #0a0a0a 75%)",
-        wine: "radial-gradient(circle at 50% 30%, #2b0404 0%, #0a0a0a 75%)"
-    },
     texts: {
         logoText: "MOJCA",
         heroLabel: "Estudio Creativo",
@@ -35,8 +28,6 @@ const DEFAULT_DATA = {
         sobreTag: "Sobre Nosotros",
         sobreTitle: "Damos vida a ideas a través de la imagen",
         sobreSubtitle: "Un estudio donde la técnica se encuentra con la sensibilidad artística",
-        sobreLead: "Nos especializamos en diseño audiovisual, fotografía, producción de video y estrategias para redes sociales.",
-        sobreText: "Creemos en las ideas que emocionan y perduran, en relatos capaces de conectar de verdad con las personas.",
         quienesTag: "El Equipo",
         quienesTitle: "Quiénes Somos",
         quienesSubtitle: "Las personas detrás de cada proyecto",
@@ -53,21 +44,9 @@ const DEFAULT_DATA = {
         footerText: "Diseño, creatividad y estrategia visual con alma artesanal."
     },
     style: {
-        heroFontSize: "clamp(36px, 5.5vw, 72px)",
+        heroFontSize: "clamp(34px, 5.2vw, 68px)",
         heroFontFamily: "'Space Grotesk', sans-serif",
-        heroColor: "#f0f0f0",
-        heroLabelColor: "#ff6b35",
-        heroSubColor: "#a0a0a0",
-        heroLabelSize: "12px",
-        heroSubSize: "18px",
-        sectionTitleSize: "clamp(32px, 4.5vw, 56px)",
-        sectionTitleColor: "#f0f0f0",
-        sectionSubtitleColor: "#a0a0a0",
-        sectionTagColor: "#ff6b35",
-        sectionTagSize: "11px",
-        bodyFontSize: "16px",
         bodyFontFamily: "'Inter', sans-serif",
-        bodyColor: "#f0f0f0",
         accentColor: "#ff6b35",
         accentLight: "#ff8c42",
         bgDark: "#0a0a0a",
@@ -76,78 +55,53 @@ const DEFAULT_DATA = {
         textPrimary: "#f0f0f0",
         textSecondary: "#a0a0a0",
         textMuted: "#666666",
-        borderColor: "#2a2a2a"
+        borderColor: "#242424"
     },
     hero: {
         videoSrc: "",
         glassEnabled: true,
-        glassBlur: "20px",
-        glassOpacity: "0.15",
-        glassBorder: "1px solid rgba(255,255,255,0.1)",
+        glassBlur: "12px",
+        glassOpacity: "0.03",
         overlayEnabled: true,
-        overlayColor: "rgba(10,10,10,0.4)",
-        textShadow: "0 4px 30px rgba(0,0,0,0.5)"
+        overlayColor: "rgba(10,10,10,0.45)"
     },
     quienesSomos: {
         enabled: true,
         members: [
-            { id: "m1", name: "María López", role: "Directora Creativa", photo: "", tags: ["Dirección", "Branding", "Estrategia"], description: "Apasionada por transformar ideas en experiencias visuales memorables. Lidera cada proyecto con visión y precisión." },
-            { id: "m2", name: "Juan Pérez", role: "Productor Audiovisual", photo: "", tags: ["Video", "Fotografía", "Motion"], description: "Especialista en contar historias a través del lente. Desde spots hasta documentales, cada frame cuenta." },
-            { id: "m3", name: "Lucía Martínez", role: "Diseñadora UX/UI", photo: "", tags: ["Web", "Diseño", "Interacción"], description: "Crea interfaces que no solo se ven bien, sino que funcionan. Experiencias digitales que conectan." }
+            { id: "m1", name: "María López", role: "Directora Creativa", photo: "", tags: ["Dirección", "Branding"], description: "Transforma ideas en experiencias visuales memorables." },
+            { id: "m2", name: "Juan Pérez", role: "Productor Audiovisual", photo: "", tags: ["Video", "Fotografía"], description: "Especialista en narrativa visual cinematográfica." }
         ]
     },
     testimonios: {
         enabled: true,
-        bgType: "gradient",
-        bgGradient: "linear-gradient(135deg, #1a0a05 0%, #0f0a05 50%, #1a0505 100%)",
-        bgImage: "",
-        bgColor: "#111111",
         items: [
-            { id: "t1", nombre: "María González", empresa: "Marca X", texto: "Trabajar con Mojca fue una experiencia transformadora. Entendieron exactamente lo que necesitábamos y lo elevaron a otro nivel.", avatar: "" },
-            { id: "t2", nombre: "Carlos Rodríguez", empresa: "Startup Y", texto: "La atención al detalle y la creatividad que ponen en cada proyecto es impresionante. Son nuestros aliados creativos de confianza.", avatar: "" },
-            { id: "t3", nombre: "Lucía Martínez", empresa: "Restaurante Z", texto: "Nuestra imagen cambió por completo gracias a ellos. El rebranding superó todas nuestras expectativas.", avatar: "" },
-            { id: "t4", nombre: "Juan Pérez", empresa: "Tienda Online W", texto: "Profesionalismo, creatividad y un trato humano excepcional. Recomiendo Mojca sin dudarlo.", avatar: "" }
+            { id: "t1", nombre: "María González", empresa: "Marca X", texto: "Trabajar con Mojca fue una experiencia transformadora. Entendieron exactamente lo que necesitábamos.", avatar: "" },
+            { id: "t2", nombre: "Carlos Rodríguez", empresa: "Startup Y", texto: "La atención al detalle y la creatividad que ponen en cada proyecto es impresionante.", avatar: "" }
         ]
     },
     videosHorizontal: [
-        { id: "vh1", type: "video", src: "", title: "Spot Comercial — Marca X", description: "Dirección, filmación y postproducción para campaña de lanzamiento.", views: "12.4K", likes: "856", tag: "Comercial" },
-        { id: "vh2", type: "video", src: "", title: "Video Musical — Artista Y", description: "Concepto visual, dirección de arte y edición para single debut.", views: "45.2K", likes: "2.1K", tag: "Musical" },
-        { id: "vh3", type: "video", src: "", title: "Corporativo — Empresa Z", description: "Video institucional con tomas aéreas en drone, entrevistas y motion graphics.", views: "8.7K", likes: "423", tag: "Corporativo" },
-        { id: "vh4", type: "video", src: "", title: "Documental — Proyecto Social", description: "Cobertura documental de 3 días. Edición narrativa con arco emocional.", views: "3.1K", likes: "189", tag: "Documental" }
+        { id: "vh1", src: "", title: "Spot Comercial — Marca X", description: "Campaña de lanzamiento con rodaje y color grading.", views: "12.4K", likes: "856", tag: "Comercial" },
+        { id: "vh2", src: "", title: "Video Musical — Artista Y", description: "Concepto visual y dirección de arte.", views: "45.2K", likes: "2.1K", tag: "Musical" },
+        { id: "vh3", src: "", title: "Corporativo — Empresa Z", description: "Video institucional con tomas aéreas.", views: "8.7K", likes: "423", tag: "Corporativo" },
+        { id: "vh4", src: "", title: "Documental — Proyecto Social", description: "Cobertura de 3 días y edición narrativa.", views: "3.1K", likes: "189", tag: "Documental" }
     ],
     videosVertical: [
-        { id: "vv1", type: "video", src: "", title: "Behind the Scenes", description: "Un día de producción en el estudio", views: "89K", likes: "4.2K" },
-        { id: "vv2", type: "video", src: "", title: "Tutorial de Color", description: "Antes y después del color grading", views: "156K", likes: "8.7K" },
-        { id: "vv3", type: "video", src: "", title: "Transiciones Creativas", description: "Edición con match cuts y speed ramps", views: "234K", likes: "12K" },
-        { id: "vv4", type: "video", src: "", title: "Motion Graphics", description: "Animaciones tipográficas y visuales", views: "67K", likes: "3.4K" },
-        { id: "vv5", type: "video", src: "", title: "Producto en 15s", description: "Spot rápido para redes sociales", views: "312K", likes: "18K" }
+        { id: "vv1", src: "", title: "Behind the Scenes", description: "Un día de rodaje en estudio", views: "89K", likes: "4.2K" },
+        { id: "vv2", src: "", title: "Tutorial de Color", description: "Antes y después de grading", views: "156K", likes: "8.7K" },
+        { id: "vv3", src: "", title: "Transiciones Creativas", description: "Edición con speed ramps", views: "234K", likes: "12K" }
     ],
     photos: [
-        { id: "p1", src: "", title: "Skincare Campaign", category: "producto", size: "1x1" },
-        { id: "p2", src: "", title: "Retrato Editorial", category: "retrato", size: "1x2" },
-        { id: "p3", src: "", title: "Evento Corporativo", category: "evento", size: "1x1" },
-        { id: "p4", src: "", title: "Urban Lifestyle", category: "lifestyle", size: "1x1" },
-        { id: "p5", src: "", title: "Flat Lay E-commerce", category: "producto", size: "2x1" },
-        { id: "p6", src: "", title: "Retrato Artístico", category: "retrato", size: "1x1" }
+        { id: "p1", src: "", title: "Campaña Skincare", category: "producto", size: "1x1", description: "Iluminación difusa y composición orientada a ecommerce de alta gama." },
+        { id: "p2", src: "", title: "Retrato Editorial", category: "retrato", size: "1x2", description: "Sesión de estudio con contrastes marcados y tratamiento tonal cinematográfico." },
+        { id: "p3", src: "", title: "Evento Nocturno", category: "evento", size: "1x1", description: "" },
+        { id: "p4", src: "", title: "Urban Lifestyle", category: "lifestyle", size: "1x1", description: "Luz natural de atardecer capturada en entorno metropolitano." }
     ],
-    branding: [
-        { id: "b1", src: "", title: "Marca A — Identidad Completa", description: "Diseño de logo, paleta cromática, tipografía y aplicaciones.", tags: ["Logo", "Packaging", "Social"] },
-        { id: "b2", src: "", title: "Restaurante B — Rebranding", description: "Renovación completa de imagen: desde el menú físico hasta la presencia digital.", tags: ["Rebranding", "Menú", "Web"] },
-        { id: "b3", src: "", title: "Startup C — Brand Book", description: "Manual de marca completo con guidelines de uso.", tags: ["Brand Book", "Guidelines"] }
-    ],
-    redes: [
-        { id: "r1", type: "carousel", slides: [{ src: "", label: "Campaña Verano 1/3" }, { src: "", label: "Campaña Verano 2/3" }, { src: "", label: "Campaña Verano 3/3" }], likes: "1,247", caption: "Nueva campaña de verano para @marcacliente.", hashtags: "#audiovisual #redessociales", time: "Hace 2 días", location: "Buenos Aires, Argentina" },
-        { id: "r2", type: "reel", src: "", label: "Behind the Scenes Reel", likes: "3,892", caption: "Behind the scenes de nuestra última producción.", hashtags: "#behindthescenes #produccion", time: "Hace 5 días", location: "Córdoba, Argentina" },
-        { id: "r3", type: "carousel", slides: [{ src: "", label: "Branding 1/4" }, { src: "", label: "Branding 2/4" }, { src: "", label: "Branding 3/4" }, { src: "", label: "Branding 4/4" }], likes: "892", caption: "Branding completo para un nuevo emprendimiento local.", hashtags: "#branding #diseno #emprendedores", time: "Hace 1 semana", location: "Rosario, Argentina" }
-    ],
-    webdev: [
-        { id: "w1", src: "", title: "E-commerce — Tienda de Moda", description: "Tienda online completa con carrito, pasarela de pagos y panel de administración.", stack: ["React", "Next.js", "Stripe", "Tailwind"], linkLive: "#", linkRepo: "#" },
-        { id: "w2", src: "", title: "Landing Page — SaaS", description: "Landing page de alta conversión para startup de software.", stack: ["Vue 3", "Vite", "GSAP", "Netlify"], linkLive: "#", linkRepo: "#" },
-        { id: "w3", src: "", title: "Portfolio Interactivo — Artista", description: "Portfolio inmersivo con scroll horizontal, WebGL effects.", stack: ["Three.js", "React", "Framer Motion", "Vercel"], linkLive: "#", linkRepo: "#" }
-    ],
+    branding: [],
+    redes: [],
+    webdev: [],
     whatsapp: {
         number: "5493534000000",
-        message: "Hola Mojca Estudio, me interesa trabajar con ustedes",
+        message: "Hola Mojca Estudio",
         floatEnabled: true,
         floatLabel: "Escribinos"
     }
@@ -156,69 +110,67 @@ const DEFAULT_DATA = {
 function getData() {
     try {
         const saved = localStorage.getItem('mojcaData');
-        if (saved) {
-            const parsed = JSON.parse(saved);
-            return deepMerge(JSON.parse(JSON.stringify(DEFAULT_DATA)), parsed);
-        }
+        if (saved) return deepMerge(JSON.parse(JSON.stringify(DEFAULT_DATA)), JSON.parse(saved));
     } catch (e) {
-        console.error('Error cargando datos de localStorage:', e);
+        console.error(e);
     }
-    localStorage.setItem('mojcaData', JSON.stringify(DEFAULT_DATA));
     return JSON.parse(JSON.stringify(DEFAULT_DATA));
 }
 
-function deepMerge(defaults, saved) {
-    const result = JSON.parse(JSON.stringify(defaults));
-    for (const key in saved) {
-        if (saved[key] !== null && typeof saved[key] === 'object' && !Array.isArray(saved[key])) {
-            result[key] = deepMerge(defaults[key] || {}, saved[key]);
-        } else {
-            result[key] = saved[key];
+function deepMerge(target, source) {
+    for (const key of Object.keys(source)) {
+        if (source[key] instanceof Object && !Array.isArray(source[key])) {
+            Object.assign(source[key], deepMerge(target[key] || {}, source[key]));
         }
     }
-    return result;
+    Object.assign(target || {}, source);
+    return target;
 }
 
-function createMediaElement(src, label, type) {
-    if (src && src.trim() !== '') {
-        if (type === 'video' || src.match(/\.(mp4|webm|ogg)$/i) || src.includes('youtube') || src.includes('vimeo')) {
-            if (src.includes('youtube')) {
-                const id = src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
-                if (id) return `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id[1]}?mute=1&loop=1&playlist=${id[1]}&controls=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></iframe>`;
-            }
-            if (src.includes('vimeo')) {
-                const id = src.match(/vimeo\.com\/(\d+)/);
-                if (id) return `<iframe src="https://player.vimeo.com/video/${id[1]}?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></iframe>`;
-            }
-            return `<video src="${src}" muted loop playsinline preload="metadata" controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false;" style="width:100%;height:100%;object-fit:cover;display:block;pointer-events:auto;"></video>`;
+// Procesador de videos universal (Drive, YouTube, Vimeo, MP4) optimizado sin controles
+function createMediaElement(src, label, type, isHero = false) {
+    if (!src || src.trim() === '') return `<div class="ph-inner"><span>${label}</span></div>`;
+
+    // Google Drive
+    if (src.includes('drive.google.com')) {
+        const driveId = src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || src.match(/id=([a-zA-Z0-9_-]+)/);
+        if (driveId && driveId[1]) {
+            return `<iframe src="https://drive.google.com/file/d/${driveId[1]}/preview" width="100%" height="100%" frameborder="0" allow="autoplay" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;"></iframe>`;
         }
-        return `<img src="${src}" alt="${label}" oncontextmenu="return false;" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block;">`;
     }
-    return placeholderHTML(label, type === 'video' ? 'video' : 'image');
-}
 
-function placeholderHTML(label, iconType) {
-    const icons = {
-        image: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`,
-        video: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
-        web: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`
-    };
-    return `<div class="ph-inner">${icons[iconType] || icons.image}<span>${label}</span></div>`;
+    // YouTube sin controles, sin branding y con loop limpio
+    if (src.includes('youtube.com') || src.includes('youtu.be')) {
+        const yt = src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
+        if (yt && yt[1]) {
+            const extraParams = isHero ? "controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1" : "controls=0&rel=0";
+            return `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${yt[1]}?autoplay=1&mute=1&loop=1&playlist=${yt[1]}&${extraParams}" frameborder="0" allow="autoplay; encrypted-media" style="pointer-events:none;"></iframe>`;
+        }
+    }
+
+    // Vimeo
+    if (src.includes('vimeo.com')) {
+        const vim = src.match(/vimeo\.com\/(\d+)/);
+        if (vim && vim[1]) {
+            return `<iframe src="https://player.vimeo.com/video/${vim[1]}?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen" style="pointer-events:none;"></iframe>`;
+        }
+    }
+
+    // Archivo de video local/directo
+    if (type === 'video' || src.match(/\.(mp4|webm|ogg)$/i)) {
+        return `<video src="${src}" muted loop playsinline preload="metadata" controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false;" style="width:100%;height:100%;object-fit:cover;display:block;"></video>`;
+    }
+
+    return `<img src="${src}" alt="${label}" oncontextmenu="return false;" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block;">`;
 }
 
 function applyDynamicStyles(data) {
     const s = data.style;
-    const g = data.gradients || DEFAULT_DATA.gradients;
     const styleEl = document.getElementById('dynamic-styles') || document.createElement('style');
     styleEl.id = 'dynamic-styles';
     styleEl.textContent = `
-        .hero-title { font-size: ${s.heroFontSize} !important; font-family: ${s.heroFontFamily} !important; color: ${s.heroColor} !important; }
-        .hero-label { color: ${s.heroLabelColor} !important; font-size: ${s.heroLabelSize} !important; }
-        .hero-sub { color: ${s.heroSubColor} !important; font-size: ${s.heroSubSize} !important; }
-        .section-title { font-size: ${s.sectionTitleSize} !important; color: ${s.sectionTitleColor} !important; }
-        .section-subtitle { color: ${s.sectionSubtitleColor} !important; }
-        .section-tag { color: ${s.sectionTagColor} !important; font-size: ${s.sectionTagSize} !important; }
-        body { font-size: ${s.bodyFontSize} !important; font-family: ${s.bodyFontFamily} !important; color: ${s.bodyColor} !important; }
+        .hero-title, .section-title, .logo, .stat-num { font-family: ${s.heroFontFamily} !important; }
+        body, p, span, a, input, select, textarea { font-family: ${s.bodyFontFamily} !important; }
         :root {
             --accent: ${s.accentColor} !important;
             --accent-light: ${s.accentLight} !important;
@@ -230,132 +182,61 @@ function applyDynamicStyles(data) {
             --text-muted: ${s.textMuted} !important;
             --border: ${s.borderColor} !important;
         }
-        .bg-gradient-layer[data-active="warm"]::before { background: ${g.warm} !important; }
-        .bg-gradient-layer[data-active="cream"]::before { background: ${g.cream} !important; }
-        .bg-gradient-layer[data-active="terracotta"]::before { background: ${g.terracotta} !important; }
-        .bg-gradient-layer[data-active="olive"]::before { background: ${g.olive} !important; }
-        .bg-gradient-layer[data-active="wine"]::before { background: ${g.wine} !important; }
     `;
     document.head.appendChild(styleEl);
 }
 
-function applySectionVisibility(data) {
-    const sec = data.sections || DEFAULT_DATA.sections;
-    const mapping = {
-        hero: { el: document.getElementById('inicio'), link: 'a[href="#inicio"]' },
-        marquee: { el: document.querySelector('.marquee-section'), link: null },
-        sobre: { el: document.getElementById('sobre'), link: 'a[href="#sobre"]' },
-        quienesSomos: { el: document.getElementById('quienes-somos'), link: 'a[href="#quienes-somos"]' },
-        testimonios: { el: document.getElementById('testimonios'), link: null },
-        videos: { el: document.getElementById('videos'), link: 'a[href="#videos"]' },
-        reels: { el: document.getElementById('reels'), link: null },
-        fotos: { el: document.getElementById('fotos'), link: 'a[href="#fotos"]' },
-        branding: { el: document.getElementById('branding'), link: 'a[href="#branding"]' },
-        redes: { el: document.getElementById('redes'), link: 'a[href="#redes"]' },
-        webdev: { el: document.getElementById('webdev'), link: 'a[href="#webdev"]' },
-        proceso: { el: document.getElementById('proceso'), link: null },
-        contacto: { el: document.getElementById('contacto'), link: 'a[href="#contacto"]' }
-    };
+// Transición suave entre fondos sin saltos cromáticos
+function initBackgroundGradient() {
+    const plates = document.querySelectorAll('.bg-color-plate');
+    const sections = document.querySelectorAll('.section-bg');
 
-    for (const [key, conf] of Object.entries(mapping)) {
-        const isVisible = sec[key] !== false;
-        if (conf.el) conf.el.style.display = isVisible ? '' : 'none';
-        if (conf.link) {
-            document.querySelectorAll(conf.link).forEach(a => {
-                const parentLi = a.closest('li');
-                if (parentLi) parentLi.style.display = isVisible ? '' : 'none';
-                else a.style.display = isVisible ? '' : 'none';
-            });
-        }
-    }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const targetBg = entry.target.getAttribute('data-bg');
+                plates.forEach(plate => {
+                    plate.classList.toggle('active', plate.getAttribute('data-plate') === targetBg);
+                });
+            }
+        });
+    }, { 
+        threshold: 0.2,
+        rootMargin: "-10% 0px -10% 0px"
+    });
+
+    sections.forEach(s => observer.observe(s));
 }
 
 function initHero(data) {
     const heroVideoBg = document.getElementById('heroVideoBg');
-    const heroVideo = document.getElementById('heroVideo');
     const heroGlass = document.getElementById('heroGlass');
     const heroOverlay = document.getElementById('heroVideoOverlay');
-    const heroContent = document.querySelector('.hero-content');
     const h = data.hero;
-    if (!heroVideoBg || !heroVideo) return;
+    if (!heroVideoBg) return;
+
     if (h.videoSrc && h.videoSrc.trim() !== '') {
-        if (h.videoSrc.includes('youtube')) {
-            const id = h.videoSrc.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
-            if (id) {
-                heroVideoBg.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${id[1]}?autoplay=1&mute=1&loop=1&playlist=${id[1]}&controls=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;"></iframe>`;
-            }
-        } else if (h.videoSrc.includes('vimeo')) {
-            const id = h.videoSrc.match(/vimeo\.com\/(\d+)/);
-            if (id) {
-                heroVideoBg.innerHTML = `<iframe src="https://player.vimeo.com/video/${id[1]}?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;"></iframe>`;
-            }
-        } else {
-            heroVideo.src = h.videoSrc;
-            heroVideo.muted = true;
-            heroVideo.loop = true;
-            heroVideo.playsInline = true;
-            heroVideo.autoplay = true;
-            heroVideo.setAttribute('controlsList', 'nodownload noplaybackrate');
-            heroVideo.setAttribute('disablePictureInPicture', 'true');
-            heroVideo.oncontextmenu = () => false;
-            heroVideo.style.display = 'block';
-        }
+        heroVideoBg.innerHTML = createMediaElement(h.videoSrc, 'Hero Video', 'video', true);
         heroVideoBg.style.display = 'block';
     } else {
         heroVideoBg.style.display = 'none';
     }
-    if (heroOverlay) {
-        if (h.overlayEnabled) { heroOverlay.style.background = h.overlayColor; heroOverlay.style.display = 'block'; }
-        else { heroOverlay.style.display = 'none'; }
+    if (heroOverlay && h.overlayEnabled) {
+        heroOverlay.style.background = h.overlayColor;
+        heroOverlay.style.display = 'block';
     }
-    if (heroGlass) {
-        if (h.glassEnabled) {
-            heroGlass.style.display = 'block';
-            heroGlass.style.backdropFilter = `blur(${h.glassBlur})`;
-            heroGlass.style.webkitBackdropFilter = `blur(${h.glassBlur})`;
-            heroGlass.style.background = `rgba(255,255,255,${h.glassOpacity})`;
-            heroGlass.style.border = h.glassBorder;
-        } else { heroGlass.style.display = 'none'; }
+    if (heroGlass && h.glassEnabled) {
+        heroGlass.style.display = 'block';
+        heroGlass.style.backdropFilter = `blur(${h.glassBlur})`;
+        heroGlass.style.background = `rgba(255,255,255,${h.glassOpacity})`;
     }
-    if (heroContent && h.textShadow) { heroContent.style.textShadow = h.textShadow; }
 }
 
 function renderTexts(data) {
     document.querySelectorAll('[data-editable]').forEach(el => {
         const key = el.getAttribute('data-editable');
-        if (data.texts[key]) {
-            if (el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'P' || el.tagName === 'SPAN') {
-                el.innerHTML = data.texts[key].replace(/\n/g, '<br>');
-            } else {
-                el.textContent = data.texts[key];
-            }
-        }
+        if (data.texts[key]) el.innerHTML = data.texts[key].replace(/\n/g, '<br>');
     });
-}
-
-function renderQuienesSomos(data) {
-    const section = document.getElementById('quienes-somos');
-    const grid = document.getElementById('quienesSomosGrid');
-    if (!section || !grid) return;
-    const qs = data.quienesSomos;
-    if (data.sections && data.sections.quienesSomos === false) return;
-    if (!qs.enabled) { section.style.display = 'none'; return; }
-    section.style.display = 'block';
-    if (!qs.members || qs.members.length === 0) {
-        grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);">No hay miembros del equipo aún.</p>';
-        return;
-    }
-    grid.innerHTML = qs.members.map(m => `
-        <div class="member-card scroll-reveal">
-            <div class="member-photo">
-                ${m.photo ? `<img src="${m.photo}" alt="${m.name}" oncontextmenu="return false;" draggable="false">` : `<div class="img-placeholder avatar" data-label="${m.name.charAt(0)}"><div class="ph-inner"><span>${m.name.charAt(0)}</span></div></div>`}
-            </div>
-            <h3 class="member-name">${m.name}</h3>
-            <p class="member-role">${m.role}</p>
-            <div class="member-tags">${(m.tags || []).map(t => `<span class="member-tag">${t}</span>`).join('')}</div>
-            <p class="member-description">${m.description}</p>
-        </div>
-    `).join('');
 }
 
 function renderVideosHorizontal(data) {
@@ -371,9 +252,8 @@ function renderVideosHorizontal(data) {
                 <h4>${v.title}</h4>
                 <p>${v.description}</p>
                 <div class="video-metrics">
-                    <span class="metric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> ${v.views} vistas</span>
-                    <span class="metric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> ${v.likes} likes</span>
                     <span class="metric tag">${v.tag}</span>
+                    <span class="metric">${v.views} views</span>
                 </div>
             </div>
         </div>
@@ -392,157 +272,145 @@ function renderVideosVertical(data) {
             <div class="video-meta-v">
                 <h4>${v.title}</h4>
                 <p>${v.description}</p>
-                <div class="video-metrics">
-                    <span class="metric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> ${v.views}</span>
-                    <span class="metric"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> ${v.likes}</span>
-                </div>
             </div>
         </div>
     `).join('');
 }
+
+// Galería con filtro y auto-rotación
+let filterInterval = null;
+let currentFilterIndex = 0;
+const filterCategories = ['all', 'producto', 'retrato', 'evento', 'lifestyle'];
 
 function renderPhotos(data, filter) {
     const grid = document.getElementById('photoGrid');
     if (!grid) return;
     const photos = filter === 'all' ? data.photos : data.photos.filter(p => p.category === filter);
     grid.innerHTML = photos.map(p => `
-        <div class="photo-item size-${p.size}" data-category="${p.category}" data-photo-id="${p.id}">
+        <div class="photo-item size-${p.size}" data-id="${p.id}" data-category="${p.category}">
             <div class="photo-frame">
-                <div class="img-placeholder ${p.size === '1x2' || p.size === '1x3' ? 'tall' : p.size === '2x1' || p.size === '3x1' || p.size === '4x1' ? 'wide' : 'square'}" data-label="${p.title}">${createMediaElement(p.src, p.title, 'image')}</div>
+                <div class="img-placeholder square" data-label="${p.title}">${createMediaElement(p.src, p.title, 'image')}</div>
             </div>
-            <div class="photo-overlay"><h4>${p.title}</h4><p>${p.category.charAt(0).toUpperCase() + p.category.slice(1)}</p></div>
-        </div>
-    `).join('');
-}
-
-function renderBranding(data) {
-    const grid = document.getElementById('brandingGrid');
-    if (!grid) return;
-    grid.innerHTML = data.branding.map(b => `
-        <div class="branding-card scroll-reveal">
-            <div class="branding-visual"><div class="img-placeholder wide" data-label="${b.title}">${createMediaElement(b.src, b.title, 'image')}</div></div>
-            <div class="branding-info">
-                <h3>${b.title}</h3>
-                <p>${b.description}</p>
-                <div class="branding-tags">${b.tags.map(t => `<span>${t}</span>`).join('')}</div>
+            <div class="photo-overlay">
+                <h4>${p.title}</h4>
+                <p>${p.category}</p>
             </div>
         </div>
     `).join('');
+
+    grid.querySelectorAll('.photo-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const photo = data.photos.find(p => p.id === item.getAttribute('data-id'));
+            if (photo) openPhotoModal(photo);
+        });
+    });
 }
 
-function renderRedes(data) {
-    const grid = document.getElementById('redesGrid');
-    if (!grid) return;
-    grid.innerHTML = data.redes.map(r => {
-        if (r.type === 'carousel') {
-            return `
-            <article class="ig-post-full scroll-reveal">
-                <div class="ig-header">
-                    <div class="ig-avatar"><div class="img-placeholder avatar" data-label="M"><div class="ph-inner"><span>M</span></div></div></div>
-                    <div class="ig-user"><strong>mojcaestudio</strong><span>${r.location}</span></div>
-                    <a href="https://www.instagram.com/mojcaestudio/" target="_blank" class="ig-follow-btn">Seguir</a>
-                </div>
-                <div class="ig-carousel">
-                    <div class="ig-carousel-track" id="carousel-${r.id}">${r.slides.map((s, i) => `<div class="ig-carousel-slide"><div class="img-placeholder square" data-label="${s.label}">${createMediaElement(s.src, s.label, 'image')}</div></div>`).join('')}</div>
-                    <div class="ig-carousel-dots" id="dots-${r.id}">${r.slides.map((_, i) => `<span class="${i === 0 ? 'active' : ''}"></span>`).join('')}</div>
-                    <button class="ig-carousel-prev" onclick="moveIGCarousel('${r.id}', -1)" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
-                    <button class="ig-carousel-next" onclick="moveIGCarousel('${r.id}', 1)" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
-                </div>
-                <div class="ig-actions">
-                    <button class="ig-like" onclick="toggleLike(this)" aria-label="Me gusta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                    <button class="ig-comment-btn" aria-label="Comentar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
-                    <button class="ig-share" aria-label="Compartir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-                    <button class="ig-save" aria-label="Guardar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
-                </div>
-                <div class="ig-likes"><span class="like-count">${r.likes}</span> Me gusta</div>
-                <div class="ig-caption"><strong>mojcaestudio</strong> ${r.caption} <span class="hashtag">${r.hashtags}</span></div>
-                <div class="ig-time">${r.time}</div>
-            </article>`;
-        } else {
-            return `
-            <article class="ig-post-full scroll-reveal">
-                <div class="ig-header">
-                    <div class="ig-avatar"><div class="img-placeholder avatar" data-label="M"><div class="ph-inner"><span>M</span></div></div></div>
-                    <div class="ig-user"><strong>mojcaestudio</strong><span>${r.location}</span></div>
-                    <a href="https://www.instagram.com/mojcaestudio/" target="_blank" class="ig-follow-btn">Seguir</a>
-                </div>
-                <div class="ig-media-reel">
-                    <div class="img-placeholder portrait" data-label="${r.label}">${createMediaElement(r.src, r.label, 'video')}</div>
-                    <div class="reel-badge">REEL</div>
-                    <div class="video-play-overlay" style="pointer-events:none;"><div class="play-circle-small"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
-                </div>
-                <div class="ig-actions">
-                    <button class="ig-like" onclick="toggleLike(this)" aria-label="Me gusta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-                    <button class="ig-comment-btn" aria-label="Comentar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
-                    <button class="ig-share" aria-label="Compartir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-                    <button class="ig-save" aria-label="Guardar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></button>
-                </div>
-                <div class="ig-likes"><span class="like-count">${r.likes}</span> Me gusta</div>
-                <div class="ig-caption"><strong>mojcaestudio</strong> ${r.caption} <span class="hashtag">${r.hashtags}</span></div>
-                <div class="ig-time">${r.time}</div>
-            </article>`;
+function openPhotoModal(photo) {
+    const modal = document.getElementById('photoModal');
+    const modalImg = document.getElementById('photoModalImg');
+    const modalInfo = document.getElementById('photoModalInfo');
+    const modalTitle = document.getElementById('photoModalTitle');
+    const modalTag = document.getElementById('photoModalTag');
+    const modalDesc = document.getElementById('photoModalDesc');
+
+    if (!modal || !modalImg) return;
+    modalImg.src = photo.src;
+    
+    if (photo.description && photo.description.trim() !== '') {
+        modalInfo.style.display = 'flex';
+        modalTitle.textContent = photo.title || '';
+        modalTag.textContent = photo.category || 'Fotografía';
+        modalDesc.textContent = photo.description;
+    } else {
+        modalInfo.style.display = 'none';
+    }
+
+    modal.classList.add('active');
+}
+
+function initPhotoModal() {
+    const modal = document.getElementById('photoModal');
+    const closeBtn = document.getElementById('photoModalClose');
+    if (!modal) return;
+    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) modal.classList.remove('active');
+    });
+}
+
+// Rotación de álbumes si el usuario no tiene el mouse encima
+function initAutoGalleryFilter(data) {
+    const filterContainer = document.getElementById('galleryFilter');
+    const grid = document.getElementById('photoGrid');
+    const buttons = document.querySelectorAll('.filter-btn');
+    if (!filterContainer || !grid) return;
+
+    function setFilter(cat) {
+        buttons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-filter') === cat));
+        renderPhotos(data, cat);
+    }
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            clearInterval(filterInterval);
+            setFilter(btn.getAttribute('data-filter'));
+        });
+    });
+
+    function startTimer() {
+        filterInterval = setInterval(() => {
+            currentFilterIndex = (currentFilterIndex + 1) % filterCategories.length;
+            setFilter(filterCategories[currentFilterIndex]);
+        }, 4000);
+    }
+
+    startTimer();
+
+    // Pausar rotación si el usuario explora con el mouse
+    [filterContainer, grid].forEach(el => {
+        el.addEventListener('mouseenter', () => clearInterval(filterInterval));
+        el.addEventListener('mouseleave', () => {
+            clearInterval(filterInterval);
+            startTimer();
+        });
+    });
+}
+
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+        status.className = 'form-status';
+
+        try {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                status.textContent = '¡Mensaje enviado con éxito!';
+                status.className = 'form-status success';
+                form.reset();
+            } else {
+                throw new Error();
+            }
+        } catch (err) {
+            status.textContent = 'Hubo un error al enviar. Intentá nuevamente.';
+            status.className = 'form-status error';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Enviar mensaje';
         }
-    }).join('');
-}
-
-function renderWebdev(data) {
-    const grid = document.getElementById('webdevGrid');
-    if (!grid) return;
-    grid.innerHTML = data.webdev.map(w => `
-        <div class="webdev-card scroll-reveal">
-            <div class="webdev-preview">
-                <div class="browser-mockup">
-                    <div class="browser-bar"><span></span><span></span><span></span></div>
-                    <div class="img-placeholder wide" data-label="${w.title}">${createMediaElement(w.src, w.title, 'web')}</div>
-                </div>
-            </div>
-            <div class="webdev-info">
-                <h3>${w.title}</h3>
-                <p>${w.description}</p>
-                <div class="webdev-stack">${w.stack.map(s => `<span>${s}</span>`).join('')}</div>
-                <div class="webdev-links"><a href="${w.linkLive}" class="link-live">Ver sitio</a><a href="${w.linkRepo}" class="link-repo">Código</a></div>
-            </div>
-        </div>
-    `).join('');
-}
-
-function renderTestimonios(data) {
-    const section = document.getElementById('testimonios');
-    const track = document.getElementById('testimoniosTrack');
-    if (!section || !track) return;
-    const t = data.testimonios;
-    if (data.sections && data.sections.testimonios === false) return;
-    if (!t.enabled) { section.style.display = 'none'; return; }
-    section.style.display = 'block';
-    const bg = document.getElementById('testimoniosBg');
-    if (bg) {
-        if (t.bgType === 'gradient') { bg.style.background = t.bgGradient; }
-        else if (t.bgType === 'solid') { bg.style.background = t.bgColor; }
-        else if (t.bgType === 'image' && t.bgImage) { bg.style.background = `url(${t.bgImage}) center/cover no-repeat`; }
-    }
-    const items = t.items;
-    if (items.length === 0) { track.innerHTML = '<p style="text-align:center;color:var(--text-muted);">No hay testimonios aún.</p>'; return; }
-    const cardHTML = (item) => `
-        <div class="testimonio-card">
-            <div class="testimonio-quote">"${item.texto}"</div>
-            <div class="testimonio-author">
-                <div class="testimonio-avatar">${item.avatar ? `<img src="${item.avatar}" alt="${item.nombre}" oncontextmenu="return false;">` : `<span>${item.nombre.charAt(0)}</span>`}</div>
-                <div class="testimonio-info"><strong>${item.nombre}</strong><span>${item.empresa}</span></div>
-            </div>
-        </div>`;
-    track.innerHTML = items.map(cardHTML).join('') + items.map(cardHTML).join('') + items.map(cardHTML).join('');
-}
-
-function initWhatsApp(data) {
-    const w = data.whatsapp;
-    const floatBtn = document.getElementById('whatsappFloat');
-    const bigBtn = document.getElementById('whatsappBtnBig');
-    const url = `https://wa.me/${w.number}?text=${encodeURIComponent(w.message)}`;
-    if (floatBtn) {
-        if (w.floatEnabled) { floatBtn.style.display = 'flex'; floatBtn.href = url; const label = floatBtn.querySelector('.whatsapp-float-label'); if (label) label.textContent = w.floatLabel; }
-        else { floatBtn.style.display = 'none'; }
-    }
-    if (bigBtn) { bigBtn.href = url; }
+    });
 }
 
 class InfiniteCarousel {
@@ -555,304 +423,89 @@ class InfiniteCarousel {
         this.items = [];
         this.currentIndex = 0;
         this.itemWidth = 0;
-        this.gap = 24;
-        this.isDragging = false;
-        this.startX = 0;
-        this.scrollLeft = 0;
+        this.gap = 20;
         this.autoplayInterval = null;
-        this.isHovered = false;
         this.init();
     }
     init() {
-        if (!this.track) return;
+        if (!this.track || this.track.children.length === 0) return;
         this.cloneItems();
         this.updateDimensions();
         this.bindEvents();
         this.startAutoplay();
-        this.setupVideoHandling();
     }
     cloneItems() {
         const original = Array.from(this.track.children);
-        if (original.length === 0) return;
-        original.forEach(item => { const cloneEnd = item.cloneNode(true); cloneEnd.setAttribute('data-clone', 'end'); this.track.appendChild(cloneEnd); });
-        for (let i = original.length - 1; i >= 0; i--) { const cloneStart = original[i].cloneNode(true); cloneStart.setAttribute('data-clone', 'start'); this.track.insertBefore(cloneStart, this.track.firstChild); }
+        original.forEach(item => { const clone = item.cloneNode(true); this.track.appendChild(clone); });
+        for (let i = original.length - 1; i >= 0; i--) { const clone = original[i].cloneNode(true); this.track.insertBefore(clone, this.track.firstChild); }
         this.items = Array.from(this.track.children);
         this.currentIndex = original.length;
         this.updatePosition(false);
     }
     updateDimensions() {
         if (this.items.length === 0) return;
-        const first = this.items[0];
-        this.itemWidth = first.offsetWidth + this.gap;
+        this.itemWidth = this.items[0].offsetWidth + this.gap;
         this.updatePosition(false);
     }
-    updatePosition(animate) {
-        if (animate) { this.track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'; }
-        else { this.track.style.transition = 'none'; }
-        const offset = -this.currentIndex * this.itemWidth;
-        this.track.style.transform = `translateX(${offset}px)`;
+    updatePosition(animate = true) {
+        this.track.style.transition = animate ? 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none';
+        this.track.style.transform = `translateX(${-this.currentIndex * this.itemWidth}px)`;
     }
-    next() { this.currentIndex++; this.updatePosition(true); this.checkInfinite(); }
-    prev() { this.currentIndex--; this.updatePosition(true); this.checkInfinite(); }
-    checkInfinite() {
-        const originalCount = this.items.length / 3;
+    next() { this.currentIndex++; this.updatePosition(true); this.checkBounds(); }
+    prev() { this.currentIndex--; this.updatePosition(true); this.checkBounds(); }
+    checkBounds() {
+        const count = this.items.length / 3;
         setTimeout(() => {
-            if (this.currentIndex >= originalCount * 2) { this.track.style.transition = 'none'; this.currentIndex = originalCount; this.updatePosition(false); }
-            else if (this.currentIndex < originalCount) { this.track.style.transition = 'none'; this.currentIndex = originalCount * 2 - 1; this.updatePosition(false); }
+            if (this.currentIndex >= count * 2) { this.currentIndex = count; this.updatePosition(false); }
+            else if (this.currentIndex < count) { this.currentIndex = count * 2 - 1; this.updatePosition(false); }
         }, 500);
     }
     bindEvents() {
         if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prev());
         if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.next());
-        this.outer.addEventListener('mouseenter', () => { this.isHovered = true; this.stopAutoplay(); });
-        this.outer.addEventListener('mouseleave', () => { this.isHovered = false; this.startAutoplay(); });
-        this.wrapper.addEventListener('mousedown', (e) => { this.isDragging = true; this.startX = e.pageX - this.wrapper.offsetLeft; this.scrollLeft = this.currentIndex * this.itemWidth; this.stopAutoplay(); });
-        this.wrapper.addEventListener('mouseleave', () => { this.isDragging = false; this.startAutoplay(); });
-        this.wrapper.addEventListener('mouseup', () => { this.isDragging = false; this.startAutoplay(); });
-        this.wrapper.addEventListener('mousemove', (e) => { if (!this.isDragging) return; e.preventDefault(); const x = e.pageX - this.wrapper.offsetLeft; const walk = (x - this.startX); const newIndex = Math.round((this.scrollLeft - walk) / this.itemWidth); if (newIndex !== this.currentIndex) { this.currentIndex = newIndex; this.updatePosition(false); } });
-        this.wrapper.addEventListener('touchstart', (e) => { this.isDragging = true; this.startX = e.touches[0].pageX - this.wrapper.offsetLeft; this.scrollLeft = this.currentIndex * this.itemWidth; this.stopAutoplay(); }, { passive: true });
-        this.wrapper.addEventListener('touchend', () => { this.isDragging = false; this.startAutoplay(); });
-        this.wrapper.addEventListener('touchmove', (e) => { if (!this.isDragging) return; const x = e.touches[0].pageX - this.wrapper.offsetLeft; const walk = (x - this.startX); const newIndex = Math.round((this.scrollLeft - walk) / this.itemWidth); if (newIndex !== this.currentIndex) { this.currentIndex = newIndex; this.updatePosition(false); } }, { passive: true });
         window.addEventListener('resize', () => this.updateDimensions());
     }
     startAutoplay() {
-        if (this.autoplayInterval) return;
-        this.autoplayInterval = setInterval(() => { if (!this.isHovered && !this.isDragging) { this.next(); } }, 3000);
+        this.autoplayInterval = setInterval(() => this.next(), 3600);
+        this.outer.addEventListener('mouseenter', () => clearInterval(this.autoplayInterval));
+        this.outer.addEventListener('mouseleave', () => this.startAutoplay());
     }
-    stopAutoplay() { clearInterval(this.autoplayInterval); this.autoplayInterval = null; }
-    setupVideoHandling() {
-        this.track.addEventListener('click', (e) => {
-            const card = e.target.closest('.video-card-large, .video-card-vertical');
-            if (!card) return;
-            this.track.querySelectorAll('video').forEach(v => { v.muted = true; v.volume = 0; });
-            const video = card.querySelector('video');
-            if (video) { video.muted = false; video.volume = 0.3; if (video.paused) video.play(); video.onended = () => { video.muted = true; video.volume = 0; const overlay = card.querySelector('.video-play-overlay'); if (overlay) overlay.style.opacity = '1'; }; }
-            this.track.querySelectorAll('.video-play-overlay').forEach(o => o.style.opacity = '1');
-            const overlay = card.querySelector('.video-play-overlay');
-            if (overlay) overlay.style.opacity = '0';
-        });
-        document.addEventListener('click', (e) => {
-            if (!this.outer.contains(e.target)) {
-                this.track.querySelectorAll('video').forEach(v => { v.muted = true; v.volume = 0; });
-                this.track.querySelectorAll('.video-play-overlay').forEach(o => o.style.opacity = '1');
-            }
-        });
-    }
-}
-
-function initVideoScrollObserver() {
-    const videos = document.querySelectorAll('video');
-    if (videos.length === 0) return;
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const video = entry.target;
-            if (!entry.isIntersecting) {
-                video.muted = true; video.volume = 0;
-                if (!video.paused) video.pause();
-                const card = video.closest('.video-card-large, .video-card-vertical');
-                if (card) { const overlay = card.querySelector('.video-play-overlay'); if (overlay) overlay.style.opacity = '1'; }
-            }
-        });
-    }, { threshold: 0.3 });
-    videos.forEach(v => observer.observe(v));
-}
-
-function moveIGCarousel(postId, direction) {
-    const track = document.getElementById('carousel-' + postId);
-    const dots = document.getElementById('dots-' + postId);
-    if (!track || !dots) return;
-    const slides = track.children.length;
-    let current = 0;
-    const activeDot = dots.querySelector('.active');
-    if (activeDot) { current = Array.from(dots.children).indexOf(activeDot); }
-    let next = current + direction;
-    if (next < 0) next = slides - 1;
-    if (next >= slides) next = 0;
-    track.style.transform = `translateX(-${next * 100}%)`;
-    dots.querySelectorAll('span').forEach((d, i) => { d.classList.toggle('active', i === next); });
-}
-
-function toggleLike(btn) {
-    btn.classList.toggle('liked');
-    const countEl = btn.closest('.ig-post-full').querySelector('.like-count');
-    if (countEl) {
-        let count = parseInt(countEl.textContent.replace(/,/g, ''));
-        if (btn.classList.contains('liked')) { count++; } else { count--; }
-        countEl.textContent = count.toLocaleString();
-    }
-}
-
-function initBackgroundGradient() {
-    const bgLayer = document.getElementById('bgGradient');
-    if (!bgLayer) return;
-    const sections = document.querySelectorAll('.section-bg');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { 
-            if (entry.isIntersecting) { 
-                const bg = entry.target.getAttribute('data-bg'); 
-                if (bg) bgLayer.setAttribute('data-active', bg); 
-            } 
-        });
-    }, { 
-        threshold: 0.2,
-        rootMargin: "-10% 0px -10% 0px"
-    });
-    sections.forEach(s => observer.observe(s));
-    const hero = document.querySelector('.section-bg');
-    if (hero) { const bg = hero.getAttribute('data-bg'); if (bg) bgLayer.setAttribute('data-active', bg); }
-}
-
-function initScrollReveal() {
-    const reveals = document.querySelectorAll('.scroll-reveal');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    reveals.forEach(el => observer.observe(el));
 }
 
 function initNav() {
     const nav = document.getElementById('nav');
     const toggle = document.getElementById('navToggle');
     const links = document.getElementById('navLinks');
-    window.addEventListener('scroll', () => { if (window.scrollY > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); } });
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
     if (toggle && links) {
         toggle.addEventListener('click', () => { toggle.classList.toggle('active'); links.classList.toggle('open'); });
         links.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { toggle.classList.remove('active'); links.classList.remove('open'); }); });
     }
 }
 
-function initGalleryFilter(data) {
-    const buttons = document.querySelectorAll('.filter-btn');
-    buttons.forEach(btn => { btn.addEventListener('click', () => { buttons.forEach(b => b.classList.remove('active')); btn.classList.add('active'); const filter = btn.getAttribute('data-filter'); renderPhotos(data, filter); }); });
-}
-
-function initContactForm() {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
-    
-    let statusEl = form.querySelector('.form-status');
-    if (!statusEl) {
-        statusEl = document.createElement('p');
-        statusEl.className = 'form-status';
-        form.appendChild(statusEl);
-    }
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviando...';
-        statusEl.className = 'form-status';
-        statusEl.style.display = 'none';
-
-        const formData = new FormData(form);
-
-        try {
-            const response = await fetch(FORMSPREE_ENDPOINT, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            });
-
-            if (response.ok) {
-                statusEl.textContent = '¡Mensaje enviado con éxito! Te responderemos a la brevedad.';
-                statusEl.className = 'form-status success';
-                form.reset();
-            } else {
-                throw new Error('Error al enviar el formulario');
-            }
-        } catch (err) {
-            statusEl.textContent = 'Hubo un error al enviar el mensaje. Por favor, intentá nuevamente.';
-            statusEl.className = 'form-status error';
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-        }
-    });
-}
-
-function initSecurity() {
-    document.addEventListener('contextmenu', (e) => {
-        if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG' || e.target.closest('.video-thumb-large, .video-thumb-vertical')) {
-            e.preventDefault();
-        }
-    });
-}
-
-function initCursorGlow() {
-    const glow = document.getElementById('cursorGlow');
-    if (!glow) return;
-    if (window.matchMedia('(pointer: coarse)').matches) return;
-    let mouseX = 0, mouseY = 0;
-    let glowX = 0, glowY = 0;
-    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
-    function animate() { glowX += (mouseX - glowX) * 0.1; glowY += (mouseY - glowY) * 0.1; glow.style.left = glowX + 'px'; glow.style.top = glowY + 'px'; requestAnimationFrame(animate); }
-    animate();
-}
-
-function initCountUp() {
-    const counters = document.querySelectorAll('.count-up');
-    if (counters.length === 0) return;
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                const target = parseInt(el.getAttribute('data-target')) || 0;
-                const suffix = el.getAttribute('data-suffix') || '';
-                const duration = 2000;
-                const start = performance.now();
-                function update(currentTime) {
-                    const elapsed = currentTime - start;
-                    const progress = Math.min(elapsed / duration, 1);
-                    const ease = 1 - Math.pow(2, -10 * progress);
-                    const current = Math.floor(ease * target);
-                    el.textContent = current + suffix;
-                    if (progress < 1) { requestAnimationFrame(update); } else { el.textContent = target + suffix; }
-                }
-                requestAnimationFrame(update);
-                observer.unobserve(el);
-            }
-        });
-    }, { threshold: 0.5 });
-    counters.forEach(c => observer.observe(c));
-}
-
-function initServicioBars() {
-    const cards = document.querySelectorAll('.servicio-card');
-    if (cards.length === 0) return;
+function initScrollReveal() {
+    const reveals = document.querySelectorAll('.scroll-reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
-    }, { threshold: 0.3 });
-    cards.forEach(c => observer.observe(c));
+    }, { threshold: 0.15 });
+    reveals.forEach(el => observer.observe(el));
 }
 
 function init() {
     const data = getData();
     applyDynamicStyles(data);
-    applySectionVisibility(data);
     renderTexts(data);
     initHero(data);
-    renderQuienesSomos(data);
-    renderTestimonios(data);
     renderVideosHorizontal(data);
     renderVideosVertical(data);
     renderPhotos(data, 'all');
-    renderBranding(data);
-    renderRedes(data);
-    renderWebdev(data);
-    initWhatsApp(data);
-    initBackgroundGradient();
-    initScrollReveal();
-    initNav();
-    initGalleryFilter(data);
+    initAutoGalleryFilter(data);
+    initPhotoModal();
     initContactForm();
-    initSecurity();
-    initCursorGlow();
-    initCountUp();
-    initServicioBars();
-    initVideoScrollObserver();
-    document.querySelectorAll('.carousel-outer').forEach(outer => { new InfiniteCarousel(outer); });
+    initNav();
+    initScrollReveal();
+    initBackgroundGradient();
+    document.querySelectorAll('.carousel-outer').forEach(outer => new InfiniteCarousel(outer));
 }
 
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); } else { init(); }
