@@ -57,6 +57,7 @@ function showAdmin() {
 
 function initAllPanels() {
     try {
+        renderSeccionesEditor();
         renderTextEditor();
         renderStyleEditor();
         renderHeroEditor();
@@ -157,6 +158,49 @@ function createTagsInput(label, tags, onChange) {
     return div;
 }
 
+function renderSeccionesEditor() {
+    const container = document.getElementById('seccionesEditor');
+    if (!container) return;
+    container.innerHTML = '';
+    const card = document.createElement('div');
+    card.className = 'admin-card';
+    card.innerHTML = '<h3>Activar / Desactivar Secciones en la Web</h3>';
+    
+    if (!currentData.sections) {
+        currentData.sections = { ...DEFAULT_DATA.sections };
+    }
+
+    const secList = [
+        ['hero', 'Sección de Inicio / Hero'],
+        ['marquee', 'Cinta animada (Marquee)'],
+        ['sobre', 'Sobre Nosotros'],
+        ['quienesSomos', 'El Equipo (Quiénes Somos)'],
+        ['testimonios', 'Testimonios'],
+        ['videos', 'Videos Horizontales'],
+        ['reels', 'Reels y Shorts'],
+        ['fotos', 'Fotografía'],
+        ['branding', 'Branding'],
+        ['redes', 'Redes Sociales (Instagram)'],
+        ['webdev', 'Web y Código'],
+        ['proceso', 'Cómo Trabajamos (De la idea a la pantalla)'],
+        ['contacto', 'Contacto']
+    ];
+
+    secList.forEach(([key, label]) => {
+        card.appendChild(createCheckbox(`Mostrar ${label}`, currentData.sections[key] !== false, (e) => {
+            currentData.sections[key] = e.target.checked;
+            if (key === 'quienesSomos' && currentData.quienesSomos) {
+                currentData.quienesSomos.enabled = e.target.checked;
+            }
+            if (key === 'testimonios' && currentData.testimonios) {
+                currentData.testimonios.enabled = e.target.checked;
+            }
+        }));
+    });
+
+    container.appendChild(card);
+}
+
 function renderTextEditor() {
     const container = document.getElementById('textosEditor');
     if (!container) return;
@@ -222,6 +266,26 @@ function renderStyleEditor() {
         }));
     });
     container.appendChild(card);
+
+    const gradCard = document.createElement('div');
+    gradCard.className = 'admin-card';
+    gradCard.innerHTML = '<h3>Degradés de Fondo Dinámicos</h3><p style="color:var(--text-muted);font-size:13px;margin-bottom:16px;">Podés definir el CSS del degradé para cada cambio de sección:</p>';
+    if (!currentData.gradients) {
+        currentData.gradients = { ...DEFAULT_DATA.gradients };
+    }
+    const gradFields = [
+        ['warm', 'Degradé Warm (Hero / Proceso)'],
+        ['cream', 'Degradé Cream (Sobre Nosotros / Fotos / Contacto)'],
+        ['terracotta', 'Degradé Terracotta (Testimonios / Branding)'],
+        ['olive', 'Degradé Olive (Videos / Redes)'],
+        ['wine', 'Degradé Wine (Reels / Webdev)']
+    ];
+    gradFields.forEach(([key, label]) => {
+        gradCard.appendChild(createInput(label, currentData.gradients[key], (e) => {
+            currentData.gradients[key] = e.target.value;
+        }));
+    });
+    container.appendChild(gradCard);
 }
 
 function renderHeroEditor() {
@@ -246,18 +310,6 @@ function renderQuienesSomosEditor() {
     const container = document.getElementById('quienesSomosEditor');
     if (!container) return;
     container.innerHTML = '';
-    const qs = currentData.quienesSomos;
-
-    // Sección activada/desactivada
-    const toggleCard = document.createElement('div');
-    toggleCard.className = 'admin-card';
-    toggleCard.innerHTML = '<h3>Visibilidad de la sección</h3>';
-    toggleCard.appendChild(createCheckbox('Mostrar sección "Quiénes Somos" en el sitio', qs.enabled, (e) => {
-        currentData.quienesSomos.enabled = e.target.checked;
-    }));
-    container.appendChild(toggleCard);
-
-    // Miembros
     const membersCard = document.createElement('div');
     membersCard.className = 'admin-card';
     membersCard.innerHTML = '<h3>Miembros del equipo</h3>';
@@ -309,11 +361,6 @@ function renderTestimoniosEditor() {
     if (!container) return;
     container.innerHTML = '';
     const t = currentData.testimonios;
-    const toggleCard = document.createElement('div');
-    toggleCard.className = 'admin-card';
-    toggleCard.innerHTML = '<h3>Visibilidad de la sección</h3>';
-    toggleCard.appendChild(createCheckbox('Mostrar sección de testimonios', t.enabled, (e) => { currentData.testimonios.enabled = e.target.checked; }));
-    container.appendChild(toggleCard);
     const bgCard = document.createElement('div');
     bgCard.className = 'admin-card';
     bgCard.innerHTML = '<h3>Fondo de la sección</h3>';
