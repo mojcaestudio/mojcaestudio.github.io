@@ -2,6 +2,8 @@
 // MOJCA ESTUDIO — Main JavaScript
 // ========================================
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkjnkdvl";
+
 const DEFAULT_DATA = {
     sections: {
         hero: true,
@@ -19,11 +21,11 @@ const DEFAULT_DATA = {
         contacto: true
     },
     gradients: {
-        warm: "linear-gradient(180deg, #0a0a0a 0%, #1a0f0a 40%, #0f0a05 70%, #0a0a0a 100%)",
-        cream: "linear-gradient(180deg, #0a0a0a 0%, #111111 40%, #0d0d0d 70%, #0a0a0a 100%)",
-        terracotta: "linear-gradient(180deg, #0a0a0a 0%, #1a0a05 40%, #150804 70%, #0a0a0a 100%)",
-        olive: "linear-gradient(180deg, #0a0a0a 0%, #0f1a0a 40%, #0a1208 70%, #0a0a0a 100%)",
-        wine: "linear-gradient(180deg, #0a0a0a 0%, #1a0505 40%, #120303 70%, #0a0a0a 100%)"
+        warm: "radial-gradient(circle at 50% 30%, #2a1208 0%, #0a0a0a 75%)",
+        cream: "radial-gradient(circle at 50% 30%, #171717 0%, #0a0a0a 75%)",
+        terracotta: "radial-gradient(circle at 50% 30%, #2e0d04 0%, #0a0a0a 75%)",
+        olive: "radial-gradient(circle at 50% 30%, #0d210b 0%, #0a0a0a 75%)",
+        wine: "radial-gradient(circle at 50% 30%, #2b0404 0%, #0a0a0a 75%)"
     },
     texts: {
         logoText: "MOJCA",
@@ -228,11 +230,11 @@ function applyDynamicStyles(data) {
             --text-muted: ${s.textMuted} !important;
             --border: ${s.borderColor} !important;
         }
-        .bg-gradient-layer[data-active="warm"] { background: ${g.warm} !important; }
-        .bg-gradient-layer[data-active="cream"] { background: ${g.cream} !important; }
-        .bg-gradient-layer[data-active="terracotta"] { background: ${g.terracotta} !important; }
-        .bg-gradient-layer[data-active="olive"] { background: ${g.olive} !important; }
-        .bg-gradient-layer[data-active="wine"] { background: ${g.wine} !important; }
+        .bg-gradient-layer[data-active="warm"]::before { background: ${g.warm} !important; }
+        .bg-gradient-layer[data-active="cream"]::before { background: ${g.cream} !important; }
+        .bg-gradient-layer[data-active="terracotta"]::before { background: ${g.terracotta} !important; }
+        .bg-gradient-layer[data-active="olive"]::before { background: ${g.olive} !important; }
+        .bg-gradient-layer[data-active="wine"]::before { background: ${g.wine} !important; }
     `;
     document.head.appendChild(styleEl);
 }
@@ -685,8 +687,16 @@ function initBackgroundGradient() {
     if (!bgLayer) return;
     const sections = document.querySelectorAll('.section-bg');
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) { const bg = entry.target.getAttribute('data-bg'); if (bg) bgLayer.setAttribute('data-active', bg); } });
-    }, { threshold: 0.3 });
+        entries.forEach(entry => { 
+            if (entry.isIntersecting) { 
+                const bg = entry.target.getAttribute('data-bg'); 
+                if (bg) bgLayer.setAttribute('data-active', bg); 
+            } 
+        });
+    }, { 
+        threshold: 0.2,
+        rootMargin: "-10% 0px -10% 0px"
+    });
     sections.forEach(s => observer.observe(s));
     const hero = document.querySelector('.section-bg');
     if (hero) { const bg = hero.getAttribute('data-bg'); if (bg) bgLayer.setAttribute('data-active', bg); }
@@ -719,15 +729,46 @@ function initGalleryFilter(data) {
 function initContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
-    form.addEventListener('submit', (e) => {
+    
+    let statusEl = form.querySelector('.form-status');
+    if (!statusEl) {
+        statusEl = document.createElement('p');
+        statusEl.className = 'form-status';
+        form.appendChild(statusEl);
+    }
+
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const nombre = document.getElementById('nombre').value;
-        const email = document.getElementById('email').value;
-        const servicio = document.getElementById('servicio').value;
-        const mensaje = document.getElementById('mensaje').value;
-        const subject = encodeURIComponent(`Nuevo mensaje desde la web - ${servicio || 'Consulta general'}`);
-        const body = encodeURIComponent(`Nombre: ${nombre}\nEmail: ${email}\nServicio: ${servicio || 'No especificado'}\n\nMensaje:\n${mensaje}`);
-        window.location.href = `mailto:mojcaestudio@gmail.com?subject=${subject}&body=${body}`;
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+        statusEl.className = 'form-status';
+        statusEl.style.display = 'none';
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                statusEl.textContent = '¡Mensaje enviado con éxito! Te responderemos a la brevedad.';
+                statusEl.className = 'form-status success';
+                form.reset();
+            } else {
+                throw new Error('Error al enviar el formulario');
+            }
+        } catch (err) {
+            statusEl.textContent = 'Hubo un error al enviar el mensaje. Por favor, intentá nuevamente.';
+            statusEl.className = 'form-status error';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
     });
 }
 
