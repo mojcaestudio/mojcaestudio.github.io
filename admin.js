@@ -1,5 +1,5 @@
 // ========================================
-// ADMIN.JS — Panel de Administración
+// ADMIN.JS — Panel de Administración (Diseño Compacto y Preview)
 // ========================================
 
 const ADMIN_PASSWORD = "mojca2024";
@@ -45,6 +45,7 @@ function showAdmin() {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('adminLayout').classList.add('active');
         currentData = getData();
+        injectAdminCompactStyles();
         initAllPanels();
     } catch (e) {
         console.error('Error al cargar el panel:', e);
@@ -53,6 +54,97 @@ function showAdmin() {
         currentData = getData();
         initAllPanels();
     }
+}
+
+// Inyección de estilos para que el admin sea compacto, horizontal y con preview
+function injectAdminCompactStyles() {
+    if (document.getElementById('admin-compact-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'admin-compact-styles';
+    style.textContent = `
+        .item-card-row {
+            display: flex;
+            gap: 20px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            margin-bottom: 14px;
+            align-items: flex-start;
+        }
+        .item-card-preview {
+            width: 200px;
+            height: 120px;
+            background: #000;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+        }
+        .item-card-preview.vertical {
+            width: 100px;
+            height: 160px;
+        }
+        .item-card-preview video, .item-card-preview iframe, .item-card-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+        }
+        .item-card-preview span {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 6px;
+        }
+        .item-card-fields {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .item-card-fields .full-width {
+            grid-column: span 2;
+        }
+        .item-card-fields .form-group {
+            margin-bottom: 0;
+        }
+        .item-card-fields .form-group label {
+            margin-bottom: 4px;
+            font-size: 10px;
+        }
+        .item-card-fields input, .item-card-fields textarea, .item-card-fields select {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+        .item-card-delete-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .item-card-delete-col button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 6px;
+            transition: var(--transition);
+        }
+        .item-card-delete-col button:hover {
+            color: #ef4444;
+        }
+        @media (max-width: 900px) {
+            .item-card-row { flex-direction: column; }
+            .item-card-preview { width: 100%; height: 160px; }
+            .item-card-fields { grid-template-columns: 1fr; }
+            .item-card-fields .full-width { grid-column: span 1; }
+        }
+    `;
+    document.head.appendChild(style);
 }
 
 function initAllPanels() {
@@ -82,7 +174,7 @@ function createInput(label, value, onChange, type = 'text') {
     let input;
     if (type === 'textarea') {
         input = document.createElement('textarea');
-        input.rows = 3;
+        input.rows = 2;
     } else {
         input = document.createElement('input');
         input.type = type;
@@ -138,7 +230,7 @@ function createTagsInput(label, tags, onChange) {
         });
         const txt = document.createElement('input');
         txt.type = 'text';
-        txt.placeholder = 'Escribí y presioná Enter...';
+        txt.placeholder = 'Tag y Enter...';
         txt.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && txt.value.trim()) {
                 e.preventDefault();
@@ -408,6 +500,7 @@ function renderTestimoniosEditor() {
     renderList();
 }
 
+// Renderizado Horizontal y con Preview para Videos Horizontales
 function renderVideosH() {
     const container = document.getElementById('videosHEditor');
     if (!container) return;
@@ -426,25 +519,68 @@ function renderVideosH() {
     });
     card.appendChild(addBtn);
     container.appendChild(card);
+
     function renderList() {
         list.innerHTML = '';
         currentData.videosHorizontal.forEach((v, idx) => {
             const item = document.createElement('div');
-            item.className = 'item-card';
-            item.innerHTML = `<div class="item-card-header"><h4>Video #${idx + 1}</h4><div class="item-card-actions"><button class="delete">🗑</button></div></div>`;
-            item.querySelector('.delete').addEventListener('click', () => { currentData.videosHorizontal.splice(idx, 1); renderList(); });
-            item.appendChild(createInput('Título', v.title, (e) => { currentData.videosHorizontal[idx].title = e.target.value; }));
-            item.appendChild(createInput('URL del video', v.src, (e) => { currentData.videosHorizontal[idx].src = e.target.value; }));
-            item.appendChild(createInput('Descripción', v.description, (e) => { currentData.videosHorizontal[idx].description = e.target.value; }, 'textarea'));
-            item.appendChild(createInput('Vistas', v.views, (e) => { currentData.videosHorizontal[idx].views = e.target.value; }));
-            item.appendChild(createInput('Likes', v.likes, (e) => { currentData.videosHorizontal[idx].likes = e.target.value; }));
-            item.appendChild(createInput('Tag', v.tag, (e) => { currentData.videosHorizontal[idx].tag = e.target.value; }));
+            item.className = 'item-card-row';
+
+            // Preview box
+            const previewBox = document.createElement('div');
+            previewBox.className = 'item-card-preview';
+            function updatePreview() {
+                if (v.src && v.src.trim() !== '') {
+                    previewBox.innerHTML = createMediaElement(v.src, v.title, 'video');
+                } else {
+                    previewBox.innerHTML = `<span>Sin video cargado</span>`;
+                }
+            }
+            updatePreview();
+
+            // Inputs en grilla horizontal
+            const fieldsBox = document.createElement('div');
+            fieldsBox.className = 'item-card-fields';
+
+            const titleInput = createInput('Título', v.title, (e) => { currentData.videosHorizontal[idx].title = e.target.value; });
+            const tagInput = createInput('Tag', v.tag, (e) => { currentData.videosHorizontal[idx].tag = e.target.value; });
+            const srcInput = createInput('URL del video (MP4, YouTube o Vimeo)', v.src, (e) => { 
+                currentData.videosHorizontal[idx].src = e.target.value; 
+                updatePreview();
+            });
+            srcInput.className = 'form-group full-width';
+
+            const viewsInput = createInput('Vistas', v.views, (e) => { currentData.videosHorizontal[idx].views = e.target.value; });
+            const likesInput = createInput('Likes', v.likes, (e) => { currentData.videosHorizontal[idx].likes = e.target.value; });
+            const descInput = createInput('Descripción', v.description, (e) => { currentData.videosHorizontal[idx].description = e.target.value; }, 'textarea');
+            descInput.className = 'form-group full-width';
+
+            fieldsBox.appendChild(titleInput);
+            fieldsBox.appendChild(tagInput);
+            fieldsBox.appendChild(srcInput);
+            fieldsBox.appendChild(viewsInput);
+            fieldsBox.appendChild(likesInput);
+            fieldsBox.appendChild(descInput);
+
+            // Botón eliminar
+            const delCol = document.createElement('div');
+            delCol.className = 'item-card-delete-col';
+            delCol.innerHTML = `<button title="Eliminar video">🗑</button>`;
+            delCol.querySelector('button').addEventListener('click', () => {
+                currentData.videosHorizontal.splice(idx, 1);
+                renderVideosH();
+            });
+
+            item.appendChild(previewBox);
+            item.appendChild(fieldsBox);
+            item.appendChild(delCol);
             list.appendChild(item);
         });
     }
     renderList();
 }
 
+// Renderizado Horizontal y con Preview para Reels
 function renderVideosV() {
     const container = document.getElementById('videosVEditor');
     if (!container) return;
@@ -463,18 +599,54 @@ function renderVideosV() {
     });
     card.appendChild(addBtn);
     container.appendChild(card);
+
     function renderList() {
         list.innerHTML = '';
         currentData.videosVertical.forEach((v, idx) => {
             const item = document.createElement('div');
-            item.className = 'item-card';
-            item.innerHTML = `<div class="item-card-header"><h4>Reel #${idx + 1}</h4><div class="item-card-actions"><button class="delete">🗑</button></div></div>`;
-            item.querySelector('.delete').addEventListener('click', () => { currentData.videosVertical.splice(idx, 1); renderList(); });
-            item.appendChild(createInput('Título', v.title, (e) => { currentData.videosVertical[idx].title = e.target.value; }));
-            item.appendChild(createInput('URL del video', v.src, (e) => { currentData.videosVertical[idx].src = e.target.value; }));
-            item.appendChild(createInput('Descripción', v.description, (e) => { currentData.videosVertical[idx].description = e.target.value; }, 'textarea'));
-            item.appendChild(createInput('Vistas', v.views, (e) => { currentData.videosVertical[idx].views = e.target.value; }));
-            item.appendChild(createInput('Likes', v.likes, (e) => { currentData.videosVertical[idx].likes = e.target.value; }));
+            item.className = 'item-card-row';
+
+            const previewBox = document.createElement('div');
+            previewBox.className = 'item-card-preview vertical';
+            function updatePreview() {
+                if (v.src && v.src.trim() !== '') {
+                    previewBox.innerHTML = createMediaElement(v.src, v.title, 'video');
+                } else {
+                    previewBox.innerHTML = `<span>Sin video</span>`;
+                }
+            }
+            updatePreview();
+
+            const fieldsBox = document.createElement('div');
+            fieldsBox.className = 'item-card-fields';
+
+            const titleInput = createInput('Título', v.title, (e) => { currentData.videosVertical[idx].title = e.target.value; });
+            const srcInput = createInput('URL del video', v.src, (e) => { 
+                currentData.videosVertical[idx].src = e.target.value; 
+                updatePreview();
+            });
+            const viewsInput = createInput('Vistas', v.views, (e) => { currentData.videosVertical[idx].views = e.target.value; });
+            const likesInput = createInput('Likes', v.likes, (e) => { currentData.videosVertical[idx].likes = e.target.value; });
+            const descInput = createInput('Descripción', v.description, (e) => { currentData.videosVertical[idx].description = e.target.value; }, 'textarea');
+            descInput.className = 'form-group full-width';
+
+            fieldsBox.appendChild(titleInput);
+            fieldsBox.appendChild(srcInput);
+            fieldsBox.appendChild(viewsInput);
+            fieldsBox.appendChild(likesInput);
+            fieldsBox.appendChild(descInput);
+
+            const delCol = document.createElement('div');
+            delCol.className = 'item-card-delete-col';
+            delCol.innerHTML = `<button title="Eliminar reel">🗑</button>`;
+            delCol.querySelector('button').addEventListener('click', () => {
+                currentData.videosVertical.splice(idx, 1);
+                renderVideosV();
+            });
+
+            item.appendChild(previewBox);
+            item.appendChild(fieldsBox);
+            item.appendChild(delCol);
             list.appendChild(item);
         });
     }
@@ -503,11 +675,28 @@ function renderPhotos() {
         list.innerHTML = '';
         currentData.photos.forEach((p, idx) => {
             const item = document.createElement('div');
-            item.className = 'item-card';
-            item.innerHTML = `<div class="item-card-header"><h4>Foto #${idx + 1}</h4><div class="item-card-actions"><button class="delete">🗑</button></div></div>`;
-            item.querySelector('.delete').addEventListener('click', () => { currentData.photos.splice(idx, 1); renderList(); });
-            item.appendChild(createInput('Título', p.title, (e) => { currentData.photos[idx].title = e.target.value; }));
-            item.appendChild(createInput('URL de la imagen', p.src, (e) => { currentData.photos[idx].src = e.target.value; }));
+            item.className = 'item-card-row';
+
+            const previewBox = document.createElement('div');
+            previewBox.className = 'item-card-preview';
+            function updatePreview() {
+                if (p.src && p.src.trim() !== '') {
+                    previewBox.innerHTML = `<img src="${p.src}" alt="${p.title}">`;
+                } else {
+                    previewBox.innerHTML = `<span>Sin imagen</span>`;
+                }
+            }
+            updatePreview();
+
+            const fieldsBox = document.createElement('div');
+            fieldsBox.className = 'item-card-fields';
+
+            const titleInput = createInput('Título', p.title, (e) => { currentData.photos[idx].title = e.target.value; });
+            const srcInput = createInput('URL de la imagen', p.src, (e) => { 
+                currentData.photos[idx].src = e.target.value; 
+                updatePreview();
+            });
+
             const catDiv = document.createElement('div');
             catDiv.className = 'form-group';
             catDiv.innerHTML = '<label>Categoría</label>';
@@ -516,7 +705,7 @@ function renderPhotos() {
             catSelect.value = p.category;
             catSelect.addEventListener('change', (e) => { currentData.photos[idx].category = e.target.value; });
             catDiv.appendChild(catSelect);
-            item.appendChild(catDiv);
+
             const sizeDiv = document.createElement('div');
             sizeDiv.className = 'form-group';
             sizeDiv.innerHTML = '<label>Tamaño en grid</label>';
@@ -525,7 +714,23 @@ function renderPhotos() {
             sizeSelect.value = p.size;
             sizeSelect.addEventListener('change', (e) => { currentData.photos[idx].size = e.target.value; });
             sizeDiv.appendChild(sizeSelect);
-            item.appendChild(sizeDiv);
+
+            fieldsBox.appendChild(titleInput);
+            fieldsBox.appendChild(srcInput);
+            fieldsBox.appendChild(catDiv);
+            fieldsBox.appendChild(sizeDiv);
+
+            const delCol = document.createElement('div');
+            delCol.className = 'item-card-delete-col';
+            delCol.innerHTML = `<button title="Eliminar foto">🗑</button>`;
+            delCol.querySelector('button').addEventListener('click', () => {
+                currentData.photos.splice(idx, 1);
+                renderPhotos();
+            });
+
+            item.appendChild(previewBox);
+            item.appendChild(fieldsBox);
+            item.appendChild(delCol);
             list.appendChild(item);
         });
     }
@@ -554,13 +759,48 @@ function renderBranding() {
         list.innerHTML = '';
         currentData.branding.forEach((b, idx) => {
             const item = document.createElement('div');
-            item.className = 'item-card';
-            item.innerHTML = `<div class="item-card-header"><h4>Proyecto #${idx + 1}</h4><div class="item-card-actions"><button class="delete">🗑</button></div></div>`;
-            item.querySelector('.delete').addEventListener('click', () => { currentData.branding.splice(idx, 1); renderList(); });
-            item.appendChild(createInput('Título', b.title, (e) => { currentData.branding[idx].title = e.target.value; }));
-            item.appendChild(createInput('URL de la imagen', b.src, (e) => { currentData.branding[idx].src = e.target.value; }));
-            item.appendChild(createInput('Descripción', b.description, (e) => { currentData.branding[idx].description = e.target.value; }, 'textarea'));
-            item.appendChild(createTagsInput('Tags', b.tags, (tags) => { currentData.branding[idx].tags = tags; }));
+            item.className = 'item-card-row';
+
+            const previewBox = document.createElement('div');
+            previewBox.className = 'item-card-preview';
+            function updatePreview() {
+                if (b.src && b.src.trim() !== '') {
+                    previewBox.innerHTML = `<img src="${b.src}" alt="${b.title}">`;
+                } else {
+                    previewBox.innerHTML = `<span>Sin imagen</span>`;
+                }
+            }
+            updatePreview();
+
+            const fieldsBox = document.createElement('div');
+            fieldsBox.className = 'item-card-fields';
+
+            const titleInput = createInput('Título', b.title, (e) => { currentData.branding[idx].title = e.target.value; });
+            const srcInput = createInput('URL de la imagen', b.src, (e) => { 
+                currentData.branding[idx].src = e.target.value; 
+                updatePreview();
+            });
+            const descInput = createInput('Descripción', b.description, (e) => { currentData.branding[idx].description = e.target.value; }, 'textarea');
+            descInput.className = 'form-group full-width';
+            const tagsInput = createTagsInput('Tags', b.tags, (tags) => { currentData.branding[idx].tags = tags; });
+            tagsInput.className = 'form-group full-width';
+
+            fieldsBox.appendChild(titleInput);
+            fieldsBox.appendChild(srcInput);
+            fieldsBox.appendChild(descInput);
+            fieldsBox.appendChild(tagsInput);
+
+            const delCol = document.createElement('div');
+            delCol.className = 'item-card-delete-col';
+            delCol.innerHTML = `<button title="Eliminar proyecto">🗑</button>`;
+            delCol.querySelector('button').addEventListener('click', () => {
+                currentData.branding.splice(idx, 1);
+                renderBranding();
+            });
+
+            item.appendChild(previewBox);
+            item.appendChild(fieldsBox);
+            item.appendChild(delCol);
             list.appendChild(item);
         });
     }
@@ -672,15 +912,52 @@ function renderWebdev() {
         list.innerHTML = '';
         currentData.webdev.forEach((w, idx) => {
             const item = document.createElement('div');
-            item.className = 'item-card';
-            item.innerHTML = `<div class="item-card-header"><h4>Proyecto #${idx + 1}</h4><div class="item-card-actions"><button class="delete">🗑</button></div></div>`;
-            item.querySelector('.delete').addEventListener('click', () => { currentData.webdev.splice(idx, 1); renderList(); });
-            item.appendChild(createInput('Título', w.title, (e) => { currentData.webdev[idx].title = e.target.value; }));
-            item.appendChild(createInput('URL de la imagen', w.src, (e) => { currentData.webdev[idx].src = e.target.value; }));
-            item.appendChild(createInput('Descripción', w.description, (e) => { currentData.webdev[idx].description = e.target.value; }, 'textarea'));
-            item.appendChild(createTagsInput('Stack tecnológico', w.stack, (tags) => { currentData.webdev[idx].stack = tags; }));
-            item.appendChild(createInput('Link en vivo', w.linkLive, (e) => { currentData.webdev[idx].linkLive = e.target.value; }));
-            item.appendChild(createInput('Link repositorio', w.linkRepo, (e) => { currentData.webdev[idx].linkRepo = e.target.value; }));
+            item.className = 'item-card-row';
+
+            const previewBox = document.createElement('div');
+            previewBox.className = 'item-card-preview';
+            function updatePreview() {
+                if (w.src && w.src.trim() !== '') {
+                    previewBox.innerHTML = `<img src="${w.src}" alt="${w.title}">`;
+                } else {
+                    previewBox.innerHTML = `<span>Sin imagen</span>`;
+                }
+            }
+            updatePreview();
+
+            const fieldsBox = document.createElement('div');
+            fieldsBox.className = 'item-card-fields';
+
+            const titleInput = createInput('Título', w.title, (e) => { currentData.webdev[idx].title = e.target.value; });
+            const srcInput = createInput('URL de la imagen', w.src, (e) => { 
+                currentData.webdev[idx].src = e.target.value; 
+                updatePreview();
+            });
+            const descInput = createInput('Descripción', w.description, (e) => { currentData.webdev[idx].description = e.target.value; }, 'textarea');
+            descInput.className = 'form-group full-width';
+            const stackInput = createTagsInput('Stack tecnológico', w.stack, (tags) => { currentData.webdev[idx].stack = tags; });
+            stackInput.className = 'form-group full-width';
+            const linkLive = createInput('Link en vivo', w.linkLive, (e) => { currentData.webdev[idx].linkLive = e.target.value; });
+            const linkRepo = createInput('Link repositorio', w.linkRepo, (e) => { currentData.webdev[idx].linkRepo = e.target.value; });
+
+            fieldsBox.appendChild(titleInput);
+            fieldsBox.appendChild(srcInput);
+            fieldsBox.appendChild(descInput);
+            fieldsBox.appendChild(stackInput);
+            fieldsBox.appendChild(linkLive);
+            fieldsBox.appendChild(linkRepo);
+
+            const delCol = document.createElement('div');
+            delCol.className = 'item-card-delete-col';
+            delCol.innerHTML = `<button title="Eliminar proyecto">🗑</button>`;
+            delCol.querySelector('button').addEventListener('click', () => {
+                currentData.webdev.splice(idx, 1);
+                renderWebdev();
+            });
+
+            item.appendChild(previewBox);
+            item.appendChild(fieldsBox);
+            item.appendChild(delCol);
             list.appendChild(item);
         });
     }
