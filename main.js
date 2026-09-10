@@ -1,5 +1,5 @@
 // ========================================
-// MOJCA ESTUDIO — Main JavaScript Optimizado
+// MOJCA ESTUDIO — Main JavaScript
 // ========================================
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkjnkdvl";
@@ -55,21 +55,23 @@ const DEFAULT_DATA = {
         textPrimary: "#f0f0f0",
         textSecondary: "#a0a0a0",
         textMuted: "#666666",
-        borderColor: "#242424"
+        borderColor: "#2a2a2a"
     },
     hero: {
         videoSrc: "",
         glassEnabled: true,
-        glassBlur: "12px",
-        glassOpacity: "0.03",
+        glassBlur: "20px",
+        glassOpacity: "0.15",
+        glassBorder: "1px solid rgba(255,255,255,0.1)",
         overlayEnabled: true,
-        overlayColor: "rgba(10,10,10,0.45)"
+        overlayColor: "rgba(10,10,10,0.4)",
+        textShadow: "0 4px 30px rgba(0,0,0,0.5)"
     },
     quienesSomos: {
         enabled: true,
         members: [
             { id: "m1", name: "María López", role: "Directora Creativa", photo: "", tags: ["Dirección", "Branding"], description: "Transforma ideas en experiencias visuales memorables." },
-            { id: "m2", name: "Juan Pérez", role: "Productor Audiovisual", photo: "", tags: ["Video", "Fotografía"], description: "Especialista en narrativa visual cinematográfica." }
+            { id: "m2", name: "Juan Pérez", role: "Productor Audiovisual", photo: "", tags: ["Video", "Fotografía"], description: "Especialista en contar historias a través del lente cinematográfico." }
         ]
     },
     testimonios: {
@@ -91,10 +93,10 @@ const DEFAULT_DATA = {
         { id: "vv3", src: "", title: "Transiciones Creativas", description: "Edición con speed ramps", views: "234K", likes: "12K" }
     ],
     photos: [
-        { id: "p1", src: "", title: "Campaña Skincare", category: "producto", size: "1x1", description: "Iluminación difusa y composición orientada a ecommerce de alta gama." },
-        { id: "p2", src: "", title: "Retrato Editorial", category: "retrato", size: "1x2", description: "Sesión de estudio con contrastes marcados y tratamiento tonal cinematográfico." },
+        { id: "p1", src: "", title: "Campaña Skincare", category: "producto", size: "1x1", description: "Iluminación suave y texturas de producto para ecommerce." },
+        { id: "p2", src: "", title: "Retrato Editorial", category: "retrato", size: "1x2", description: "Fotografía de estudio con luz de recorte y contrastes altos." },
         { id: "p3", src: "", title: "Evento Nocturno", category: "evento", size: "1x1", description: "" },
-        { id: "p4", src: "", title: "Urban Lifestyle", category: "lifestyle", size: "1x1", description: "Luz natural de atardecer capturada en entorno metropolitano." }
+        { id: "p4", src: "", title: "Urban Lifestyle", category: "lifestyle", size: "1x1", description: "Toma urbana en luz natural con atmósfera cinematográfica." }
     ],
     branding: [],
     redes: [],
@@ -110,58 +112,72 @@ const DEFAULT_DATA = {
 function getData() {
     try {
         const saved = localStorage.getItem('mojcaData');
-        if (saved) return deepMerge(JSON.parse(JSON.stringify(DEFAULT_DATA)), JSON.parse(saved));
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            return deepMerge(JSON.parse(JSON.stringify(DEFAULT_DATA)), parsed);
+        }
     } catch (e) {
-        console.error(e);
+        console.error('Error cargando localStorage:', e);
     }
+    localStorage.setItem('mojcaData', JSON.stringify(DEFAULT_DATA));
     return JSON.parse(JSON.stringify(DEFAULT_DATA));
 }
 
-function deepMerge(target, source) {
-    for (const key of Object.keys(source)) {
-        if (source[key] instanceof Object && !Array.isArray(source[key])) {
-            Object.assign(source[key], deepMerge(target[key] || {}, source[key]));
+function deepMerge(defaults, saved) {
+    const result = JSON.parse(JSON.stringify(defaults));
+    for (const key in saved) {
+        if (saved[key] !== null && typeof saved[key] === 'object' && !Array.isArray(saved[key])) {
+            result[key] = deepMerge(defaults[key] || {}, saved[key]);
+        } else {
+            result[key] = saved[key];
         }
     }
-    Object.assign(target || {}, source);
-    return target;
+    return result;
 }
 
-// Procesador de videos universal (Drive, YouTube, Vimeo, MP4) optimizado sin controles
-function createMediaElement(src, label, type, isHero = false) {
-    if (!src || src.trim() === '') return `<div class="ph-inner"><span>${label}</span></div>`;
+// Convertidor e integrador de enlaces de video (Google Drive, YouTube, Vimeo, MP4)
+function createMediaElement(src, label, type) {
+    if (!src || src.trim() === '') return placeholderHTML(label, type === 'video' ? 'video' : 'image');
 
-    // Google Drive
+    // Integración Google Drive
     if (src.includes('drive.google.com')) {
-        const driveId = src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || src.match(/id=([a-zA-Z0-9_-]+)/);
-        if (driveId && driveId[1]) {
-            return `<iframe src="https://drive.google.com/file/d/${driveId[1]}/preview" width="100%" height="100%" frameborder="0" allow="autoplay" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;"></iframe>`;
+        const driveIdMatch = src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || src.match(/id=([a-zA-Z0-9_-]+)/);
+        if (driveIdMatch && driveIdMatch[1]) {
+            const embedUrl = `https://drive.google.com/file/d/${driveIdMatch[1]}/preview`;
+            return `<iframe src="${embedUrl}" width="100%" height="100%" allow="autoplay" frameborder="0" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;"></iframe>`;
         }
     }
 
-    // YouTube sin controles, sin branding y con loop limpio
+    // YouTube
     if (src.includes('youtube.com') || src.includes('youtu.be')) {
-        const yt = src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
-        if (yt && yt[1]) {
-            const extraParams = isHero ? "controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1" : "controls=0&rel=0";
-            return `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${yt[1]}?autoplay=1&mute=1&loop=1&playlist=${yt[1]}&${extraParams}" frameborder="0" allow="autoplay; encrypted-media" style="pointer-events:none;"></iframe>`;
+        const ytMatch = src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
+        if (ytMatch && ytMatch[1]) {
+            return `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${ytMatch[1]}?mute=1&loop=1&playlist=${ytMatch[1]}&controls=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;"></iframe>`;
         }
     }
 
     // Vimeo
     if (src.includes('vimeo.com')) {
-        const vim = src.match(/vimeo\.com\/(\d+)/);
-        if (vim && vim[1]) {
-            return `<iframe src="https://player.vimeo.com/video/${vim[1]}?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen" style="pointer-events:none;"></iframe>`;
+        const vimeoMatch = src.match(/vimeo\.com\/(\d+)/);
+        if (vimeoMatch && vimeoMatch[1]) {
+            return `<iframe src="https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;"></iframe>`;
         }
     }
 
-    // Archivo de video local/directo
+    // Video directo (MP4, WebM)
     if (type === 'video' || src.match(/\.(mp4|webm|ogg)$/i)) {
         return `<video src="${src}" muted loop playsinline preload="metadata" controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false;" style="width:100%;height:100%;object-fit:cover;display:block;"></video>`;
     }
 
     return `<img src="${src}" alt="${label}" oncontextmenu="return false;" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block;">`;
+}
+
+function placeholderHTML(label, iconType) {
+    const icons = {
+        image: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`,
+        video: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polygon points="5 3 19 12 5 21 5 3"/></svg>`
+    };
+    return `<div class="ph-inner">${icons[iconType] || icons.image}<span>${label}</span></div>`;
 }
 
 function applyDynamicStyles(data) {
@@ -186,7 +202,7 @@ function applyDynamicStyles(data) {
     document.head.appendChild(styleEl);
 }
 
-// Transición suave entre fondos sin saltos cromáticos
+// Transición de fondo suave por activación de placas superpuestas
 function initBackgroundGradient() {
     const plates = document.querySelectorAll('.bg-color-plate');
     const sections = document.querySelectorAll('.section-bg');
@@ -201,7 +217,7 @@ function initBackgroundGradient() {
             }
         });
     }, { 
-        threshold: 0.2,
+        threshold: 0.25,
         rootMargin: "-10% 0px -10% 0px"
     });
 
@@ -210,13 +226,14 @@ function initBackgroundGradient() {
 
 function initHero(data) {
     const heroVideoBg = document.getElementById('heroVideoBg');
+    const heroVideo = document.getElementById('heroVideo');
     const heroGlass = document.getElementById('heroGlass');
     const heroOverlay = document.getElementById('heroVideoOverlay');
+    const heroContent = document.querySelector('.hero-content');
     const h = data.hero;
-    if (!heroVideoBg) return;
-
+    if (!heroVideoBg || !heroVideo) return;
     if (h.videoSrc && h.videoSrc.trim() !== '') {
-        heroVideoBg.innerHTML = createMediaElement(h.videoSrc, 'Hero Video', 'video', true);
+        heroVideoBg.innerHTML = createMediaElement(h.videoSrc, 'Hero Video', 'video');
         heroVideoBg.style.display = 'block';
     } else {
         heroVideoBg.style.display = 'none';
@@ -277,11 +294,7 @@ function renderVideosVertical(data) {
     `).join('');
 }
 
-// Galería con filtro y auto-rotación
-let filterInterval = null;
-let currentFilterIndex = 0;
-const filterCategories = ['all', 'producto', 'retrato', 'evento', 'lifestyle'];
-
+// Renderizado de Galería y Modal Lightbox con Glassmorphism
 function renderPhotos(data, filter) {
     const grid = document.getElementById('photoGrid');
     if (!grid) return;
@@ -298,9 +311,11 @@ function renderPhotos(data, filter) {
         </div>
     `).join('');
 
+    // Listener para abrir el Modal
     grid.querySelectorAll('.photo-item').forEach(item => {
         item.addEventListener('click', () => {
-            const photo = data.photos.find(p => p.id === item.getAttribute('data-id'));
+            const photoId = item.getAttribute('data-id');
+            const photo = data.photos.find(p => p.id === photoId);
             if (photo) openPhotoModal(photo);
         });
     });
@@ -315,13 +330,15 @@ function openPhotoModal(photo) {
     const modalDesc = document.getElementById('photoModalDesc');
 
     if (!modal || !modalImg) return;
+
     modalImg.src = photo.src;
     
-    if (photo.description && photo.description.trim() !== '') {
+    // Si tiene información adicional, mostramos el panel glass; si no, lo ocultamos
+    if ((photo.description && photo.description.trim() !== '') || photo.title) {
         modalInfo.style.display = 'flex';
         modalTitle.textContent = photo.title || '';
         modalTag.textContent = photo.category || 'Fotografía';
-        modalDesc.textContent = photo.description;
+        modalDesc.textContent = photo.description || '';
     } else {
         modalInfo.style.display = 'none';
     }
@@ -333,47 +350,10 @@ function initPhotoModal() {
     const modal = document.getElementById('photoModal');
     const closeBtn = document.getElementById('photoModalClose');
     if (!modal) return;
+
     closeBtn.addEventListener('click', () => modal.classList.remove('active'));
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.classList.remove('active');
-    });
-}
-
-// Rotación de álbumes si el usuario no tiene el mouse encima
-function initAutoGalleryFilter(data) {
-    const filterContainer = document.getElementById('galleryFilter');
-    const grid = document.getElementById('photoGrid');
-    const buttons = document.querySelectorAll('.filter-btn');
-    if (!filterContainer || !grid) return;
-
-    function setFilter(cat) {
-        buttons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-filter') === cat));
-        renderPhotos(data, cat);
-    }
-
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            clearInterval(filterInterval);
-            setFilter(btn.getAttribute('data-filter'));
-        });
-    });
-
-    function startTimer() {
-        filterInterval = setInterval(() => {
-            currentFilterIndex = (currentFilterIndex + 1) % filterCategories.length;
-            setFilter(filterCategories[currentFilterIndex]);
-        }, 4000);
-    }
-
-    startTimer();
-
-    // Pausar rotación si el usuario explora con el mouse
-    [filterContainer, grid].forEach(el => {
-        el.addEventListener('mouseenter', () => clearInterval(filterInterval));
-        el.addEventListener('mouseleave', () => {
-            clearInterval(filterInterval);
-            startTimer();
-        });
     });
 }
 
@@ -466,29 +446,10 @@ class InfiniteCarousel {
         window.addEventListener('resize', () => this.updateDimensions());
     }
     startAutoplay() {
-        this.autoplayInterval = setInterval(() => this.next(), 3600);
+        this.autoplayInterval = setInterval(() => this.next(), 3500);
         this.outer.addEventListener('mouseenter', () => clearInterval(this.autoplayInterval));
         this.outer.addEventListener('mouseleave', () => this.startAutoplay());
     }
-}
-
-function initNav() {
-    const nav = document.getElementById('nav');
-    const toggle = document.getElementById('navToggle');
-    const links = document.getElementById('navLinks');
-    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
-    if (toggle && links) {
-        toggle.addEventListener('click', () => { toggle.classList.toggle('active'); links.classList.toggle('open'); });
-        links.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { toggle.classList.remove('active'); links.classList.remove('open'); }); });
-    }
-}
-
-function initScrollReveal() {
-    const reveals = document.querySelectorAll('.scroll-reveal');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
-    }, { threshold: 0.15 });
-    reveals.forEach(el => observer.observe(el));
 }
 
 function init() {
@@ -499,11 +460,8 @@ function init() {
     renderVideosHorizontal(data);
     renderVideosVertical(data);
     renderPhotos(data, 'all');
-    initAutoGalleryFilter(data);
     initPhotoModal();
     initContactForm();
-    initNav();
-    initScrollReveal();
     initBackgroundGradient();
     document.querySelectorAll('.carousel-outer').forEach(outer => new InfiniteCarousel(outer));
 }
