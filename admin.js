@@ -38,7 +38,6 @@ function showAdmin() {
     renderAllPanels();
 }
 
-// Estilos visuales modernos, compactos y con selectores
 function injectAdminStyles() {
     const style = document.createElement('style');
     style.textContent = `
@@ -65,7 +64,7 @@ function injectAdminStyles() {
             border: 1px solid var(--border);
         }
         .compact-preview.vertical { width: 85px; height: 130px; }
-        .compact-preview img, .compact-preview video, .compact-preview iframe { width: 100%; height: 100%; object-fit: cover; }
+        .compact-preview img, .compact-preview video, .compact-preview iframe { width: 100%; height: 100%; object-fit: cover; border: none; }
         .compact-preview span { font-size: 10px; color: var(--text-muted); }
         .compact-fields { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .compact-fields .full { grid-column: span 2; }
@@ -84,7 +83,6 @@ function renderAllPanels() {
     renderPhotos();
 }
 
-// Editor de Estilos y Tipografías mediante Selectores Visuales
 function renderStyleEditor() {
     const container = document.getElementById('styleEditor');
     if (!container) return;
@@ -119,7 +117,6 @@ function renderStyleEditor() {
         card.appendChild(group);
     });
 
-    // Selector de Tipografías
     const fontCard = document.createElement('div');
     fontCard.className = 'admin-card';
     fontCard.innerHTML = '<h3>Tipografías del Sitio</h3>';
@@ -159,7 +156,6 @@ function renderStyleEditor() {
     container.appendChild(fontCard);
 }
 
-// Videos Horizontales en fila compacta con Previsualización
 function renderVideosH() {
     const container = document.getElementById('videosHEditor');
     if (!container) return;
@@ -194,7 +190,7 @@ function renderVideosH() {
         fields.innerHTML = `
             <div class="form-group"><label>Título</label><input type="text" value="${v.title}"></div>
             <div class="form-group"><label>Categoría / Tag</label><input type="text" value="${v.tag}"></div>
-            <div class="form-group full"><label>Enlace del Video (Drive, YouTube o enlace directo)</label><input type="text" value="${v.src}"></div>
+            <div class="form-group full"><label>Enlace del Video (Drive, YouTube o directo)</label><input type="text" value="${v.src}"></div>
         `;
 
         const inputs = fields.querySelectorAll('input');
@@ -284,7 +280,7 @@ function renderPhotos() {
     container.innerHTML = '';
     const card = document.createElement('div');
     card.className = 'admin-card';
-    card.innerHTML = '<h3>Galería de Fotografía (con soporte de descripción en modal)</h3>';
+    card.innerHTML = '<h3>Galería de Fotografía (con descripción opcional en modal)</h3>';
     const list = document.createElement('div');
     card.appendChild(list);
 
@@ -339,12 +335,13 @@ function renderPhotos() {
     });
 }
 
-// Seguridad de acceso con retardo progresivo anti-bruteforce
 document.addEventListener('DOMContentLoaded', () => {
     const loginBtn = document.getElementById('loginBtn');
     const passwordInput = document.getElementById('password');
     const loginError = document.getElementById('loginError');
     const saveAllBtn = document.getElementById('saveAllBtn');
+    const navLinks = document.querySelectorAll('.admin-nav a');
+    const panelTitle = document.getElementById('panelTitle');
 
     if (loginBtn) {
         loginBtn.addEventListener('click', () => {
@@ -361,6 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 loginError.style.display = 'block';
             }
         });
+        passwordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') loginBtn.click(); });
     }
 
     if (saveAllBtn) {
@@ -369,4 +367,20 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('¡Cambios guardados con éxito!');
         });
     }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const panelId = link.getAttribute('data-panel');
+            if (!panelId) return;
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            const targetPanel = document.getElementById('panel-' + panelId);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+                panelTitle.textContent = link.textContent.trim();
+            }
+        });
+    });
 });
