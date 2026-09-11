@@ -3,141 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración — Mojca Estudio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Panel de Administración</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0a; --bg-elevated: #111111; --bg-card: #161616; --bg-hover: #1c1c1c; --bg-input: #1a1a1a;
+            --bg: #0a0a0a; --bg-elevated: #111111; --bg-card: #161616; --bg-input: #1a1a1a;
             --text-primary: #f0f0f0; --text-secondary: #a0a0a0; --text-muted: #666666;
             --accent: #ff6b35; --accent-light: #ff8c42; --accent-glow: rgba(255, 107, 53, 0.15);
-            --border: #242424; --border-light: #333333; --border-hover: #444444;
-            --radius-sm: 6px; --radius-md: 12px; --radius-lg: 16px;
-            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --border: #242424; --radius-sm: 6px; --radius-md: 12px;
             --font-display: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-body); background: var(--bg); color: var(--text-primary); line-height: 1.6; }
-        a { color: inherit; text-decoration: none; }
-        .login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 50%, #1a0f0a 0%, #0a0a0a 100%); }
-        .login-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 48px; width: 100%; max-width: 400px; box-shadow: 0 12px 48px rgba(0,0,0,0.8); text-align: center; }
-        .login-box h1 { font-family: var(--font-display); font-size: 24px; margin-bottom: 8px; }
-        .login-box p { color: var(--text-muted); margin-bottom: 28px; font-size: 13px; }
+        body { font-family: var(--font-body); background: var(--bg); color: var(--text-primary); }
+        .login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .login-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 40px; width: 100%; max-width: 400px; text-align: center; }
+        .login-box h1 { font-family: var(--font-display); font-size: 24px; margin-bottom: 24px; }
         .form-group { margin-bottom: 16px; text-align: left; }
-        .form-group label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 6px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; font-size: 14px; font-family: var(--font-body); background: var(--bg-input); border: 1.5px solid var(--border); border-radius: var(--radius-sm); color: var(--text-primary); outline: none; }
-        .form-group input:focus, .form-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; border-radius: var(--radius-sm); cursor: pointer; border: none; gap: 8px; width: 100%; }
-        .btn-primary { background: var(--accent); color: #fff; }
-        .btn-primary:hover { background: var(--accent-light); }
-        .btn-outline { background: transparent; color: var(--text-primary); border: 1.5px solid var(--border-light); }
-        .btn-sm { padding: 6px 14px; font-size: 11px; width: auto; }
+        .form-group label { display: block; font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; font-family: var(--font-body); background: var(--bg-input); border: 1px solid var(--border); color: var(--text-primary); border-radius: var(--radius-sm); outline: none; }
+        .btn { display: inline-block; padding: 12px 24px; font-size: 12px; font-weight: 600; text-transform: uppercase; border-radius: var(--radius-sm); cursor: pointer; border: none; width: 100%; background: var(--accent); color: #fff; }
         .error-msg { color: #ef4444; font-size: 12px; margin-top: 12px; display: none; }
         .admin-layout { display: none; min-height: 100vh; }
         .admin-layout.active { display: flex; }
-        .admin-sidebar { width: 250px; background: var(--bg-elevated); border-right: 1px solid var(--border); padding: 24px 0; position: fixed; height: 100vh; overflow-y: auto; z-index: 100; }
-        .admin-sidebar-header { padding: 0 24px 20px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
-        .admin-sidebar-header h2 { font-family: var(--font-display); font-size: 18px; }
-        .admin-sidebar-header p { font-size: 11px; color: var(--text-muted); }
-        .admin-nav { list-style: none; padding: 0 12px; }
-        .admin-nav li { margin-bottom: 4px; }
-        .admin-nav a { display: flex; align-items: center; gap: 10px; padding: 10px 14px; font-size: 13px; color: var(--text-secondary); border-radius: var(--radius-sm); cursor: pointer; }
-        .admin-nav a:hover, .admin-nav a.active { background: var(--accent-glow); color: var(--accent); }
-        .admin-main { flex: 1; margin-left: 250px; padding: 32px 48px; min-height: 100vh; }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
-        .admin-header h1 { font-family: var(--font-display); font-size: 24px; }
-        .admin-header-actions { display: flex; gap: 10px; align-items: center; }
+        .admin-sidebar { width: 250px; background: var(--bg-elevated); border-right: 1px solid var(--border); padding: 24px; }
+        .admin-nav { list-style: none; margin-top: 24px; }
+        .admin-nav li { margin-bottom: 8px; }
+        .admin-nav a { display: block; padding: 10px; font-size: 13px; color: var(--text-secondary); cursor: pointer; border-radius: var(--radius-sm); }
+        .admin-nav a.active { background: var(--accent-glow); color: var(--accent); }
+        .admin-main { flex: 1; padding: 32px 48px; }
+        .admin-header { display: flex; justify-content: space-between; margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
         .panel { display: none; }
         .panel.active { display: block; }
-        .panel-title { font-family: var(--font-display); font-size: 20px; margin-bottom: 6px; }
-        .panel-desc { color: var(--text-muted); font-size: 13px; margin-bottom: 24px; }
-        .admin-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px; margin-bottom: 20px; }
-        .admin-card h3 { font-family: var(--font-display); font-size: 15px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-        .add-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); border: 1.5px dashed var(--accent); border-radius: var(--radius-sm); background: transparent; cursor: pointer; margin-top: 10px; }
-        .add-btn:hover { background: var(--accent-glow); }
-        .save-bar { position: sticky; bottom: 0; background: var(--bg-elevated); border-top: 1px solid var(--border); padding: 14px 0; margin-top: 28px; display: flex; justify-content: flex-end; gap: 10px; z-index: 50; }
-        .preview-link { font-size: 12px; color: var(--accent); text-decoration: underline; margin-right: 12px; }
-        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-        .checkbox-group input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
+        .admin-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin-bottom: 20px; }
+        .add-btn { background: transparent; border: 1px dashed var(--accent); color: var(--accent); padding: 8px 16px; cursor: pointer; border-radius: var(--radius-sm); }
+        .save-bar { position: sticky; bottom: 0; background: var(--bg-elevated); border-top: 1px solid var(--border); padding: 16px 0; margin-top: 24px; display: flex; justify-content: flex-end; }
     </style>
 </head>
 <body>
-
 <div class="login-screen" id="loginScreen">
     <div class="login-box">
         <h1>Administración</h1>
-        <p>Mojca Estudio Panel</p>
         <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" placeholder="••••••••">
+            <label>Contraseña</label>
+            <input type="password" id="password">
         </div>
-        <button class="btn btn-primary" id="loginBtn">Ingresar</button>
+        <button class="btn" id="loginBtn">Ingresar</button>
         <p class="error-msg" id="loginError">Contraseña incorrecta.</p>
     </div>
 </div>
-
 <div class="admin-layout" id="adminLayout">
     <aside class="admin-sidebar">
-        <div class="admin-sidebar-header">
-            <h2>MOJCA</h2>
-            <p>Control Panel</p>
-        </div>
+        <h2>MOJCA</h2>
         <ul class="admin-nav">
-            <li><a class="active" data-panel="secciones">Secciones del Sitio</a></li>
+            <li><a class="active" data-panel="secciones">Secciones</a></li>
             <li><a data-panel="estilos">Estilos y Tipografía</a></li>
             <li><a data-panel="videos-h">Videos Horizontales</a></li>
             <li><a data-panel="videos-v">Reels y Shorts</a></li>
             <li><a data-panel="fotos">Fotografía</a></li>
         </ul>
     </aside>
-
     <main class="admin-main">
         <div class="admin-header">
-            <h1 id="panelTitle">Secciones del Sitio</h1>
-            <div class="admin-header-actions">
-                <a href="index.html" target="_blank" class="preview-link">Ver sitio web &rarr;</a>
-                <button class="btn btn-outline btn-sm" id="logoutBtn">Salir</button>
-            </div>
+            <h1 id="panelTitle">Secciones</h1>
+            <button class="btn" style="width:auto;background:transparent;border:1px solid var(--border);" id="logoutBtn">Salir</button>
         </div>
-
-        <div class="panel active" id="panel-secciones">
-            <h2 class="panel-title">Visibilidad de Secciones</h2>
-            <p class="panel-desc">Prendé o apagá los bloques de tu web.</p>
-            <div id="seccionesEditor"></div>
-        </div>
-
-        <div class="panel" id="panel-estilos">
-            <h2 class="panel-title">Selector Visual de Estilos</h2>
-            <p class="panel-desc">Modificá los colores de la paleta y las tipografías del sitio sin tocar código.</p>
-            <div id="styleEditor"></div>
-        </div>
-
-        <div class="panel" id="panel-videos-h">
-            <h2 class="panel-title">Videos Horizontales</h2>
-            <p class="panel-desc">Admite enlaces de Google Drive, YouTube, Vimeo o MP4 directo con previsualización en vivo.</p>
-            <div id="videosHEditor"></div>
-        </div>
-
-        <div class="panel" id="panel-videos-v">
-            <h2 class="panel-title">Reels y Shorts</h2>
-            <p class="panel-desc">Videos verticales del carrusel interactivo.</p>
-            <div id="videosVEditor"></div>
-        </div>
-
-        <div class="panel" id="panel-fotos">
-            <h2 class="panel-title">Galería de Fotos</h2>
-            <p class="panel-desc">Cargá imágenes y agregá información opcional para que se muestre en tarjeta flotante tipo glass.</p>
-            <div id="photosEditor"></div>
-        </div>
-
-        <div class="save-bar">
-            <button class="btn btn-primary btn-sm" id="saveAllBtn">Guardar todos los cambios</button>
-        </div>
+        <div class="panel active" id="panel-secciones"><div id="seccionesEditor"></div></div>
+        <div class="panel" id="panel-estilos"><div id="styleEditor"></div></div>
+        <div class="panel" id="panel-videos-h"><div id="videosHEditor"></div></div>
+        <div class="panel" id="panel-videos-v"><div id="videosVEditor"></div></div>
+        <div class="panel" id="panel-fotos"><div id="photosEditor"></div></div>
+        <div class="save-bar"><button class="btn" style="width:auto;" id="saveAllBtn">Guardar cambios</button></div>
     </main>
 </div>
-
-<!-- IMPORTANTE: El main se carga primero para proveer DEFAULT_DATA y funciones compartidas al admin -->
 <script src="main.js"></script>
 <script src="admin.js"></script>
 </body>
