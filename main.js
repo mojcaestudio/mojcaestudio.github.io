@@ -1,5 +1,5 @@
 // ========================================
-// MOJCA ESTUDIO — Main JavaScript Optimizado
+// MOJCA ESTUDIO — Main JavaScript (Limpio y Funcional)
 // ========================================
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkjnkdvl";
@@ -127,10 +127,10 @@ function deepMerge(target, source) {
     return target;
 }
 
-function createMediaElement(src, label, type, isHero = false) {
+// Convertidor para Drive, YouTube, Vimeo y MP4 directo
+function createMediaElement(src, label, type) {
     if (!src || src.trim() === '') return `<div class="ph-inner"><span>${label}</span></div>`;
 
-    // Google Drive
     if (src.includes('drive.google.com')) {
         const driveId = src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || src.match(/id=([a-zA-Z0-9_-]+)/);
         if (driveId && driveId[1]) {
@@ -138,16 +138,13 @@ function createMediaElement(src, label, type, isHero = false) {
         }
     }
 
-    // YouTube sin controles ni branding
     if (src.includes('youtube.com') || src.includes('youtu.be')) {
         const yt = src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
         if (yt && yt[1]) {
-            const extraParams = isHero ? "controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1" : "controls=0&rel=0";
-            return `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${yt[1]}?autoplay=1&mute=1&loop=1&playlist=${yt[1]}&${extraParams}" frameborder="0" allow="autoplay; encrypted-media" style="pointer-events:none;"></iframe>`;
+            return `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${yt[1]}?autoplay=1&mute=1&loop=1&playlist=${yt[1]}&controls=0&rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" style="pointer-events:none;"></iframe>`;
         }
     }
 
-    // Vimeo
     if (src.includes('vimeo.com')) {
         const vim = src.match(/vimeo\.com\/(\d+)/);
         if (vim && vim[1]) {
@@ -155,7 +152,6 @@ function createMediaElement(src, label, type, isHero = false) {
         }
     }
 
-    // Video MP4 directo
     if (type === 'video' || src.match(/\.(mp4|webm|ogg)$/i)) {
         return `<video src="${src}" muted loop playsinline preload="metadata" controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false;" style="width:100%;height:100%;object-fit:cover;display:block;"></video>`;
     }
@@ -185,7 +181,6 @@ function applyDynamicStyles(data) {
     document.head.appendChild(styleEl);
 }
 
-// Transición suave entre fondos sin saltos cromáticos
 function initBackgroundGradient() {
     const plates = document.querySelectorAll('.bg-color-plate');
     const sections = document.querySelectorAll('.section-bg');
@@ -199,28 +194,9 @@ function initBackgroundGradient() {
                 });
             }
         });
-    }, { 
-        threshold: 0.2,
-        rootMargin: "-10% 0px -10% 0px"
-    });
+    }, { threshold: 0.2, rootMargin: "-10% 0px -10% 0px" });
 
     sections.forEach(s => observer.observe(s));
-}
-
-// Contador HUD de código de tiempo a 24fps
-function initTimecode() {
-    const el = document.getElementById('hudTimecode');
-    if (!el) return;
-    let frames = 0;
-    setInterval(() => {
-        frames++;
-        const totalSec = Math.floor(frames / 24);
-        const f = frames % 24;
-        const s = totalSec % 60;
-        const m = Math.floor(totalSec / 60) % 60;
-        const h = Math.floor(totalSec / 3600);
-        el.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}:${String(f).padStart(2,'0')}`;
-    }, 1000 / 24);
 }
 
 function initHero(data) {
@@ -231,7 +207,7 @@ function initHero(data) {
     if (!heroVideoBg) return;
 
     if (h.videoSrc && h.videoSrc.trim() !== '') {
-        heroVideoBg.innerHTML = createMediaElement(h.videoSrc, 'Hero Video', 'video', true);
+        heroVideoBg.innerHTML = createMediaElement(h.videoSrc, 'Hero Video', 'video');
         heroVideoBg.style.display = 'block';
     } else {
         heroVideoBg.style.display = 'none';
@@ -252,6 +228,37 @@ function renderTexts(data) {
         const key = el.getAttribute('data-editable');
         if (data.texts[key]) el.innerHTML = data.texts[key].replace(/\n/g, '<br>');
     });
+}
+
+function applySectionVisibility(data) {
+    const sec = data.sections || DEFAULT_DATA.sections;
+    const mapping = {
+        hero: { el: document.getElementById('inicio'), link: 'a[href="#inicio"]' },
+        marquee: { el: document.querySelector('.marquee-section'), link: null },
+        sobre: { el: document.getElementById('sobre'), link: 'a[href="#sobre"]' },
+        quienesSomos: { el: document.getElementById('quienes-somos'), link: 'a[href="#quienes-somos"]' },
+        testimonios: { el: document.getElementById('testimonios'), link: null },
+        videos: { el: document.getElementById('videos'), link: 'a[href="#videos"]' },
+        reels: { el: document.getElementById('reels'), link: null },
+        fotos: { el: document.getElementById('fotos'), link: 'a[href="#fotos"]' },
+        branding: { el: document.getElementById('branding'), link: 'a[href="#branding"]' },
+        redes: { el: document.getElementById('redes'), link: 'a[href="#redes"]' },
+        webdev: { el: document.getElementById('webdev'), link: 'a[href="#webdev"]' },
+        proceso: { el: document.getElementById('proceso'), link: null },
+        contacto: { el: document.getElementById('contacto'), link: 'a[href="#contacto"]' }
+    };
+
+    for (const [key, conf] of Object.entries(mapping)) {
+        const isVisible = sec[key] !== false;
+        if (conf.el) conf.el.style.display = isVisible ? '' : 'none';
+        if (conf.link) {
+            document.querySelectorAll(conf.link).forEach(a => {
+                const parentLi = a.closest('li');
+                if (parentLi) parentLi.style.display = isVisible ? '' : 'none';
+                else a.style.display = isVisible ? '' : 'none';
+            });
+        }
+    }
 }
 
 function renderVideosHorizontal(data) {
@@ -292,7 +299,6 @@ function renderVideosVertical(data) {
     `).join('');
 }
 
-// Galería con filtro, auto-rotación y modal lightbox
 let filterInterval = null;
 let currentFilterIndex = 0;
 const filterCategories = ['all', 'producto', 'retrato', 'evento', 'lifestyle'];
@@ -426,6 +432,14 @@ function initContactForm() {
     });
 }
 
+function initSecurity() {
+    document.addEventListener('contextmenu', (e) => {
+        if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG' || e.target.closest('.video-thumb-large, .video-thumb-vertical')) {
+            e.preventDefault();
+        }
+    });
+}
+
 class InfiniteCarousel {
     constructor(outerEl) {
         this.outer = outerEl;
@@ -507,9 +521,9 @@ function initScrollReveal() {
 function init() {
     const data = getData();
     applyDynamicStyles(data);
+    applySectionVisibility(data);
     renderTexts(data);
     initHero(data);
-    initTimecode();
     renderVideosHorizontal(data);
     renderVideosVertical(data);
     renderPhotos(data, 'all');
@@ -517,6 +531,7 @@ function init() {
     initPhotoModal();
     initContactForm();
     initNav();
+    initSecurity();
     initScrollReveal();
     initBackgroundGradient();
     document.querySelectorAll('.carousel-outer').forEach(outer => new InfiniteCarousel(outer));
