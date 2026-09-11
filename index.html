@@ -11,15 +11,16 @@
 </head>
 <body>
 
+<div class="film-grain" aria-hidden="true"></div>
 <div class="cursor-glow" id="cursorGlow"></div>
 
-<!-- Capas de color superpuestas para transición 100% fluida -->
 <div class="bg-gradient-layer" id="bgGradient">
     <div class="bg-color-plate plate-warm active" data-plate="warm"></div>
     <div class="bg-color-plate plate-cream" data-plate="cream"></div>
     <div class="bg-color-plate plate-terracotta" data-plate="terracotta"></div>
     <div class="bg-color-plate plate-olive" data-plate="olive"></div>
     <div class="bg-color-plate plate-wine" data-plate="wine"></div>
+    <div class="bg-color-plate plate-steel" data-plate="steel"></div>
 </div>
 
 <nav class="nav" id="nav">
@@ -31,10 +32,9 @@
             <li><a href="#sobre">Nosotros</a></li>
             <li><a href="#quienes-somos">Equipo</a></li>
             <li><a href="#videos">Videos</a></li>
+            <li><a href="#reels">Reels</a></li>
             <li><a href="#fotos">Fotografía</a></li>
             <li><a href="#branding">Branding</a></li>
-            <li><a href="#redes">Redes</a></li>
-            <li><a href="#webdev">Web</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
         <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -50,10 +50,15 @@
     </div>
     <div class="hero-glass" id="heroGlass"></div>
     <div class="hero-content">
-        <p class="hero-label fade-up delay-1" data-editable="heroLabel">Estudio Creativo</p>
-        <h1 class="hero-title fade-up delay-2" data-editable="heroTitle">DAMOS VIDA A TUS IDEAS CON DISEÑO, CREATIVIDAD Y ESTRATEGIA VISUAL</h1>
-        <p class="hero-sub fade-up delay-3" data-editable="heroSub">Creamos contenido que se ve, se siente y se comparte.</p>
-        <div class="hero-cta fade-up delay-4">
+        <div class="camera-hud fade-up delay-1">
+            <div class="hud-rec"><span class="hud-dot"></span> REC</div>
+            <div class="hud-timecode" id="hudTimecode">00:00:00:00</div>
+            <div class="hud-format">4K 24FPS</div>
+        </div>
+        <p class="hero-label fade-up delay-2" data-editable="heroLabel">Estudio Creativo</p>
+        <h1 class="hero-title fade-up delay-3" data-editable="heroTitle">DAMOS VIDA A TUS IDEAS CON DISEÑO, CREATIVIDAD Y ESTRATEGIA VISUAL</h1>
+        <p class="hero-sub fade-up delay-4" data-editable="heroSub">Creamos contenido que se ve, se siente y se comparte.</p>
+        <div class="hero-cta fade-up delay-5">
             <a href="#contacto" class="btn btn-primary">Hablemos</a>
             <a href="#videos" class="btn btn-outline">Ver Trabajos</a>
         </div>
@@ -70,18 +75,14 @@
         <span>Fotografía</span><span class="marquee-dot"></span>
         <span>Branding</span><span class="marquee-dot"></span>
         <span>Motion Graphics</span><span class="marquee-dot"></span>
-        <span>Redes Sociales</span><span class="marquee-dot"></span>
-        <span>Desarrollo Web</span><span class="marquee-dot"></span>
         <span>Color Grading</span><span class="marquee-dot"></span>
-        <span>Diseño Editorial</span><span class="marquee-dot"></span>
+        <span>Desarrollo Web</span><span class="marquee-dot"></span>
         <span>Producción Audiovisual</span><span class="marquee-dot"></span>
         <span>Fotografía</span><span class="marquee-dot"></span>
         <span>Branding</span><span class="marquee-dot"></span>
         <span>Motion Graphics</span><span class="marquee-dot"></span>
-        <span>Redes Sociales</span><span class="marquee-dot"></span>
-        <span>Desarrollo Web</span><span class="marquee-dot"></span>
         <span>Color Grading</span><span class="marquee-dot"></span>
-        <span>Diseño Editorial</span><span class="marquee-dot"></span>
+        <span>Desarrollo Web</span><span class="marquee-dot"></span>
     </div>
 </div>
 
@@ -93,7 +94,6 @@
             <p class="section-subtitle" data-editable="sobreSubtitle">Un estudio donde la técnica se encuentra con la sensibilidad artística</p>
         </div>
         
-        <!-- Rectángulos horizontales elegantes -->
         <div class="servicios-grid">
             <div class="servicio-card scroll-reveal" data-delay="0">
                 <div class="servicio-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
@@ -166,6 +166,8 @@
     </div>
 </section>
 
+<div class="section-divider"></div>
+
 <section class="section section-bg quienes-somos-section" data-bg="cream" id="quienes-somos">
     <div class="container-wide">
         <div class="section-header scroll-reveal">
@@ -176,6 +178,8 @@
         <div class="quienes-somos-grid" id="quienesSomosGrid"></div>
     </div>
 </section>
+
+<div class="section-divider"></div>
 
 <section class="section section-bg testimonios-section" data-bg="terracotta" id="testimonios">
     <div class="testimonios-bg" id="testimoniosBg"></div>
@@ -193,15 +197,16 @@
     </div>
 </section>
 
+<div class="section-divider"></div>
+
 <section class="section section-bg" data-bg="olive" id="videos">
     <div class="container-wide">
+        <div class="section-header scroll-reveal">
+            <span class="section-tag">Audiovisual</span>
+            <h2 class="section-title">Historias en <em>movimiento</em></h2>
+            <p class="section-subtitle">Producciones pensadas para conectar, impactar y trascender en pantalla</p>
+        </div>
         <div class="carousel-section">
-            <div class="carousel-header scroll-reveal">
-                <div class="carousel-title-group">
-                    <h3>Videos Horizontales</h3>
-                    <p class="carousel-desc">Piezas audiovisuales pensadas para contar historias con ritmo y alma</p>
-                </div>
-            </div>
             <div class="carousel-outer">
                 <button class="carousel-btn prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
                 <div class="carousel-track-wrapper"><div class="carousel-track" id="carousel-horizontal"></div></div>
@@ -211,15 +216,16 @@
     </div>
 </section>
 
+<div class="section-divider"></div>
+
 <section class="section section-bg" data-bg="wine" id="reels">
     <div class="container-wide">
+        <div class="section-header scroll-reveal">
+            <span class="section-tag">Formatos Verticales</span>
+            <h2 class="section-title">Reels y <em>Shorts</em></h2>
+            <p class="section-subtitle">Ritmo dinámico, ganchos visuales y contenido listo para el scroll</p>
+        </div>
         <div class="carousel-section">
-            <div class="carousel-header scroll-reveal">
-                <div class="carousel-title-group">
-                    <h3>Reels y Shorts</h3>
-                    <p class="carousel-desc">Contenido ágil y vertical con máximo impacto visual</p>
-                </div>
-            </div>
             <div class="carousel-outer">
                 <button class="carousel-btn prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
                 <div class="carousel-track-wrapper"><div class="carousel-track vertical" id="carousel-vertical"></div></div>
@@ -229,14 +235,16 @@
     </div>
 </section>
 
-<section class="section section-bg" data-bg="cream" id="fotos">
+<div class="section-divider"></div>
+
+<section class="section section-bg" data-bg="steel" id="fotos">
     <div class="container-wide">
         <div class="section-header scroll-reveal">
-            <span class="section-tag">Fotografía</span>
-            <h2 class="section-title">Una imagen vale más que <em>mil palabras</em></h2>
+            <span class="section-tag">Galería</span>
+            <h2 class="section-title">Fotografía de <em>Autor</em></h2>
             <p class="section-subtitle">Capturamos momentos, emociones y esencias en cada disparo</p>
         </div>
-        <div class="gallery-filter scroll-reveal">
+        <div class="gallery-filter scroll-reveal" id="galleryFilter">
             <button class="filter-btn active" data-filter="all">Todo</button>
             <button class="filter-btn" data-filter="producto">Producto</button>
             <button class="filter-btn" data-filter="retrato">Retrato</button>
@@ -247,12 +255,11 @@
     </div>
 </section>
 
-<!-- Lightbox Modal para Fotografías -->
 <div class="photo-modal" id="photoModal">
     <button class="photo-modal-close" id="photoModalClose">&times;</button>
     <div class="photo-modal-container" id="photoModalContainer">
         <div class="photo-modal-img-wrap">
-            <img id="photoModalImg" src="" alt="Foto expandida">
+            <img id="photoModalImg" src="" alt="Foto ampliada">
         </div>
         <div class="photo-modal-info" id="photoModalInfo">
             <span class="modal-tag" id="photoModalTag"></span>
@@ -261,6 +268,8 @@
         </div>
     </div>
 </div>
+
+<div class="section-divider"></div>
 
 <section class="section section-bg" data-bg="terracotta" id="branding">
     <div class="container-wide">
@@ -273,27 +282,7 @@
     </div>
 </section>
 
-<section class="section section-bg" data-bg="olive" id="redes">
-    <div class="container-wide">
-        <div class="section-header scroll-reveal">
-            <span class="section-tag">Redes Sociales</span>
-            <h2 class="section-title">Contenido que <em>conecta</em></h2>
-            <p class="section-subtitle">Estrategias visuales que generan conversación y comunidad</p>
-        </div>
-        <div class="ig-feed-full" id="redesGrid"></div>
-    </div>
-</section>
-
-<section class="section section-bg" data-bg="wine" id="webdev">
-    <div class="container-wide">
-        <div class="section-header scroll-reveal">
-            <span class="section-tag">Web y Código</span>
-            <h2 class="section-title">Experiencias <em>digitales</em></h2>
-            <p class="section-subtitle">Sitios web que funcionan, sorprenden y convierten</p>
-        </div>
-        <div class="webdev-grid" id="webdevGrid"></div>
-    </div>
-</section>
+<div class="section-divider"></div>
 
 <section class="section section-bg proceso-section" data-bg="warm" id="proceso">
     <div class="container-wide">
@@ -322,6 +311,8 @@
         </div>
     </div>
 </section>
+
+<div class="section-divider"></div>
 
 <section class="section section-bg" data-bg="cream" id="contacto">
     <div class="container-wide">
