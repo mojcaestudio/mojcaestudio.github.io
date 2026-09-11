@@ -1,5 +1,5 @@
 // ========================================
-// MOJCA ESTUDIO — Main JavaScript Optimizado
+// MOJCA ESTUDIO — Main JavaScript (Limpio y Funcional)
 // ========================================
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkjnkdvl";
@@ -18,12 +18,45 @@ const DEFAULT_DATA = {
         accentColor: "#ff6b35", accentLight: "#ff8c42", bgDark: "#0a0a0a", bgPanel: "#111111", bgCard: "#161616", textPrimary: "#f0f0f0", textSecondary: "#a0a0a0", textMuted: "#666666", borderColor: "#242424"
     },
     hero: { videoSrc: "", glassEnabled: true, glassBlur: "12px", glassOpacity: "0.03", overlayEnabled: true, overlayColor: "rgba(10,10,10,0.45)" },
-    quienesSomos: { enabled: true, members: [{ id: "m1", name: "María López", role: "Directora Creativa", photo: "", tags: ["Dirección", "Branding"], description: "Transforma ideas en experiencias visuales memorables." }] },
-    testimonios: { enabled: true, items: [{ id: "t1", nombre: "María González", empresa: "Marca X", texto: "Excelente trabajo.", avatar: "" }] },
-    videosHorizontal: [{ id: "vh1", src: "", title: "Spot Comercial", description: "Campaña de lanzamiento.", views: "12.4K", likes: "856", tag: "Comercial" }],
-    videosVertical: [{ id: "vv1", src: "", title: "Behind the Scenes", description: "Un día de rodaje en estudio", views: "89K", likes: "4.2K" }],
-    photos: [{ id: "p1", src: "", title: "Campaña Skincare", category: "producto", size: "1x1", description: "Iluminación difusa." }],
-    branding: [], redes: [], webdev: [],
+    quienesSomos: { enabled: true, members: [
+        { id: "m1", name: "María López", role: "Directora Creativa", photo: "", tags: ["Dirección", "Branding"], description: "Transforma ideas en experiencias visuales memorables." },
+        { id: "m2", name: "Juan Pérez", role: "Productor Audiovisual", photo: "", tags: ["Video", "Fotografía"], description: "Especialista en narrativa visual cinematográfica." },
+        { id: "m3", name: "Lucía Martínez", role: "Diseñadora UX/UI", photo: "", tags: ["Web", "Diseño"], description: "Crea interfaces que no solo se ven bien, sino que funcionan." }
+    ]},
+    testimonios: { enabled: true, items: [
+        { id: "t1", nombre: "María González", empresa: "Marca X", texto: "Trabajar con Mojca fue una experiencia transformadora. Entendieron exactamente lo que necesitábamos.", avatar: "" },
+        { id: "t2", nombre: "Carlos Rodríguez", empresa: "Startup Y", texto: "La atención al detalle y la creatividad que ponen en cada proyecto es impresionante.", avatar: "" },
+        { id: "t3", nombre: "Juan López", empresa: "Restaurante Z", texto: "Nuestra imagen cambió por completo gracias a ellos. El rebranding superó todas nuestras expectativas.", avatar: "" }
+    ]},
+    videosHorizontal: [
+        { id: "vh1", src: "", title: "Spot Comercial — Marca X", description: "Campaña de lanzamiento con rodaje y color grading.", views: "12.4K", likes: "856", tag: "Comercial" },
+        { id: "vh2", src: "", title: "Video Musical — Artista Y", description: "Concepto visual y dirección de arte.", views: "45.2K", likes: "2.1K", tag: "Musical" },
+        { id: "vh3", src: "", title: "Corporativo — Empresa Z", description: "Video institucional con tomas aéreas.", views: "8.7K", likes: "423", tag: "Corporativo" },
+        { id: "vh4", src: "", title: "Documental — Proyecto Social", description: "Cobertura de 3 días y edición narrativa.", views: "3.1K", likes: "189", tag: "Documental" }
+    ],
+    videosVertical: [
+        { id: "vv1", src: "", title: "Behind the Scenes", description: "Un día de rodaje en estudio", views: "89K", likes: "4.2K" },
+        { id: "vv2", src: "", title: "Tutorial de Color", description: "Antes y después de grading", views: "156K", likes: "8.7K" },
+        { id: "vv3", src: "", title: "Transiciones Creativas", description: "Edición con speed ramps", views: "234K", likes: "12K" }
+    ],
+    photos: [
+        { id: "p1", src: "", title: "Campaña Skincare", category: "producto", size: "1x1", description: "Iluminación difusa." },
+        { id: "p2", src: "", title: "Retrato Editorial", category: "retrato", size: "1x2", description: "Fotografía de estudio." },
+        { id: "p3", src: "", title: "Evento Nocturno", category: "evento", size: "1x1", description: "" },
+        { id: "p4", src: "", title: "Urban Lifestyle", category: "lifestyle", size: "1x1", description: "Luz natural." }
+    ],
+    branding: [
+        { id: "b1", src: "", title: "Marca A — Identidad Completa", description: "Diseño de logo, paleta cromática y aplicaciones.", tags: ["Logo", "Packaging", "Social"] },
+        { id: "b2", src: "", title: "Restaurante B — Rebranding", description: "Renovación completa de imagen comercial.", tags: ["Rebranding", "Menú", "Web"] }
+    ],
+    redes: [
+        { id: "r1", type: "carousel", slides: [{ src: "", label: "Campaña Verano 1" }], likes: "1,247", caption: "Nueva campaña de verano.", hashtags: "#audiovisual #redessociales", time: "Hace 2 días", location: "Buenos Aires, Argentina" },
+        { id: "r2", type: "reel", src: "", label: "Behind the Scenes Reel", likes: "3,892", caption: "Behind the scenes.", hashtags: "#behindthescenes #produccion", time: "Hace 5 días", location: "Córdoba, Argentina" }
+    ],
+    webdev: [
+        { id: "w1", src: "", title: "E-commerce — Tienda de Moda", description: "Tienda online completa con carrito y pasarela de pagos.", stack: ["React", "Next.js", "Stripe", "Tailwind"], linkLive: "#", linkRepo: "#" },
+        { id: "w2", src: "", title: "Landing Page — SaaS", description: "Landing page de alta conversión para startup de software.", stack: ["Vue 3", "Vite", "GSAP", "Netlify"], linkLive: "#", linkRepo: "#" }
+    ],
     whatsapp: { number: "5493534000000", message: "Hola Mojca Estudio", floatEnabled: true, floatLabel: "Escribinos" }
 };
 
@@ -45,10 +78,8 @@ function deepMerge(target, source) {
     return target;
 }
 
-// Generador de IFRAME y VIDEO permitiendo interacción al cliquear
 function createMediaElement(src, label, type, isHero = false) {
     if (!src || src.trim() === '') return `<div class="ph-inner"><span>${label}</span></div>`;
-
     let pointerEvents = isHero ? 'pointer-events:none;' : 'pointer-events:auto;';
 
     if (src.includes('drive.google.com')) {
@@ -57,7 +88,6 @@ function createMediaElement(src, label, type, isHero = false) {
             return `<iframe src="https://drive.google.com/file/d/${driveId[1]}/preview" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${pointerEvents}"></iframe>`;
         }
     }
-
     if (src.includes('youtube.com') || src.includes('youtu.be')) {
         const yt = src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
         if (yt && yt[1]) {
@@ -65,7 +95,6 @@ function createMediaElement(src, label, type, isHero = false) {
             return `<iframe src="https://www.youtube.com/embed/${yt[1]}?${params}&loop=1&playlist=${yt[1]}" frameborder="0" allow="autoplay; encrypted-media; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${pointerEvents}"></iframe>`;
         }
     }
-
     if (src.includes('vimeo.com')) {
         const vim = src.match(/vimeo\.com\/(\d+)/);
         if (vim && vim[1]) {
@@ -73,12 +102,10 @@ function createMediaElement(src, label, type, isHero = false) {
             return `<iframe src="https://player.vimeo.com/video/${vim[1]}?${params}&loop=1" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${pointerEvents}"></iframe>`;
         }
     }
-
     if (type === 'video' || src.match(/\.(mp4|webm|ogg)$/i)) {
         const auto = isHero ? 'autoplay' : '';
         return `<video src="${src}" ${auto} muted loop playsinline preload="metadata" controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false;" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;${pointerEvents}"></video>`;
     }
-
     return `<img src="${src}" alt="${label}" oncontextmenu="return false;" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">`;
 }
 
@@ -122,13 +149,25 @@ function initBackgroundGradient() {
 
 function initHero(data) {
     const heroVideoBg = document.getElementById('heroVideoBg');
+    const heroGlass = document.getElementById('heroGlass');
+    const heroOverlay = document.getElementById('heroVideoOverlay');
     const h = data.hero;
     if (!heroVideoBg) return;
+
     if (h.videoSrc && h.videoSrc.trim() !== '') {
         heroVideoBg.innerHTML = createMediaElement(h.videoSrc, 'Hero Video', 'video', true);
         heroVideoBg.style.display = 'block';
     } else {
         heroVideoBg.style.display = 'none';
+    }
+    if (heroOverlay && h.overlayEnabled) {
+        heroOverlay.style.background = h.overlayColor;
+        heroOverlay.style.display = 'block';
+    }
+    if (heroGlass && h.glassEnabled) {
+        heroGlass.style.display = 'block';
+        heroGlass.style.backdropFilter = `blur(${h.glassBlur})`;
+        heroGlass.style.background = `rgba(255,255,255,${h.glassOpacity})`;
     }
 }
 
@@ -167,6 +206,26 @@ function applySectionVisibility(data) {
     }
 }
 
+function renderQuienesSomos(data) {
+    const grid = document.getElementById('quienesSomosGrid');
+    if (!grid) return;
+    const qs = data.quienesSomos;
+    if (!qs.enabled || !qs.members || qs.members.length === 0) {
+        grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);">No hay miembros del equipo aún.</p>';
+        return;
+    }
+    grid.innerHTML = qs.members.map(m => `
+        <div class="member-card scroll-reveal">
+            <div class="member-photo">
+                ${m.photo ? `<img src="${m.photo}" alt="${m.name}" oncontextmenu="return false;">` : `<div class="img-placeholder avatar" data-label="${m.name.charAt(0)}"><div class="ph-inner"><span>${m.name.charAt(0)}</span></div></div>`}
+            </div>
+            <h3 class="member-name">${m.name}</h3>
+            <p class="member-role">${m.role}</p>
+            <p class="member-description">${m.description}</p>
+        </div>
+    `).join('');
+}
+
 function renderVideosHorizontal(data) {
     const track = document.getElementById('carousel-horizontal');
     if (!track) return;
@@ -202,7 +261,6 @@ function renderVideosVertical(data) {
     `).join('');
 }
 
-// Filtro automático de fotos y Modal
 let filterInterval = null;
 let currentFilterIndex = 0;
 const filterCategories = ['all', 'producto', 'retrato', 'evento', 'lifestyle'];
@@ -280,7 +338,86 @@ function initAutoGalleryFilter(data) {
     });
 }
 
-// Formulario con API Fetch directa
+function renderBranding(data) {
+    const grid = document.getElementById('brandingGrid');
+    if (!grid) return;
+    grid.innerHTML = data.branding.map(b => `
+        <div class="branding-card scroll-reveal">
+            <div class="branding-visual"><div class="img-placeholder wide" data-label="${b.title}">${createMediaElement(b.src, b.title, 'image')}</div></div>
+            <div class="branding-info">
+                <h3>${b.title}</h3>
+                <p>${b.description}</p>
+                <div class="branding-tags">${b.tags.map(t => `<span>${t}</span>`).join('')}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderRedes(data) {
+    const grid = document.getElementById('redesGrid');
+    if (!grid) return;
+    grid.innerHTML = data.redes.map(r => {
+        if (r.type === 'carousel') {
+            return `
+            <article class="ig-post-full scroll-reveal">
+                <div class="ig-header">
+                    <div class="ig-user"><strong>mojcaestudio</strong><span>${r.location}</span></div>
+                    <a href="https://www.instagram.com/mojcaestudio/" target="_blank" class="ig-follow-btn">Seguir</a>
+                </div>
+                <div class="ig-media-reel">
+                    <div class="img-placeholder square" data-label="${r.label}">${createMediaElement(r.slides[0]?.src, r.label, 'image')}</div>
+                </div>
+                <div class="ig-caption"><strong>mojcaestudio</strong> ${r.caption} <span class="hashtag">${r.hashtags}</span></div>
+            </article>`;
+        } else {
+            return `
+            <article class="ig-post-full scroll-reveal">
+                <div class="ig-header">
+                    <div class="ig-user"><strong>mojcaestudio</strong><span>${r.location}</span></div>
+                    <a href="https://www.instagram.com/mojcaestudio/" target="_blank" class="ig-follow-btn">Seguir</a>
+                </div>
+                <div class="ig-media-reel">
+                    <div class="img-placeholder square" data-label="${r.label}">${createMediaElement(r.src, r.label, 'video')}</div>
+                </div>
+                <div class="ig-caption"><strong>mojcaestudio</strong> ${r.caption} <span class="hashtag">${r.hashtags}</span></div>
+            </article>`;
+        }
+    }).join('');
+}
+
+function renderWebdev(data) {
+    const grid = document.getElementById('webdevGrid');
+    if (!grid) return;
+    grid.innerHTML = data.webdev.map(w => `
+        <div class="webdev-card scroll-reveal">
+            <div class="webdev-preview">
+                <div class="img-placeholder wide" data-label="${w.title}">${createMediaElement(w.src, w.title, 'web')}</div>
+            </div>
+            <div class="webdev-info">
+                <h3>${w.title}</h3>
+                <p>${w.description}</p>
+                <div class="webdev-stack">${w.stack.map(s => `<span>${s}</span>`).join('')}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderTestimonios(data) {
+    const track = document.getElementById('testimoniosTrack');
+    if (!track) return;
+    const t = data.testimonios;
+    if (!t.items || t.items.length === 0) { track.innerHTML = '<p style="text-align:center;color:var(--text-muted);">No hay testimonios aún.</p>'; return; }
+    const cardHTML = (item) => `
+        <div class="testimonio-card">
+            <div class="testimonio-quote">"${item.texto}"</div>
+            <div class="testimonio-author">
+                <div class="testimonio-avatar">${item.avatar ? `<img src="${item.avatar}" alt="${item.nombre}">` : `<span>${item.nombre.charAt(0)}</span>`}</div>
+                <div class="testimonio-info"><strong>${item.nombre}</strong><span>${item.empresa}</span></div>
+            </div>
+        </div>`;
+    track.innerHTML = t.items.map(cardHTML).join('') + t.items.map(cardHTML).join('') + t.items.map(cardHTML).join('');
+}
+
 function initContactForm() {
     const form = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
@@ -317,7 +454,6 @@ function initContactForm() {
     });
 }
 
-// Carrusel que permite hacer click en los reproductores
 class InfiniteCarousel {
     constructor(outerEl) {
         this.outer = outerEl;
@@ -376,13 +512,12 @@ class InfiniteCarousel {
         this.outer.addEventListener('mouseenter', () => clearInterval(this.autoplayInterval));
         this.outer.addEventListener('mouseleave', () => this.startAutoplay());
     }
-    // Lógica para que al cliquear desaparezca el overlay de protección y puedas darle Play a YouTube o Drive
     setupVideoHandling() {
         this.track.addEventListener('click', (e) => {
             const card = e.target.closest('.video-card-large, .video-card-vertical');
             if (!card) return;
             
-            clearInterval(this.autoplayInterval); // Frena el carrusel cuando vas a ver un video
+            clearInterval(this.autoplayInterval);
 
             const iframe = card.querySelector('iframe');
             if (iframe) {
@@ -391,6 +526,7 @@ class InfiniteCarousel {
                     overlay.style.pointerEvents = 'none';
                     overlay.style.opacity = '0';
                 }
+                iframe.style.pointerEvents = 'auto';
                 return;
             }
 
@@ -442,9 +578,14 @@ function init() {
     applySectionVisibility(data);
     renderTexts(data);
     initHero(data);
+    renderQuienesSomos(data);
+    renderTestimonios(data);
     renderVideosHorizontal(data);
     renderVideosVertical(data);
     renderPhotos(data, 'all');
+    renderBranding(data);
+    renderRedes(data);
+    renderWebdev(data);
     initAutoGalleryFilter(data);
     initPhotoModal();
     initContactForm();
