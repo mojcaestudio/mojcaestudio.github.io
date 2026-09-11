@@ -1,119 +1,37 @@
 // ========================================
-// MOJCA ESTUDIO — Main JavaScript (Limpio y Funcional)
+// MOJCA ESTUDIO — Main JavaScript Optimizado
 // ========================================
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkjnkdvl";
 
 const DEFAULT_DATA = {
-    sections: {
-        hero: true,
-        marquee: true,
-        sobre: true,
-        quienesSomos: true,
-        testimonios: true,
-        videos: true,
-        reels: true,
-        fotos: true,
-        branding: true,
-        redes: true,
-        webdev: true,
-        proceso: true,
-        contacto: true
-    },
+    sections: { hero: true, marquee: true, sobre: true, quienesSomos: true, testimonios: true, videos: true, reels: true, fotos: true, branding: true, redes: true, webdev: true, proceso: true, contacto: true },
     texts: {
-        logoText: "MOJCA",
-        heroLabel: "Estudio Creativo",
-        heroTitle: "DAMOS VIDA A TUS IDEAS CON DISEÑO, CREATIVIDAD Y ESTRATEGIA VISUAL",
-        heroSub: "Creamos contenido que se ve, se siente y se comparte.",
-        sobreTag: "Sobre Nosotros",
-        sobreTitle: "Damos vida a ideas a través de la imagen",
-        sobreSubtitle: "Un estudio donde la técnica se encuentra con la sensibilidad artística",
-        quienesTag: "El Equipo",
-        quienesTitle: "Quiénes Somos",
-        quienesSubtitle: "Las personas detrás de cada proyecto",
-        stat1: "50+",
-        stat1Label: "Proyectos Realizados",
-        stat2: "30+",
-        stat2Label: "Clientes Satisfechos",
-        stat3: "5",
-        stat3Label: "Años de Trayectoria",
-        stat4: "12",
-        stat4Label: "Premios y Reconocimientos",
-        contactEmail: "mojcaestudio@gmail.com",
-        contactLocation: "Villa María, Córdoba, Argentina",
-        footerText: "Diseño, creatividad y estrategia visual con alma artesanal."
+        logoText: "MOJCA", heroLabel: "Estudio Creativo", heroTitle: "DAMOS VIDA A TUS IDEAS CON DISEÑO, CREATIVIDAD Y ESTRATEGIA VISUAL", heroSub: "Creamos contenido que se ve, se siente y se comparte.",
+        sobreTag: "Sobre Nosotros", sobreTitle: "Damos vida a ideas a través de la imagen", sobreSubtitle: "Un estudio donde la técnica se encuentra con la sensibilidad artística",
+        quienesTag: "El Equipo", quienesTitle: "Quiénes Somos", quienesSubtitle: "Las personas detrás de cada proyecto",
+        stat1: "50+", stat1Label: "Proyectos Realizados", stat2: "30+", stat2Label: "Clientes Satisfechos", stat3: "5", stat3Label: "Años de Trayectoria", stat4: "12", stat4Label: "Premios y Reconocimientos",
+        contactEmail: "mojcaestudio@gmail.com", contactLocation: "Villa María, Córdoba, Argentina", footerText: "Diseño, creatividad y estrategia visual con alma artesanal."
     },
     style: {
-        heroFontSize: "clamp(34px, 5.2vw, 68px)",
-        heroFontFamily: "'Space Grotesk', sans-serif",
-        bodyFontFamily: "'Inter', sans-serif",
-        accentColor: "#ff6b35",
-        accentLight: "#ff8c42",
-        bgDark: "#0a0a0a",
-        bgPanel: "#111111",
-        bgCard: "#161616",
-        textPrimary: "#f0f0f0",
-        textSecondary: "#a0a0a0",
-        textMuted: "#666666",
-        borderColor: "#242424"
+        heroFontSize: "clamp(34px, 5.2vw, 68px)", heroFontFamily: "'Space Grotesk', sans-serif", bodyFontFamily: "'Inter', sans-serif",
+        accentColor: "#ff6b35", accentLight: "#ff8c42", bgDark: "#0a0a0a", bgPanel: "#111111", bgCard: "#161616", textPrimary: "#f0f0f0", textSecondary: "#a0a0a0", textMuted: "#666666", borderColor: "#242424"
     },
-    hero: {
-        videoSrc: "",
-        glassEnabled: true,
-        glassBlur: "12px",
-        glassOpacity: "0.03",
-        overlayEnabled: true,
-        overlayColor: "rgba(10,10,10,0.45)"
-    },
-    quienesSomos: {
-        enabled: true,
-        members: [
-            { id: "m1", name: "María López", role: "Directora Creativa", photo: "", tags: ["Dirección", "Branding"], description: "Transforma ideas en experiencias visuales memorables." },
-            { id: "m2", name: "Juan Pérez", role: "Productor Audiovisual", photo: "", tags: ["Video", "Fotografía"], description: "Especialista en narrativa visual cinematográfica." }
-        ]
-    },
-    testimonios: {
-        enabled: true,
-        items: [
-            { id: "t1", nombre: "María González", empresa: "Marca X", texto: "Trabajar con Mojca fue una experiencia transformadora. Entendieron exactamente lo que necesitábamos.", avatar: "" },
-            { id: "t2", nombre: "Carlos Rodríguez", empresa: "Startup Y", texto: "La atención al detalle y la creatividad que ponen en cada proyecto es impresionante.", avatar: "" }
-        ]
-    },
-    videosHorizontal: [
-        { id: "vh1", src: "", title: "Spot Comercial — Marca X", description: "Campaña de lanzamiento con rodaje y color grading.", views: "12.4K", likes: "856", tag: "Comercial" },
-        { id: "vh2", src: "", title: "Video Musical — Artista Y", description: "Concepto visual y dirección de arte.", views: "45.2K", likes: "2.1K", tag: "Musical" },
-        { id: "vh3", src: "", title: "Corporativo — Empresa Z", description: "Video institucional con tomas aéreas.", views: "8.7K", likes: "423", tag: "Corporativo" },
-        { id: "vh4", src: "", title: "Documental — Proyecto Social", description: "Cobertura de 3 días y edición narrativa.", views: "3.1K", likes: "189", tag: "Documental" }
-    ],
-    videosVertical: [
-        { id: "vv1", src: "", title: "Behind the Scenes", description: "Un día de rodaje en estudio", views: "89K", likes: "4.2K" },
-        { id: "vv2", src: "", title: "Tutorial de Color", description: "Antes y después de grading", views: "156K", likes: "8.7K" },
-        { id: "vv3", src: "", title: "Transiciones Creativas", description: "Edición con speed ramps", views: "234K", likes: "12K" }
-    ],
-    photos: [
-        { id: "p1", src: "", title: "Campaña Skincare", category: "producto", size: "1x1", description: "Iluminación difusa y composición orientada a ecommerce de alta gama." },
-        { id: "p2", src: "", title: "Retrato Editorial", category: "retrato", size: "1x2", description: "Sesión de estudio con contrastes marcados y tratamiento tonal cinematográfico." },
-        { id: "p3", src: "", title: "Evento Nocturno", category: "evento", size: "1x1", description: "" },
-        { id: "p4", src: "", title: "Urban Lifestyle", category: "lifestyle", size: "1x1", description: "Luz natural de atardecer capturada en entorno metropolitano." }
-    ],
-    branding: [],
-    redes: [],
-    webdev: [],
-    whatsapp: {
-        number: "5493534000000",
-        message: "Hola Mojca Estudio",
-        floatEnabled: true,
-        floatLabel: "Escribinos"
-    }
+    hero: { videoSrc: "", glassEnabled: true, glassBlur: "12px", glassOpacity: "0.03", overlayEnabled: true, overlayColor: "rgba(10,10,10,0.45)" },
+    quienesSomos: { enabled: true, members: [{ id: "m1", name: "María López", role: "Directora Creativa", photo: "", tags: ["Dirección", "Branding"], description: "Transforma ideas en experiencias visuales memorables." }] },
+    testimonios: { enabled: true, items: [{ id: "t1", nombre: "María González", empresa: "Marca X", texto: "Excelente trabajo.", avatar: "" }] },
+    videosHorizontal: [{ id: "vh1", src: "", title: "Spot Comercial", description: "Campaña de lanzamiento.", views: "12.4K", likes: "856", tag: "Comercial" }],
+    videosVertical: [{ id: "vv1", src: "", title: "Behind the Scenes", description: "Un día de rodaje en estudio", views: "89K", likes: "4.2K" }],
+    photos: [{ id: "p1", src: "", title: "Campaña Skincare", category: "producto", size: "1x1", description: "Iluminación difusa." }],
+    branding: [], redes: [], webdev: [],
+    whatsapp: { number: "5493534000000", message: "Hola Mojca Estudio", floatEnabled: true, floatLabel: "Escribinos" }
 };
 
 function getData() {
     try {
         const saved = localStorage.getItem('mojcaData');
         if (saved) return deepMerge(JSON.parse(JSON.stringify(DEFAULT_DATA)), JSON.parse(saved));
-    } catch (e) {
-        console.error(e);
-    }
+    } catch (e) { console.error(e); }
     return JSON.parse(JSON.stringify(DEFAULT_DATA));
 }
 
@@ -127,36 +45,41 @@ function deepMerge(target, source) {
     return target;
 }
 
-// Convertidor para Drive, YouTube, Vimeo y MP4 directo
-function createMediaElement(src, label, type) {
+// Generador de IFRAME y VIDEO permitiendo interacción al cliquear
+function createMediaElement(src, label, type, isHero = false) {
     if (!src || src.trim() === '') return `<div class="ph-inner"><span>${label}</span></div>`;
+
+    let pointerEvents = isHero ? 'pointer-events:none;' : 'pointer-events:auto;';
 
     if (src.includes('drive.google.com')) {
         const driveId = src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || src.match(/id=([a-zA-Z0-9_-]+)/);
         if (driveId && driveId[1]) {
-            return `<iframe src="https://drive.google.com/file/d/${driveId[1]}/preview" width="100%" height="100%" frameborder="0" allow="autoplay" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;"></iframe>`;
+            return `<iframe src="https://drive.google.com/file/d/${driveId[1]}/preview" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${pointerEvents}"></iframe>`;
         }
     }
 
     if (src.includes('youtube.com') || src.includes('youtu.be')) {
         const yt = src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
         if (yt && yt[1]) {
-            return `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${yt[1]}?autoplay=1&mute=1&loop=1&playlist=${yt[1]}&controls=0&rel=0&showinfo=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" style="pointer-events:none;"></iframe>`;
+            const params = isHero ? "autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1" : "autoplay=0&mute=0&controls=1&rel=0&modestbranding=1";
+            return `<iframe src="https://www.youtube.com/embed/${yt[1]}?${params}&loop=1&playlist=${yt[1]}" frameborder="0" allow="autoplay; encrypted-media; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${pointerEvents}"></iframe>`;
         }
     }
 
     if (src.includes('vimeo.com')) {
         const vim = src.match(/vimeo\.com\/(\d+)/);
         if (vim && vim[1]) {
-            return `<iframe src="https://player.vimeo.com/video/${vim[1]}?autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen" style="pointer-events:none;"></iframe>`;
+            const params = isHero ? "autoplay=1&muted=1&background=1" : "autoplay=0&muted=0";
+            return `<iframe src="https://player.vimeo.com/video/${vim[1]}?${params}&loop=1" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${pointerEvents}"></iframe>`;
         }
     }
 
     if (type === 'video' || src.match(/\.(mp4|webm|ogg)$/i)) {
-        return `<video src="${src}" muted loop playsinline preload="metadata" controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false;" style="width:100%;height:100%;object-fit:cover;display:block;"></video>`;
+        const auto = isHero ? 'autoplay' : '';
+        return `<video src="${src}" ${auto} muted loop playsinline preload="metadata" controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false;" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;${pointerEvents}"></video>`;
     }
 
-    return `<img src="${src}" alt="${label}" oncontextmenu="return false;" draggable="false" style="width:100%;height:100%;object-fit:cover;display:block;">`;
+    return `<img src="${src}" alt="${label}" oncontextmenu="return false;" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">`;
 }
 
 function applyDynamicStyles(data) {
@@ -184,7 +107,6 @@ function applyDynamicStyles(data) {
 function initBackgroundGradient() {
     const plates = document.querySelectorAll('.bg-color-plate');
     const sections = document.querySelectorAll('.section-bg');
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -195,31 +117,18 @@ function initBackgroundGradient() {
             }
         });
     }, { threshold: 0.2, rootMargin: "-10% 0px -10% 0px" });
-
     sections.forEach(s => observer.observe(s));
 }
 
 function initHero(data) {
     const heroVideoBg = document.getElementById('heroVideoBg');
-    const heroGlass = document.getElementById('heroGlass');
-    const heroOverlay = document.getElementById('heroVideoOverlay');
     const h = data.hero;
     if (!heroVideoBg) return;
-
     if (h.videoSrc && h.videoSrc.trim() !== '') {
-        heroVideoBg.innerHTML = createMediaElement(h.videoSrc, 'Hero Video', 'video');
+        heroVideoBg.innerHTML = createMediaElement(h.videoSrc, 'Hero Video', 'video', true);
         heroVideoBg.style.display = 'block';
     } else {
         heroVideoBg.style.display = 'none';
-    }
-    if (heroOverlay && h.overlayEnabled) {
-        heroOverlay.style.background = h.overlayColor;
-        heroOverlay.style.display = 'block';
-    }
-    if (heroGlass && h.glassEnabled) {
-        heroGlass.style.display = 'block';
-        heroGlass.style.backdropFilter = `blur(${h.glassBlur})`;
-        heroGlass.style.background = `rgba(255,255,255,${h.glassOpacity})`;
     }
 }
 
@@ -239,7 +148,7 @@ function applySectionVisibility(data) {
         quienesSomos: { el: document.getElementById('quienes-somos'), link: 'a[href="#quienes-somos"]' },
         testimonios: { el: document.getElementById('testimonios'), link: null },
         videos: { el: document.getElementById('videos'), link: 'a[href="#videos"]' },
-        reels: { el: document.getElementById('reels'), link: null },
+        reels: { el: document.getElementById('reels'), link: 'a[href="#reels"]' },
         fotos: { el: document.getElementById('fotos'), link: 'a[href="#fotos"]' },
         branding: { el: document.getElementById('branding'), link: 'a[href="#branding"]' },
         redes: { el: document.getElementById('redes'), link: 'a[href="#redes"]' },
@@ -247,17 +156,14 @@ function applySectionVisibility(data) {
         proceso: { el: document.getElementById('proceso'), link: null },
         contacto: { el: document.getElementById('contacto'), link: 'a[href="#contacto"]' }
     };
-
     for (const [key, conf] of Object.entries(mapping)) {
         const isVisible = sec[key] !== false;
         if (conf.el) conf.el.style.display = isVisible ? '' : 'none';
-        if (conf.link) {
-            document.querySelectorAll(conf.link).forEach(a => {
-                const parentLi = a.closest('li');
-                if (parentLi) parentLi.style.display = isVisible ? '' : 'none';
-                else a.style.display = isVisible ? '' : 'none';
-            });
-        }
+        if (conf.link) document.querySelectorAll(conf.link).forEach(a => {
+            const parentLi = a.closest('li');
+            if (parentLi) parentLi.style.display = isVisible ? '' : 'none';
+            else a.style.display = isVisible ? '' : 'none';
+        });
     }
 }
 
@@ -267,16 +173,13 @@ function renderVideosHorizontal(data) {
     track.innerHTML = data.videosHorizontal.map(v => `
         <div class="video-card-large" data-video-id="${v.id}">
             <div class="video-thumb-large">
-                <div class="img-placeholder landscape" data-label="${v.title}">${createMediaElement(v.src, v.title, 'video')}</div>
+                ${createMediaElement(v.src, v.title, 'video', false)}
                 <div class="video-play-overlay"><div class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
             </div>
             <div class="video-meta">
                 <h4>${v.title}</h4>
                 <p>${v.description}</p>
-                <div class="video-metrics">
-                    <span class="metric tag">${v.tag}</span>
-                    <span class="metric">${v.views} views</span>
-                </div>
+                <div class="video-metrics"><span class="metric tag">${v.tag}</span><span class="metric">${v.views} views</span></div>
             </div>
         </div>
     `).join('');
@@ -288,7 +191,7 @@ function renderVideosVertical(data) {
     track.innerHTML = data.videosVertical.map(v => `
         <div class="video-card-vertical" data-video-id="${v.id}">
             <div class="video-thumb-vertical">
-                <div class="img-placeholder portrait" data-label="${v.title}">${createMediaElement(v.src, v.title, 'video')}</div>
+                ${createMediaElement(v.src, v.title, 'video', false)}
                 <div class="video-play-overlay"><div class="play-circle-small"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
             </div>
             <div class="video-meta-v">
@@ -299,6 +202,7 @@ function renderVideosVertical(data) {
     `).join('');
 }
 
+// Filtro automático de fotos y Modal
 let filterInterval = null;
 let currentFilterIndex = 0;
 const filterCategories = ['all', 'producto', 'retrato', 'evento', 'lifestyle'];
@@ -309,13 +213,8 @@ function renderPhotos(data, filter) {
     const photos = filter === 'all' ? data.photos : data.photos.filter(p => p.category === filter);
     grid.innerHTML = photos.map(p => `
         <div class="photo-item size-${p.size}" data-id="${p.id}" data-category="${p.category}">
-            <div class="photo-frame">
-                <div class="img-placeholder square" data-label="${p.title}">${createMediaElement(p.src, p.title, 'image')}</div>
-            </div>
-            <div class="photo-overlay">
-                <h4>${p.title}</h4>
-                <p>${p.category}</p>
-            </div>
+            <div class="photo-frame">${createMediaElement(p.src, p.title, 'image')}</div>
+            <div class="photo-overlay"><h4>${p.title}</h4><p>${p.category}</p></div>
         </div>
     `).join('');
 
@@ -331,33 +230,25 @@ function openPhotoModal(photo) {
     const modal = document.getElementById('photoModal');
     const modalImg = document.getElementById('photoModalImg');
     const modalInfo = document.getElementById('photoModalInfo');
-    const modalTitle = document.getElementById('photoModalTitle');
-    const modalTag = document.getElementById('photoModalTag');
-    const modalDesc = document.getElementById('photoModalDesc');
-
     if (!modal || !modalImg) return;
     modalImg.src = photo.src;
     
     if (photo.description && photo.description.trim() !== '') {
         modalInfo.style.display = 'flex';
-        modalTitle.textContent = photo.title || '';
-        modalTag.textContent = photo.category || 'Fotografía';
-        modalDesc.textContent = photo.description;
+        document.getElementById('photoModalTitle').textContent = photo.title || '';
+        document.getElementById('photoModalTag').textContent = photo.category || '';
+        document.getElementById('photoModalDesc').textContent = photo.description;
     } else {
         modalInfo.style.display = 'none';
     }
-
     modal.classList.add('active');
 }
 
 function initPhotoModal() {
     const modal = document.getElementById('photoModal');
-    const closeBtn = document.getElementById('photoModalClose');
     if (!modal) return;
-    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.remove('active');
-    });
+    document.getElementById('photoModalClose').addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
 }
 
 function initAutoGalleryFilter(data) {
@@ -370,32 +261,26 @@ function initAutoGalleryFilter(data) {
         buttons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-filter') === cat));
         renderPhotos(data, cat);
     }
-
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
             clearInterval(filterInterval);
             setFilter(btn.getAttribute('data-filter'));
         });
     });
-
     function startTimer() {
         filterInterval = setInterval(() => {
             currentFilterIndex = (currentFilterIndex + 1) % filterCategories.length;
             setFilter(filterCategories[currentFilterIndex]);
         }, 4000);
     }
-
     startTimer();
-
     [filterContainer, grid].forEach(el => {
         el.addEventListener('mouseenter', () => clearInterval(filterInterval));
-        el.addEventListener('mouseleave', () => {
-            clearInterval(filterInterval);
-            startTimer();
-        });
+        el.addEventListener('mouseleave', () => { clearInterval(filterInterval); startTimer(); });
     });
 }
 
+// Formulario con API Fetch directa
 function initContactForm() {
     const form = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
@@ -432,14 +317,7 @@ function initContactForm() {
     });
 }
 
-function initSecurity() {
-    document.addEventListener('contextmenu', (e) => {
-        if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG' || e.target.closest('.video-thumb-large, .video-thumb-vertical')) {
-            e.preventDefault();
-        }
-    });
-}
-
+// Carrusel que permite hacer click en los reproductores
 class InfiniteCarousel {
     constructor(outerEl) {
         this.outer = outerEl;
@@ -460,6 +338,7 @@ class InfiniteCarousel {
         this.updateDimensions();
         this.bindEvents();
         this.startAutoplay();
+        this.setupVideoHandling();
     }
     cloneItems() {
         const original = Array.from(this.track.children);
@@ -497,6 +376,45 @@ class InfiniteCarousel {
         this.outer.addEventListener('mouseenter', () => clearInterval(this.autoplayInterval));
         this.outer.addEventListener('mouseleave', () => this.startAutoplay());
     }
+    // Lógica para que al cliquear desaparezca el overlay de protección y puedas darle Play a YouTube o Drive
+    setupVideoHandling() {
+        this.track.addEventListener('click', (e) => {
+            const card = e.target.closest('.video-card-large, .video-card-vertical');
+            if (!card) return;
+            
+            clearInterval(this.autoplayInterval); // Frena el carrusel cuando vas a ver un video
+
+            const iframe = card.querySelector('iframe');
+            if (iframe) {
+                const overlay = card.querySelector('.video-play-overlay');
+                if (overlay) {
+                    overlay.style.pointerEvents = 'none';
+                    overlay.style.opacity = '0';
+                }
+                return;
+            }
+
+            const video = card.querySelector('video');
+            if (video) {
+                this.track.querySelectorAll('video').forEach(v => { if (v !== video) { v.muted = true; v.pause(); } });
+                this.track.querySelectorAll('.video-play-overlay').forEach(o => {
+                    if (o.closest('.video-card-large, .video-card-vertical') !== card) {
+                        o.style.opacity = '1'; o.style.pointerEvents = 'auto';
+                    }
+                });
+                video.muted = false;
+                if (video.paused) {
+                    video.play();
+                    const overlay = card.querySelector('.video-play-overlay');
+                    if (overlay) overlay.style.opacity = '0';
+                } else {
+                    video.pause();
+                    const overlay = card.querySelector('.video-play-overlay');
+                    if (overlay) overlay.style.opacity = '1';
+                }
+            }
+        });
+    }
 }
 
 function initNav() {
@@ -531,7 +449,6 @@ function init() {
     initPhotoModal();
     initContactForm();
     initNav();
-    initSecurity();
     initScrollReveal();
     initBackgroundGradient();
     document.querySelectorAll('.carousel-outer').forEach(outer => new InfiniteCarousel(outer));
