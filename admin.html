@@ -30,13 +30,13 @@
         .admin-nav li { margin-bottom: 8px; }
         .admin-nav a { display: block; padding: 10px; font-size: 13px; color: var(--text-secondary); cursor: pointer; border-radius: var(--radius-sm); }
         .admin-nav a.active { background: var(--accent-glow); color: var(--accent); }
-        .admin-main { flex: 1; padding: 32px 48px; }
+        .admin-main { flex: 1; padding: 32px 48px; height: 100vh; overflow-y: auto; }
         .admin-header { display: flex; justify-content: space-between; margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
         .panel { display: none; }
         .panel.active { display: block; }
         .admin-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; margin-bottom: 20px; }
         .add-btn { background: transparent; border: 1px dashed var(--accent); color: var(--accent); padding: 8px 16px; cursor: pointer; border-radius: var(--radius-sm); }
-        .save-bar { position: sticky; bottom: 0; background: var(--bg-elevated); border-top: 1px solid var(--border); padding: 16px 0; margin-top: 24px; display: flex; justify-content: flex-end; }
+        .save-bar { position: sticky; bottom: 0; background: var(--bg-elevated); border-top: 1px solid var(--border); padding: 16px 0; margin-top: 24px; display: flex; justify-content: flex-end; z-index: 100; }
     </style>
 </head>
 <body>
@@ -60,6 +60,9 @@
             <li><a data-panel="videos-h">Videos Horizontales</a></li>
             <li><a data-panel="videos-v">Reels y Shorts</a></li>
             <li><a data-panel="fotos">Fotografía</a></li>
+            <li><a data-panel="branding">Branding</a></li>
+            <li><a data-panel="redes">Redes Sociales</a></li>
+            <li><a data-panel="webdev">Web y Código</a></li>
         </ul>
     </aside>
     <main class="admin-main">
@@ -72,6 +75,9 @@
         <div class="panel" id="panel-videos-h"><div id="videosHEditor"></div></div>
         <div class="panel" id="panel-videos-v"><div id="videosVEditor"></div></div>
         <div class="panel" id="panel-fotos"><div id="photosEditor"></div></div>
+        <div class="panel" id="panel-branding"><div id="brandingEditor"></div></div>
+        <div class="panel" id="panel-redes"><div id="redesEditor"></div></div>
+        <div class="panel" id="panel-webdev"><div id="webdevEditor"></div></div>
         <div class="save-bar"><button class="btn" style="width:auto;" id="saveAllBtn">Guardar cambios</button></div>
     </main>
 </div>
