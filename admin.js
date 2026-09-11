@@ -1,5 +1,5 @@
 // ========================================
-// ADMIN.JS — Panel de Control
+// ADMIN.JS — Panel de Control Compacto y Completo
 // ========================================
 
 const ADMIN_PASSWORD = "mojca2024";
@@ -24,7 +24,7 @@ function injectAdminStyles() {
         .compact-fields { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .compact-fields .full { grid-column: span 2; }
         .color-picker-group { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; width: 50%; float: left; }
     `;
     document.head.appendChild(style);
 }
@@ -35,6 +35,9 @@ function renderAllPanels() {
     renderVideosH();
     renderVideosV();
     renderPhotos();
+    renderBranding();
+    renderRedes();
+    renderWebdev();
 }
 
 function createCheckbox(label, checked, onChange) {
@@ -55,9 +58,9 @@ function createCheckbox(label, checked, onChange) {
 
 function renderSeccionesEditor() {
     const container = document.getElementById('seccionesEditor');
-    container.innerHTML = '<div class="admin-card" id="secCard"><h3>Prender / Apagar Secciones</h3></div>';
+    container.innerHTML = '<div class="admin-card" id="secCard" style="overflow:hidden;"><h3>Prender / Apagar Secciones</h3></div>';
     const card = document.getElementById('secCard');
-    const secList = [['hero', 'Hero'],['marquee', 'Marquee'],['sobre', 'Sobre Nosotros'],['quienesSomos', 'El Equipo'],['testimonios', 'Testimonios'],['videos', 'Videos'],['reels', 'Reels'],['fotos', 'Fotografía'],['branding', 'Branding'],['contacto', 'Contacto']];
+    const secList = [['hero', 'Hero'],['marquee', 'Marquee'],['sobre', 'Sobre Nosotros'],['quienesSomos', 'El Equipo'],['testimonios', 'Testimonios'],['videos', 'Videos'],['reels', 'Reels'],['fotos', 'Fotografía'],['branding', 'Branding'],['redes', 'Redes Sociales'],['webdev', 'Web y Código'],['contacto', 'Contacto']];
     secList.forEach(([key, label]) => {
         card.appendChild(createCheckbox(`Mostrar ${label}`, currentData.sections[key] !== false, (e) => { currentData.sections[key] = e.target.checked; }));
     });
@@ -154,7 +157,6 @@ function renderPhotos() {
                 <div class="form-group"><label>Título</label><input type="text" value="${p.title}"></div>
                 <div class="form-group"><label>Categoría</label><input type="text" value="${p.category}"></div>
                 <div class="form-group full"><label>URL de Imagen</label><input type="text" value="${p.src}"></div>
-                <div class="form-group full"><label>Información en tarjeta lateral (Dejar vacío para omitir)</label><input type="text" value="${p.description || ''}"></div>
             </div>
             <button style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:18px;">🗑</button>`;
         row.querySelector(`#prevP${idx}`).innerHTML = `<img src="${p.src}">`;
@@ -162,8 +164,82 @@ function renderPhotos() {
         inputs[0].oninput = e => currentData.photos[idx].title = e.target.value;
         inputs[1].oninput = e => currentData.photos[idx].category = e.target.value;
         inputs[2].oninput = e => { currentData.photos[idx].src = e.target.value; row.querySelector(`#prevP${idx}`).innerHTML = `<img src="${e.target.value}">`; };
-        inputs[3].oninput = e => currentData.photos[idx].description = e.target.value;
         row.querySelector('button').onclick = () => { currentData.photos.splice(idx, 1); renderPhotos(); };
+        list.appendChild(row);
+    });
+}
+
+function renderBranding() {
+    const container = document.getElementById('brandingEditor');
+    container.innerHTML = '<div class="admin-card" id="bCard"><h3>Proyectos de Branding</h3></div>';
+    const list = document.createElement('div');
+    const btn = document.createElement('button'); btn.className = 'add-btn'; btn.textContent = '+ Agregar proyecto';
+    btn.onclick = () => { currentData.branding.push({ id: 'b'+Date.now(), src:'', title:'', description:'', tags:[] }); renderBranding(); };
+    document.getElementById('bCard').append(list, btn);
+
+    currentData.branding.forEach((b, idx) => {
+        const row = document.createElement('div'); row.className = 'compact-row';
+        row.innerHTML = `<div class="compact-preview" id="prevB${idx}"></div>
+            <div class="compact-fields">
+                <div class="form-group full"><label>Título</label><input type="text" value="${b.title}"></div>
+                <div class="form-group full"><label>URL de Imagen</label><input type="text" value="${b.src}"></div>
+            </div>
+            <button style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:18px;">🗑</button>`;
+        row.querySelector(`#prevB${idx}`).innerHTML = `<img src="${b.src}">`;
+        const inputs = row.querySelectorAll('input');
+        inputs[0].oninput = e => currentData.branding[idx].title = e.target.value;
+        inputs[1].oninput = e => { currentData.branding[idx].src = e.target.value; row.querySelector(`#prevB${idx}`).innerHTML = `<img src="${e.target.value}">`; };
+        row.querySelector('button').onclick = () => { currentData.branding.splice(idx, 1); renderBranding(); };
+        list.appendChild(row);
+    });
+}
+
+function renderRedes() {
+    const container = document.getElementById('redesEditor');
+    container.innerHTML = '<div class="admin-card" id="rCard"><h3>Redes Sociales</h3></div>';
+    const list = document.createElement('div');
+    const btn = document.createElement('button'); btn.className = 'add-btn'; btn.textContent = '+ Agregar Redes';
+    btn.onclick = () => { currentData.redes.push({ id: 'r'+Date.now(), src:'', label:'', caption:'' }); renderRedes(); };
+    document.getElementById('rCard').append(list, btn);
+
+    currentData.redes.forEach((r, idx) => {
+        const row = document.createElement('div'); row.className = 'compact-row';
+        row.innerHTML = `<div class="compact-preview" id="prevR${idx}"></div>
+            <div class="compact-fields">
+                <div class="form-group full"><label>URL de Imagen/Video</label><input type="text" value="${r.src || ''}"></div>
+                <div class="form-group full"><label>Caption</label><input type="text" value="${r.caption || ''}"></div>
+            </div>
+            <button style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:18px;">🗑</button>`;
+        row.querySelector(`#prevR${idx}`).innerHTML = createMediaElement(r.src, r.label, 'image', true);
+        const inputs = row.querySelectorAll('input');
+        inputs[0].oninput = e => { currentData.redes[idx].src = e.target.value; row.querySelector(`#prevR${idx}`).innerHTML = createMediaElement(e.target.value, '', 'image', true); };
+        inputs[1].oninput = e => currentData.redes[idx].caption = e.target.value;
+        row.querySelector('button').onclick = () => { currentData.redes.splice(idx, 1); renderRedes(); };
+        list.appendChild(row);
+    });
+}
+
+function renderWebdev() {
+    const container = document.getElementById('webdevEditor');
+    container.innerHTML = '<div class="admin-card" id="wCard"><h3>Proyectos Web</h3></div>';
+    const list = document.createElement('div');
+    const btn = document.createElement('button'); btn.className = 'add-btn'; btn.textContent = '+ Agregar Web';
+    btn.onclick = () => { currentData.webdev.push({ id: 'w'+Date.now(), src:'', title:'', stack:[] }); renderWebdev(); };
+    document.getElementById('wCard').append(list, btn);
+
+    currentData.webdev.forEach((w, idx) => {
+        const row = document.createElement('div'); row.className = 'compact-row';
+        row.innerHTML = `<div class="compact-preview" id="prevW${idx}"></div>
+            <div class="compact-fields">
+                <div class="form-group full"><label>Título</label><input type="text" value="${w.title}"></div>
+                <div class="form-group full"><label>URL de Imagen</label><input type="text" value="${w.src}"></div>
+            </div>
+            <button style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:18px;">🗑</button>`;
+        row.querySelector(`#prevW${idx}`).innerHTML = `<img src="${w.src}">`;
+        const inputs = row.querySelectorAll('input');
+        inputs[0].oninput = e => currentData.webdev[idx].title = e.target.value;
+        inputs[1].oninput = e => { currentData.webdev[idx].src = e.target.value; row.querySelector(`#prevW${idx}`).innerHTML = `<img src="${e.target.value}">`; };
+        row.querySelector('button').onclick = () => { currentData.webdev.splice(idx, 1); renderWebdev(); };
         list.appendChild(row);
     });
 }
