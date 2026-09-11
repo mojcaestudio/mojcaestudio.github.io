@@ -6,30 +6,6 @@ const ADMIN_PASSWORD = "mojca2024";
 let currentData = null;
 let failedAttempts = 0;
 
-function getData() {
-    try {
-        const saved = localStorage.getItem('mojcaData');
-        if (saved) return deepMerge(JSON.parse(JSON.stringify(DEFAULT_DATA)), JSON.parse(saved));
-    } catch (e) {
-        console.error(e);
-    }
-    return JSON.parse(JSON.stringify(DEFAULT_DATA));
-}
-
-function deepMerge(target, source) {
-    for (const key of Object.keys(source)) {
-        if (source[key] instanceof Object && !Array.isArray(source[key])) {
-            Object.assign(source[key], deepMerge(target[key] || {}, source[key]));
-        }
-    }
-    Object.assign(target || {}, source);
-    return target;
-}
-
-function saveData(data) {
-    localStorage.setItem('mojcaData', JSON.stringify(data));
-}
-
 function showAdmin() {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminLayout').classList.add('active');
@@ -77,10 +53,61 @@ function injectAdminStyles() {
 }
 
 function renderAllPanels() {
+    renderSeccionesEditor();
     renderStyleEditor();
     renderVideosH();
     renderVideosV();
     renderPhotos();
+}
+
+function createCheckbox(label, checked, onChange) {
+    const div = document.createElement('div');
+    div.className = 'checkbox-group';
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.checked = !!checked;
+    input.addEventListener('change', onChange);
+    const lbl = document.createElement('label');
+    lbl.textContent = label;
+    lbl.style.cursor = 'pointer';
+    lbl.addEventListener('click', () => { input.checked = !input.checked; onChange({ target: input }); });
+    div.appendChild(input);
+    div.appendChild(lbl);
+    return div;
+}
+
+function renderSeccionesEditor() {
+    const container = document.getElementById('seccionesEditor');
+    if (!container) return;
+    container.innerHTML = '';
+    const card = document.createElement('div');
+    card.className = 'admin-card';
+    card.innerHTML = '<h3>Activar / Desactivar Secciones en la Web</h3>';
+    
+    if (!currentData.sections) {
+        currentData.sections = { ...DEFAULT_DATA.sections };
+    }
+
+    const secList = [
+        ['hero', 'Sección de Inicio / Hero'],
+        ['marquee', 'Cinta animada (Marquee)'],
+        ['sobre', 'Sobre Nosotros'],
+        ['quienesSomos', 'El Equipo (Quiénes Somos)'],
+        ['testimonios', 'Testimonios'],
+        ['videos', 'Videos Horizontales'],
+        ['reels', 'Reels y Shorts'],
+        ['fotos', 'Fotografía'],
+        ['branding', 'Branding'],
+        ['contacto', 'Contacto']
+    ];
+
+    secList.forEach(([key, label]) => {
+        card.appendChild(createCheckbox(`Mostrar ${label}`, currentData.sections[key] !== false, (e) => {
+            currentData.sections[key] = e.target.checked;
+        }));
+    });
+
+    container.appendChild(card);
 }
 
 function renderStyleEditor() {
@@ -190,7 +217,7 @@ function renderVideosH() {
         fields.innerHTML = `
             <div class="form-group"><label>Título</label><input type="text" value="${v.title}"></div>
             <div class="form-group"><label>Categoría / Tag</label><input type="text" value="${v.tag}"></div>
-            <div class="form-group full"><label>Enlace del Video (Drive, YouTube o directo)</label><input type="text" value="${v.src}"></div>
+            <div class="form-group full"><label>Enlace del Video (Drive, YouTube o enlace directo)</label><input type="text" value="${v.src}"></div>
         `;
 
         const inputs = fields.querySelectorAll('input');
