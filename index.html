@@ -29,10 +29,11 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="#sobre">Nosotros</a></li>
             <li><a href="#quienes-somos">Equipo</a></li>
-            <li><a href="#videos">Videos</a></li>
-            <li><a href="#reels">Reels</a></li>
+            <li><a href="#videos">Audiovisual</a></li>
             <li><a href="#fotos">Fotografía</a></li>
             <li><a href="#branding">Branding</a></li>
+            <li><a href="#redes">Redes</a></li>
+            <li><a href="#webdev">Web</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
         <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -61,18 +62,7 @@
 
 <div class="marquee-section">
     <div class="marquee-track" id="marqueeTrack">
-        <span>Producción Audiovisual</span><span class="marquee-dot"></span>
-        <span>Fotografía</span><span class="marquee-dot"></span>
-        <span>Branding</span><span class="marquee-dot"></span>
-        <span>Motion Graphics</span><span class="marquee-dot"></span>
-        <span>Color Grading</span><span class="marquee-dot"></span>
-        <span>Desarrollo Web</span><span class="marquee-dot"></span>
-        <span>Producción Audiovisual</span><span class="marquee-dot"></span>
-        <span>Fotografía</span><span class="marquee-dot"></span>
-        <span>Branding</span><span class="marquee-dot"></span>
-        <span>Motion Graphics</span><span class="marquee-dot"></span>
-        <span>Color Grading</span><span class="marquee-dot"></span>
-        <span>Desarrollo Web</span><span class="marquee-dot"></span>
+        <!-- JS inyecta el contenido infinito aquí -->
     </div>
 </div>
 
@@ -189,6 +179,7 @@
 
 <div class="section-divider"></div>
 
+<!-- SECCIÓN AUDIOVISUAL UNIFICADA -->
 <section class="section section-bg" data-bg="olive" id="videos">
     <div class="container-wide">
         <div class="section-header scroll-reveal">
@@ -196,26 +187,20 @@
             <h2 class="section-title">Historias en <em>movimiento</em></h2>
             <p class="section-subtitle">Producciones pensadas para conectar, impactar y trascender en pantalla</p>
         </div>
+        
+        <!-- Carrusel Horizontales -->
         <div class="carousel-section">
+            <h3 class="sub-section-title scroll-reveal">Formatos Horizontales</h3>
             <div class="carousel-outer">
                 <button class="carousel-btn prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
                 <div class="carousel-track-wrapper"><div class="carousel-track" id="carousel-horizontal"></div></div>
                 <button class="carousel-btn next" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
             </div>
         </div>
-    </div>
-</section>
 
-<div class="section-divider"></div>
-
-<section class="section section-bg" data-bg="wine" id="reels">
-    <div class="container-wide">
-        <div class="section-header scroll-reveal">
-            <span class="section-tag">Formatos Verticales</span>
-            <h2 class="section-title">Reels y <em>Shorts</em></h2>
-            <p class="section-subtitle">Ritmo dinámico, ganchos visuales y contenido listo para el scroll</p>
-        </div>
-        <div class="carousel-section">
+        <!-- Carrusel Reels -->
+        <div class="carousel-section" id="reels" style="margin-top: 80px;">
+            <h3 class="sub-section-title scroll-reveal">Formatos Verticales (Reels)</h3>
             <div class="carousel-outer">
                 <button class="carousel-btn prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
                 <div class="carousel-track-wrapper"><div class="carousel-track vertical" id="carousel-vertical"></div></div>
@@ -245,16 +230,17 @@
     </div>
 </section>
 
-<div class="photo-modal" id="photoModal">
-    <button class="photo-modal-close" id="photoModalClose">&times;</button>
-    <div class="photo-modal-container" id="photoModalContainer">
-        <div class="photo-modal-img-wrap">
-            <img id="photoModalImg" src="" alt="Foto ampliada">
+<!-- MODAL UNIFICADO PARA VIDEOS Y FOTOS (Pantalla Completa) -->
+<div class="media-modal" id="mediaModal">
+    <button class="media-modal-close" id="mediaModalClose">&times;</button>
+    <div class="media-modal-container" id="mediaModalContainer">
+        <div class="media-modal-content" id="mediaModalContent">
+            <!-- JS inyecta el video interactivo o foto aquí -->
         </div>
-        <div class="photo-modal-info" id="photoModalInfo">
-            <span class="modal-tag" id="photoModalTag"></span>
-            <h3 id="photoModalTitle"></h3>
-            <p id="photoModalDesc"></p>
+        <div class="media-modal-info" id="mediaModalInfo">
+            <span class="modal-tag" id="mediaModalTag"></span>
+            <h3 id="mediaModalTitle"></h3>
+            <p id="mediaModalDesc"></p>
         </div>
     </div>
 </div>
