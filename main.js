@@ -5,7 +5,7 @@
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkjnkdvl";
 
 const DEFAULT_DATA = {
-    sections: { hero: true, marquee: true, sobre: true, quienesSomos: true, testimonios: true, videos: true, reels: true, fotos: true, branding: true, redes: true, webdev: true, proceso: true, contacto: true },
+    sections: { hero: true, marquee: true, sobre: true, quienesSomos: true, testimonios: true, audiovisual: true, fotos: true, branding: true, redes: true, webdev: true, proceso: true, contacto: true },
     texts: {
         logoText: "MOJCA", heroLabel: "Estudio Creativo", heroTitle: "DAMOS VIDA A TUS IDEAS CON DISEÑO, CREATIVIDAD Y ESTRATEGIA VISUAL", heroSub: "Creamos contenido que se ve, se siente y se comparte.",
         sobreTag: "Sobre Nosotros", sobreTitle: "Damos vida a ideas a través de la imagen", sobreSubtitle: "Un estudio donde la técnica se encuentra con la sensibilidad artística",
@@ -29,33 +29,28 @@ const DEFAULT_DATA = {
         { id: "t3", nombre: "Juan López", empresa: "Restaurante Z", texto: "Nuestra imagen cambió por completo gracias a ellos. El rebranding superó todas nuestras expectativas.", avatar: "" }
     ]},
     videosHorizontal: [
-        { id: "vh1", src: "", title: "Spot Comercial — Marca X", description: "Campaña de lanzamiento con rodaje y color grading.", views: "12.4K", likes: "856", tag: "Comercial" },
-        { id: "vh2", src: "", title: "Video Musical — Artista Y", description: "Concepto visual y dirección de arte.", views: "45.2K", likes: "2.1K", tag: "Musical" },
-        { id: "vh3", src: "", title: "Corporativo — Empresa Z", description: "Video institucional con tomas aéreas.", views: "8.7K", likes: "423", tag: "Corporativo" },
-        { id: "vh4", src: "", title: "Documental — Proyecto Social", description: "Cobertura de 3 días y edición narrativa.", views: "3.1K", likes: "189", tag: "Documental" }
+        { id: "vh1", src: "", title: "Spot Comercial", description: "Lanzamiento y color grading.", views: "12.4K", likes: "856", tag: "Comercial" },
+        { id: "vh2", src: "", title: "Video Musical", description: "Dirección de arte.", views: "45.2K", likes: "2.1K", tag: "Musical" }
     ],
     videosVertical: [
-        { id: "vv1", src: "", title: "Behind the Scenes", description: "Un día de rodaje en estudio", views: "89K", likes: "4.2K" },
-        { id: "vv2", src: "", title: "Tutorial de Color", description: "Antes y después de grading", views: "156K", likes: "8.7K" },
-        { id: "vv3", src: "", title: "Transiciones Creativas", description: "Edición con speed ramps", views: "234K", likes: "12K" }
+        { id: "vv1", src: "", title: "Behind the Scenes", description: "Día de rodaje", views: "89K", likes: "4.2K" },
+        { id: "vv2", src: "", title: "Tutorial Color", description: "Color grading", views: "156K", likes: "8.7K" }
     ],
     photos: [
-        { id: "p1", src: "", title: "Campaña Skincare", category: "producto", size: "1x1", description: "Iluminación difusa." },
+        { id: "p1", src: "", title: "Campaña Skincare", category: "producto", size: "1x1", description: "Iluminación difusa para ecommerce." },
         { id: "p2", src: "", title: "Retrato Editorial", category: "retrato", size: "1x2", description: "Fotografía de estudio." },
         { id: "p3", src: "", title: "Evento Nocturno", category: "evento", size: "1x1", description: "" },
-        { id: "p4", src: "", title: "Urban Lifestyle", category: "lifestyle", size: "1x1", description: "Luz natural." }
+        { id: "p4", src: "", title: "Urban Lifestyle", category: "lifestyle", size: "1x1", description: "Luz natural metropolitana." }
     ],
     branding: [
-        { id: "b1", src: "", title: "Marca A — Identidad Completa", description: "Diseño de logo, paleta cromática y aplicaciones.", tags: ["Logo", "Packaging", "Social"] },
-        { id: "b2", src: "", title: "Restaurante B — Rebranding", description: "Renovación completa de imagen comercial.", tags: ["Rebranding", "Menú", "Web"] }
+        { id: "b1", src: "", title: "Marca A — Identidad", description: "Diseño de logo, paleta cromática y aplicaciones.", tags: ["Logo", "Packaging", "Social"] },
+        { id: "b2", src: "", title: "Restaurante B", description: "Renovación completa de imagen comercial.", tags: ["Rebranding", "Menú", "Web"] }
     ],
     redes: [
-        { id: "r1", type: "carousel", slides: [{ src: "", label: "Campaña Verano 1" }], likes: "1,247", caption: "Nueva campaña de verano.", hashtags: "#audiovisual #redessociales", time: "Hace 2 días", location: "Buenos Aires, Argentina" },
-        { id: "r2", type: "reel", src: "", label: "Behind the Scenes Reel", likes: "3,892", caption: "Behind the scenes.", hashtags: "#behindthescenes #produccion", time: "Hace 5 días", location: "Córdoba, Argentina" }
+        { id: "r1", type: "carousel", slides: [{ src: "", label: "Campaña 1" }], likes: "1,247", caption: "Nueva campaña de verano.", hashtags: "#audiovisual", time: "Hace 2 días", location: "Buenos Aires" }
     ],
     webdev: [
-        { id: "w1", src: "", title: "E-commerce — Tienda de Moda", description: "Tienda online completa con carrito y pasarela de pagos.", stack: ["React", "Next.js", "Stripe", "Tailwind"], linkLive: "#", linkRepo: "#" },
-        { id: "w2", src: "", title: "Landing Page — SaaS", description: "Landing page de alta conversión para startup de software.", stack: ["Vue 3", "Vite", "GSAP", "Netlify"], linkLive: "#", linkRepo: "#" }
+        { id: "w1", src: "", title: "E-commerce Moda", description: "Tienda online con pasarela de pagos.", stack: ["React", "Next.js", "Tailwind"], linkLive: "#", linkRepo: "#" }
     ],
     whatsapp: { number: "5493534000000", message: "Hola Mojca Estudio", floatEnabled: true, floatLabel: "Escribinos" }
 };
@@ -78,33 +73,33 @@ function deepMerge(target, source) {
     return target;
 }
 
-function createMediaElement(src, label, type, isHero = false) {
+// Generador para Carruseles (Autoplay silenciado, sin controles) vs Modal (Con sonido y controles)
+function createMediaElement(src, label, type, isBackground = true) {
     if (!src || src.trim() === '') return `<div class="ph-inner"><span>${label}</span></div>`;
-    let pointerEvents = isHero ? 'pointer-events:none;' : 'pointer-events:auto;';
-
+    
     if (src.includes('drive.google.com')) {
         const driveId = src.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || src.match(/id=([a-zA-Z0-9_-]+)/);
         if (driveId && driveId[1]) {
-            return `<iframe src="https://drive.google.com/file/d/${driveId[1]}/preview" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${pointerEvents}"></iframe>`;
+            return `<iframe src="https://drive.google.com/file/d/${driveId[1]}/preview" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${isBackground?'pointer-events:none;':''}"></iframe>`;
         }
     }
     if (src.includes('youtube.com') || src.includes('youtu.be')) {
         const yt = src.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
         if (yt && yt[1]) {
-            const params = isHero ? "autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1" : "autoplay=0&mute=0&controls=1&rel=0&modestbranding=1";
-            return `<iframe src="https://www.youtube.com/embed/${yt[1]}?${params}&loop=1&playlist=${yt[1]}" frameborder="0" allow="autoplay; encrypted-media; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${pointerEvents}"></iframe>`;
+            const params = isBackground ? "autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1" : "autoplay=1&mute=0&controls=1&rel=0&modestbranding=1";
+            return `<iframe src="https://www.youtube.com/embed/${yt[1]}?${params}&loop=1&playlist=${yt[1]}" frameborder="0" allow="autoplay; encrypted-media; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${isBackground?'pointer-events:none;':''}"></iframe>`;
         }
     }
     if (src.includes('vimeo.com')) {
         const vim = src.match(/vimeo\.com\/(\d+)/);
         if (vim && vim[1]) {
-            const params = isHero ? "autoplay=1&muted=1&background=1" : "autoplay=0&muted=0";
-            return `<iframe src="https://player.vimeo.com/video/${vim[1]}?${params}&loop=1" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${pointerEvents}"></iframe>`;
+            const params = isBackground ? "autoplay=1&muted=1&background=1" : "autoplay=1&muted=0";
+            return `<iframe src="https://player.vimeo.com/video/${vim[1]}?${params}&loop=1" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;inset:0;width:100%;height:100%;${isBackground?'pointer-events:none;':''}"></iframe>`;
         }
     }
     if (type === 'video' || src.match(/\.(mp4|webm|ogg)$/i)) {
-        const auto = isHero ? 'autoplay' : '';
-        return `<video src="${src}" ${auto} muted loop playsinline preload="metadata" controlsList="nodownload noplaybackrate" disablePictureInPicture oncontextmenu="return false;" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;${pointerEvents}"></video>`;
+        if(isBackground) return `<video src="${src}" autoplay muted loop playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>`;
+        return `<video src="${src}" autoplay controls playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>`;
     }
     return `<img src="${src}" alt="${label}" oncontextmenu="return false;" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">`;
 }
@@ -138,9 +133,7 @@ function initBackgroundGradient() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const targetBg = entry.target.getAttribute('data-bg');
-                plates.forEach(plate => {
-                    plate.classList.toggle('active', plate.getAttribute('data-plate') === targetBg);
-                });
+                plates.forEach(plate => { plate.classList.toggle('active', plate.getAttribute('data-plate') === targetBg); });
             }
         });
     }, { threshold: 0.2, rootMargin: "-10% 0px -10% 0px" });
@@ -149,26 +142,11 @@ function initBackgroundGradient() {
 
 function initHero(data) {
     const heroVideoBg = document.getElementById('heroVideoBg');
-    const heroGlass = document.getElementById('heroGlass');
-    const heroOverlay = document.getElementById('heroVideoOverlay');
-    const h = data.hero;
     if (!heroVideoBg) return;
-
-    if (h.videoSrc && h.videoSrc.trim() !== '') {
-        heroVideoBg.innerHTML = createMediaElement(h.videoSrc, 'Hero Video', 'video', true);
+    if (data.hero.videoSrc && data.hero.videoSrc.trim() !== '') {
+        heroVideoBg.innerHTML = createMediaElement(data.hero.videoSrc, 'Hero', 'video', true);
         heroVideoBg.style.display = 'block';
-    } else {
-        heroVideoBg.style.display = 'none';
-    }
-    if (heroOverlay && h.overlayEnabled) {
-        heroOverlay.style.background = h.overlayColor;
-        heroOverlay.style.display = 'block';
-    }
-    if (heroGlass && h.glassEnabled) {
-        heroGlass.style.display = 'block';
-        heroGlass.style.backdropFilter = `blur(${h.glassBlur})`;
-        heroGlass.style.background = `rgba(255,255,255,${h.glassOpacity})`;
-    }
+    } else { heroVideoBg.style.display = 'none'; }
 }
 
 function renderTexts(data) {
@@ -186,8 +164,7 @@ function applySectionVisibility(data) {
         sobre: { el: document.getElementById('sobre'), link: 'a[href="#sobre"]' },
         quienesSomos: { el: document.getElementById('quienes-somos'), link: 'a[href="#quienes-somos"]' },
         testimonios: { el: document.getElementById('testimonios'), link: null },
-        videos: { el: document.getElementById('videos'), link: 'a[href="#videos"]' },
-        reels: { el: document.getElementById('reels'), link: 'a[href="#reels"]' },
+        audiovisual: { el: document.getElementById('audiovisual'), link: 'a[href="#audiovisual"]' },
         fotos: { el: document.getElementById('fotos'), link: 'a[href="#fotos"]' },
         branding: { el: document.getElementById('branding'), link: 'a[href="#branding"]' },
         redes: { el: document.getElementById('redes'), link: 'a[href="#redes"]' },
@@ -206,22 +183,31 @@ function applySectionVisibility(data) {
     }
 }
 
+function renderMarquee() {
+    const track = document.getElementById('marqueeTrack');
+    if(!track) return;
+    const itemsHTML = `<span>Producción Audiovisual</span><span class="marquee-dot"></span>
+        <span>Fotografía</span><span class="marquee-dot"></span>
+        <span>Branding</span><span class="marquee-dot"></span>
+        <span>Motion Graphics</span><span class="marquee-dot"></span>
+        <span>Color Grading</span><span class="marquee-dot"></span>
+        <span>Desarrollo Web</span><span class="marquee-dot"></span>`;
+    // Dos bloques idénticos para el loop perfecto 50%
+    track.innerHTML = `<div class="marquee-content">${itemsHTML}</div><div class="marquee-content">${itemsHTML}</div>`;
+}
+
 function renderQuienesSomos(data) {
     const grid = document.getElementById('quienesSomosGrid');
     if (!grid) return;
     const qs = data.quienesSomos;
     if (!qs.enabled || !qs.members || qs.members.length === 0) {
-        grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);">No hay miembros del equipo aún.</p>';
-        return;
+        grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);">No hay miembros del equipo aún.</p>'; return;
     }
     grid.innerHTML = qs.members.map(m => `
         <div class="member-card scroll-reveal">
-            <div class="member-photo">
-                ${m.photo ? `<img src="${m.photo}" alt="${m.name}" oncontextmenu="return false;">` : `<div class="img-placeholder avatar" data-label="${m.name.charAt(0)}"><div class="ph-inner"><span>${m.name.charAt(0)}</span></div></div>`}
-            </div>
+            <div class="member-photo">${m.photo ? `<img src="${m.photo}" alt="${m.name}" oncontextmenu="return false;">` : `<div class="img-placeholder avatar" data-label="${m.name.charAt(0)}"><div class="ph-inner"><span>${m.name.charAt(0)}</span></div></div>`}</div>
             <h3 class="member-name">${m.name}</h3>
             <p class="member-role">${m.role}</p>
-            <p class="member-description">${m.description}</p>
         </div>
     `).join('');
 }
@@ -230,15 +216,14 @@ function renderVideosHorizontal(data) {
     const track = document.getElementById('carousel-horizontal');
     if (!track) return;
     track.innerHTML = data.videosHorizontal.map(v => `
-        <div class="video-card-large" data-video-id="${v.id}">
+        <div class="video-card-large" data-src="${v.src}" data-type="video">
             <div class="video-thumb-large">
-                ${createMediaElement(v.src, v.title, 'video', false)}
+                ${createMediaElement(v.src, v.title, 'video', true)}
                 <div class="video-play-overlay"><div class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
             </div>
             <div class="video-meta">
                 <h4>${v.title}</h4>
                 <p>${v.description}</p>
-                <div class="video-metrics"><span class="metric tag">${v.tag}</span><span class="metric">${v.views} views</span></div>
             </div>
         </div>
     `).join('');
@@ -248,9 +233,9 @@ function renderVideosVertical(data) {
     const track = document.getElementById('carousel-vertical');
     if (!track) return;
     track.innerHTML = data.videosVertical.map(v => `
-        <div class="video-card-vertical" data-video-id="${v.id}">
+        <div class="video-card-vertical" data-src="${v.src}" data-type="video">
             <div class="video-thumb-vertical">
-                ${createMediaElement(v.src, v.title, 'video', false)}
+                ${createMediaElement(v.src, v.title, 'video', true)}
                 <div class="video-play-overlay"><div class="play-circle-small"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
             </div>
             <div class="video-meta-v">
@@ -261,6 +246,48 @@ function renderVideosVertical(data) {
     `).join('');
 }
 
+// Media Modal Logic (Para Videos a Pantalla Completa y Fotos)
+function openMediaModal(src, type, info = null) {
+    const modal = document.getElementById('mediaModal');
+    const content = document.getElementById('mediaModalContent');
+    const infoBox = document.getElementById('mediaModalInfo');
+    if (!modal) return;
+    
+    content.innerHTML = createMediaElement(src, '', type, false); // false = con sonido/controles
+    
+    if (info && info.title) {
+        infoBox.style.display = 'flex';
+        document.getElementById('mediaModalTitle').textContent = info.title;
+        document.getElementById('mediaModalTag').textContent = info.tag || '';
+        document.getElementById('mediaModalDesc').textContent = info.desc || '';
+    } else {
+        infoBox.style.display = 'none';
+    }
+    modal.classList.add('active');
+}
+
+function initMediaModal() {
+    const modal = document.getElementById('mediaModal');
+    if (!modal) return;
+    document.getElementById('mediaModalClose').addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.getElementById('mediaModalContent').innerHTML = ''; // Detiene el video
+    });
+    modal.addEventListener('click', (e) => { 
+        if (e.target === modal) { modal.classList.remove('active'); document.getElementById('mediaModalContent').innerHTML = ''; } 
+    });
+
+    // Delegación de clicks para abrir videos en Modal
+    document.addEventListener('click', (e) => {
+        const card = e.target.closest('.video-card-large, .video-card-vertical');
+        if (card) {
+            const src = card.getAttribute('data-src');
+            openMediaModal(src, 'video');
+        }
+    });
+}
+
+// Filtro de fotos sin bugs
 let filterInterval = null;
 let currentFilterIndex = 0;
 const filterCategories = ['all', 'producto', 'retrato', 'evento', 'lifestyle'];
@@ -270,8 +297,8 @@ function renderPhotos(data, filter) {
     if (!grid) return;
     const photos = filter === 'all' ? data.photos : data.photos.filter(p => p.category === filter);
     grid.innerHTML = photos.map(p => `
-        <div class="photo-item size-${p.size}" data-id="${p.id}" data-category="${p.category}">
-            <div class="photo-frame">${createMediaElement(p.src, p.title, 'image')}</div>
+        <div class="photo-item size-${p.size}" data-id="${p.id}">
+            <div class="photo-frame">${createMediaElement(p.src, p.title, 'image', true)}</div>
             <div class="photo-overlay"><h4>${p.title}</h4><p>${p.category}</p></div>
         </div>
     `).join('');
@@ -279,34 +306,9 @@ function renderPhotos(data, filter) {
     grid.querySelectorAll('.photo-item').forEach(item => {
         item.addEventListener('click', () => {
             const photo = data.photos.find(p => p.id === item.getAttribute('data-id'));
-            if (photo) openPhotoModal(photo);
+            if (photo) openMediaModal(photo.src, 'image', { title: photo.title, tag: photo.category, desc: photo.description });
         });
     });
-}
-
-function openPhotoModal(photo) {
-    const modal = document.getElementById('photoModal');
-    const modalImg = document.getElementById('photoModalImg');
-    const modalInfo = document.getElementById('photoModalInfo');
-    if (!modal || !modalImg) return;
-    modalImg.src = photo.src;
-    
-    if (photo.description && photo.description.trim() !== '') {
-        modalInfo.style.display = 'flex';
-        document.getElementById('photoModalTitle').textContent = photo.title || '';
-        document.getElementById('photoModalTag').textContent = photo.category || '';
-        document.getElementById('photoModalDesc').textContent = photo.description;
-    } else {
-        modalInfo.style.display = 'none';
-    }
-    modal.classList.add('active');
-}
-
-function initPhotoModal() {
-    const modal = document.getElementById('photoModal');
-    if (!modal) return;
-    document.getElementById('photoModalClose').addEventListener('click', () => modal.classList.remove('active'));
-    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
 }
 
 function initAutoGalleryFilter(data) {
@@ -321,11 +323,12 @@ function initAutoGalleryFilter(data) {
     }
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
-            clearInterval(filterInterval);
+            if(filterInterval) clearInterval(filterInterval);
             setFilter(btn.getAttribute('data-filter'));
         });
     });
     function startTimer() {
+        if(filterInterval) clearInterval(filterInterval);
         filterInterval = setInterval(() => {
             currentFilterIndex = (currentFilterIndex + 1) % filterCategories.length;
             setFilter(filterCategories[currentFilterIndex]);
@@ -333,127 +336,29 @@ function initAutoGalleryFilter(data) {
     }
     startTimer();
     [filterContainer, grid].forEach(el => {
-        el.addEventListener('mouseenter', () => clearInterval(filterInterval));
-        el.addEventListener('mouseleave', () => { clearInterval(filterInterval); startTimer(); });
+        el.addEventListener('mouseenter', () => { if(filterInterval) clearInterval(filterInterval); });
+        el.addEventListener('mouseleave', startTimer);
     });
-}
-
-function renderBranding(data) {
-    const grid = document.getElementById('brandingGrid');
-    if (!grid) return;
-    grid.innerHTML = data.branding.map(b => `
-        <div class="branding-card scroll-reveal">
-            <div class="branding-visual"><div class="img-placeholder wide" data-label="${b.title}">${createMediaElement(b.src, b.title, 'image')}</div></div>
-            <div class="branding-info">
-                <h3>${b.title}</h3>
-                <p>${b.description}</p>
-                <div class="branding-tags">${b.tags.map(t => `<span>${t}</span>`).join('')}</div>
-            </div>
-        </div>
-    `).join('');
-}
-
-function renderRedes(data) {
-    const grid = document.getElementById('redesGrid');
-    if (!grid) return;
-    grid.innerHTML = data.redes.map(r => {
-        if (r.type === 'carousel') {
-            return `
-            <article class="ig-post-full scroll-reveal">
-                <div class="ig-header">
-                    <div class="ig-user"><strong>mojcaestudio</strong><span>${r.location}</span></div>
-                    <a href="https://www.instagram.com/mojcaestudio/" target="_blank" class="ig-follow-btn">Seguir</a>
-                </div>
-                <div class="ig-media-reel">
-                    <div class="img-placeholder square" data-label="${r.label}">${createMediaElement(r.slides[0]?.src, r.label, 'image')}</div>
-                </div>
-                <div class="ig-caption"><strong>mojcaestudio</strong> ${r.caption} <span class="hashtag">${r.hashtags}</span></div>
-            </article>`;
-        } else {
-            return `
-            <article class="ig-post-full scroll-reveal">
-                <div class="ig-header">
-                    <div class="ig-user"><strong>mojcaestudio</strong><span>${r.location}</span></div>
-                    <a href="https://www.instagram.com/mojcaestudio/" target="_blank" class="ig-follow-btn">Seguir</a>
-                </div>
-                <div class="ig-media-reel">
-                    <div class="img-placeholder square" data-label="${r.label}">${createMediaElement(r.src, r.label, 'video')}</div>
-                </div>
-                <div class="ig-caption"><strong>mojcaestudio</strong> ${r.caption} <span class="hashtag">${r.hashtags}</span></div>
-            </article>`;
-        }
-    }).join('');
-}
-
-function renderWebdev(data) {
-    const grid = document.getElementById('webdevGrid');
-    if (!grid) return;
-    grid.innerHTML = data.webdev.map(w => `
-        <div class="webdev-card scroll-reveal">
-            <div class="webdev-preview">
-                <div class="img-placeholder wide" data-label="${w.title}">${createMediaElement(w.src, w.title, 'web')}</div>
-            </div>
-            <div class="webdev-info">
-                <h3>${w.title}</h3>
-                <p>${w.description}</p>
-                <div class="webdev-stack">${w.stack.map(s => `<span>${s}</span>`).join('')}</div>
-            </div>
-        </div>
-    `).join('');
-}
-
-function renderTestimonios(data) {
-    const track = document.getElementById('testimoniosTrack');
-    if (!track) return;
-    const t = data.testimonios;
-    if (!t.items || t.items.length === 0) { track.innerHTML = '<p style="text-align:center;color:var(--text-muted);">No hay testimonios aún.</p>'; return; }
-    const cardHTML = (item) => `
-        <div class="testimonio-card">
-            <div class="testimonio-quote">"${item.texto}"</div>
-            <div class="testimonio-author">
-                <div class="testimonio-avatar">${item.avatar ? `<img src="${item.avatar}" alt="${item.nombre}">` : `<span>${item.nombre.charAt(0)}</span>`}</div>
-                <div class="testimonio-info"><strong>${item.nombre}</strong><span>${item.empresa}</span></div>
-            </div>
-        </div>`;
-    track.innerHTML = t.items.map(cardHTML).join('') + t.items.map(cardHTML).join('') + t.items.map(cardHTML).join('');
 }
 
 function initContactForm() {
     const form = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
     if (!form) return;
-
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const submitBtn = form.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviando...';
-        status.className = 'form-status';
-
+        submitBtn.disabled = true; submitBtn.textContent = 'Enviando...'; status.style.display = 'none';
         try {
-            const response = await fetch(FORMSPREE_ENDPOINT, {
-                method: 'POST',
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
-            });
-
-            if (response.ok) {
-                status.textContent = '¡Mensaje enviado con éxito!';
-                status.className = 'form-status success';
-                form.reset();
-            } else {
-                throw new Error();
-            }
-        } catch (err) {
-            status.textContent = 'Hubo un error al enviar. Intentá nuevamente.';
-            status.className = 'form-status error';
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Enviar mensaje';
-        }
+            const response = await fetch(FORMSPREE_ENDPOINT, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+            if (response.ok) { status.textContent = '¡Mensaje enviado con éxito!'; status.className = 'form-status success'; form.reset(); } 
+            else throw new Error();
+        } catch (err) { status.textContent = 'Error al enviar. Intentá nuevamente.'; status.className = 'form-status error'; } 
+        finally { submitBtn.disabled = false; submitBtn.textContent = 'Enviar mensaje'; }
     });
 }
 
+// Carrusel Anti-Bugs (Multiplica ítems si hay pocos para rotar suave)
 class InfiniteCarousel {
     constructor(outerEl) {
         this.outer = outerEl;
@@ -461,8 +366,6 @@ class InfiniteCarousel {
         this.track = outerEl.querySelector('.carousel-track');
         this.prevBtn = outerEl.querySelector('.carousel-btn.prev');
         this.nextBtn = outerEl.querySelector('.carousel-btn.next');
-        this.items = [];
-        this.currentIndex = 0;
         this.itemWidth = 0;
         this.gap = 20;
         this.autoplayInterval = null;
@@ -470,23 +373,30 @@ class InfiniteCarousel {
     }
     init() {
         if (!this.track || this.track.children.length === 0) return;
+        this.ensureEnoughItems();
         this.cloneItems();
         this.updateDimensions();
         this.bindEvents();
         this.startAutoplay();
-        this.setupVideoHandling();
+    }
+    ensureEnoughItems() {
+        // Multiplica los ítems iniciales para que el scroll infinito no colapse si solo hay 1 o 2.
+        const originals = Array.from(this.track.children);
+        while (this.track.children.length > 0 && this.track.children.length < 8) {
+            originals.forEach(item => this.track.appendChild(item.cloneNode(true)));
+        }
     }
     cloneItems() {
-        const original = Array.from(this.track.children);
-        original.forEach(item => { const clone = item.cloneNode(true); this.track.appendChild(clone); });
-        for (let i = original.length - 1; i >= 0; i--) { const clone = original[i].cloneNode(true); this.track.insertBefore(clone, this.track.firstChild); }
-        this.items = Array.from(this.track.children);
-        this.currentIndex = original.length;
+        const originals = Array.from(this.track.children);
+        originals.forEach(item => this.track.appendChild(item.cloneNode(true)));
+        for (let i = originals.length - 1; i >= 0; i--) this.track.insertBefore(originals[i].cloneNode(true), this.track.firstChild);
+        this.currentIndex = originals.length;
+        this.originalCount = originals.length;
         this.updatePosition(false);
     }
     updateDimensions() {
-        if (this.items.length === 0) return;
-        this.itemWidth = this.items[0].offsetWidth + this.gap;
+        if (this.track.children.length === 0) return;
+        this.itemWidth = this.track.children[0].offsetWidth + this.gap;
         this.updatePosition(false);
     }
     updatePosition(animate = true) {
@@ -496,10 +406,9 @@ class InfiniteCarousel {
     next() { this.currentIndex++; this.updatePosition(true); this.checkBounds(); }
     prev() { this.currentIndex--; this.updatePosition(true); this.checkBounds(); }
     checkBounds() {
-        const count = this.items.length / 3;
         setTimeout(() => {
-            if (this.currentIndex >= count * 2) { this.currentIndex = count; this.updatePosition(false); }
-            else if (this.currentIndex < count) { this.currentIndex = count * 2 - 1; this.updatePosition(false); }
+            if (this.currentIndex >= this.originalCount * 2) { this.currentIndex = this.originalCount; this.updatePosition(false); }
+            else if (this.currentIndex < this.originalCount) { this.currentIndex = this.originalCount * 2 - 1; this.updatePosition(false); }
         }, 500);
     }
     bindEvents() {
@@ -508,48 +417,9 @@ class InfiniteCarousel {
         window.addEventListener('resize', () => this.updateDimensions());
     }
     startAutoplay() {
-        this.autoplayInterval = setInterval(() => this.next(), 3600);
+        this.autoplayInterval = setInterval(() => this.next(), 3500);
         this.outer.addEventListener('mouseenter', () => clearInterval(this.autoplayInterval));
         this.outer.addEventListener('mouseleave', () => this.startAutoplay());
-    }
-    setupVideoHandling() {
-        this.track.addEventListener('click', (e) => {
-            const card = e.target.closest('.video-card-large, .video-card-vertical');
-            if (!card) return;
-            
-            clearInterval(this.autoplayInterval);
-
-            const iframe = card.querySelector('iframe');
-            if (iframe) {
-                const overlay = card.querySelector('.video-play-overlay');
-                if (overlay) {
-                    overlay.style.pointerEvents = 'none';
-                    overlay.style.opacity = '0';
-                }
-                iframe.style.pointerEvents = 'auto';
-                return;
-            }
-
-            const video = card.querySelector('video');
-            if (video) {
-                this.track.querySelectorAll('video').forEach(v => { if (v !== video) { v.muted = true; v.pause(); } });
-                this.track.querySelectorAll('.video-play-overlay').forEach(o => {
-                    if (o.closest('.video-card-large, .video-card-vertical') !== card) {
-                        o.style.opacity = '1'; o.style.pointerEvents = 'auto';
-                    }
-                });
-                video.muted = false;
-                if (video.paused) {
-                    video.play();
-                    const overlay = card.querySelector('.video-play-overlay');
-                    if (overlay) overlay.style.opacity = '0';
-                } else {
-                    video.pause();
-                    const overlay = card.querySelector('.video-play-overlay');
-                    if (overlay) overlay.style.opacity = '1';
-                }
-            }
-        });
     }
 }
 
@@ -560,7 +430,7 @@ function initNav() {
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
     if (toggle && links) {
         toggle.addEventListener('click', () => { toggle.classList.toggle('active'); links.classList.toggle('open'); });
-        links.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { toggle.classList.remove('active'); links.classList.remove('open'); }); });
+        links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { toggle.classList.remove('active'); links.classList.remove('open'); }));
     }
 }
 
@@ -568,8 +438,24 @@ function initScrollReveal() {
     const reveals = document.querySelectorAll('.scroll-reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
+}
+
+function renderTestimonios(data) {
+    const track = document.getElementById('testimoniosTrack');
+    if (!track) return;
+    const t = data.testimonios;
+    if (!t.items || t.items.length === 0) return;
+    const cardHTML = (item) => `
+        <div class="testimonio-card">
+            <div class="testimonio-quote">"${item.texto}"</div>
+            <div class="testimonio-author">
+                <div class="testimonio-avatar">${item.avatar ? `<img src="${item.avatar}">` : `<span>${item.nombre.charAt(0)}</span>`}</div>
+                <div class="testimonio-info"><strong>${item.nombre}</strong><span>${item.empresa}</span></div>
+            </div>
+        </div>`;
+    track.innerHTML = t.items.map(cardHTML).join('');
 }
 
 function init() {
@@ -578,16 +464,14 @@ function init() {
     applySectionVisibility(data);
     renderTexts(data);
     initHero(data);
+    renderMarquee();
     renderQuienesSomos(data);
     renderTestimonios(data);
     renderVideosHorizontal(data);
     renderVideosVertical(data);
     renderPhotos(data, 'all');
-    renderBranding(data);
-    renderRedes(data);
-    renderWebdev(data);
     initAutoGalleryFilter(data);
-    initPhotoModal();
+    initMediaModal();
     initContactForm();
     initNav();
     initScrollReveal();
